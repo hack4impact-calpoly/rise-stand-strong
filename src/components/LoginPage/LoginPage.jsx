@@ -13,6 +13,7 @@ const SubmitButton = styled(Button)`
 export default () => (
   <div>
     <h1>Login Page</h1>
+    <h2>Emma Sauerborn</h2>
     <SubmitButton>Submit</SubmitButton>
   </div>
 );
