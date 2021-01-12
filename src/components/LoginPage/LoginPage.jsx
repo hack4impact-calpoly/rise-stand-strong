@@ -13,6 +13,7 @@ const SubmitButton = styled(Button)`
 export default () => (
   <div>
     <h1>Login Page</h1>
+    <h2>JP Poist</h2>
     <SubmitButton>Submit</SubmitButton>
   </div>
 );
