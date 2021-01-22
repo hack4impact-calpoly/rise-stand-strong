@@ -19,23 +19,19 @@ class NewAccountPage extends React.Component {
   }
 
   handleValidation() {
-    console.log('handle validation'); // eslint-disable-line no-console
     const { fields } = this.state;
     const errors = {};
     let formIsValid = true;
 
     if (!fields.name) {
-      console.log('name empty'); // eslint-disable-line no-console
       formIsValid = false;
       errors.name = 'Name cannot be empty';
     }
     if (!fields.email) {
-      console.log('email empty'); // eslint-disable-line no-console
       formIsValid = false;
       errors.email = 'Email cannot be empty';
     }
     if (!fields.phonenumber) {
-      console.log('phone number empty'); // eslint-disable-line no-console
       formIsValid = false;
       errors.phonenumber = 'Phone number cannot be empty';
     }
@@ -44,7 +40,6 @@ class NewAccountPage extends React.Component {
   }
 
   handleChange(field, e) {
-    console.log('handle change'); // eslint-disable-line no-console
     const { fields } = this.state;
     fields[field] = e.target.value;
     this.setState({ fields });
@@ -53,8 +48,10 @@ class NewAccountPage extends React.Component {
 
   contactSubmit(e) {
     e.preventDefault();
+    const fields = this.state;
     if (this.handleValidation()) {
       alert('Form submitted. Admin will need to approve the account.'); // eslint-disable-line no-alert
+      console.log(fields); // eslint-disable-line no-console
     } else {
       alert('Form has errors.'); // eslint-disable-line no-alert
     }
