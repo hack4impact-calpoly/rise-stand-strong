@@ -43,7 +43,6 @@ class NewAccountPage extends React.Component {
     const { fields } = this.state;
     fields[field] = e.target.value;
     this.setState({ fields });
-    console.log(fields); // eslint-disable-line no-console
   }
 
   contactSubmit(e) {
