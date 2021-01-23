@@ -1,5 +1,14 @@
 import React from 'react';
+import { Button } from 'react-bootstrap';
+import styled from 'styled-components';
 
+const SubmitButton = styled(Button)`
+  background-color: #6593D6;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+`;
 class NewAccountPage extends React.Component {
   constructor(props) {
     super(props);
@@ -59,7 +68,7 @@ class NewAccountPage extends React.Component {
           <span style={{ color: 'red' }}>{errors.email}</span>
           <input name="phonenumber" size="30" placeholder="Phone Number" onChange={this.handleChange.bind(this, 'phonenumber')} value={fields.phonenumber} />
           <span style={{ color: 'red' }}>{errors.phonenumber}</span>
-          <button type="submit">Submit</button>
+          <SubmitButton type="submit">Submit</SubmitButton>
         </form>
       </div>
     );
