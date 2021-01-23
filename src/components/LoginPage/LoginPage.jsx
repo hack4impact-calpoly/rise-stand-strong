@@ -88,5 +88,3 @@ export default () => {
     </Form>
   );
 };
-
-export default LoginPage;
