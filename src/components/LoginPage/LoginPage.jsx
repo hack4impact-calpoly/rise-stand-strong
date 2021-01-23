@@ -29,7 +29,7 @@ const StyledLinkButton = styled(Button)`
   font-size: 10px;
 `;
 
-const LoginPage = () => {
+export default () => {
   const [validated, setValidated] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -88,5 +88,3 @@ const LoginPage = () => {
     </Form>
   );
 };
-
-export default LoginPage;
