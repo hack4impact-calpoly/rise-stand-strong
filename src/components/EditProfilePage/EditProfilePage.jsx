@@ -19,7 +19,6 @@ export default () => {
   };
   const updateEmailField = (e) => {
     setEmail(e.target.value);
-    console.log(email);
   };
   const updatePhoneField = (e) => {
     setPhone(e.target.value);
