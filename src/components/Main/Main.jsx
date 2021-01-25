@@ -7,7 +7,6 @@ export default () => (
   <div className="App">
     <Switch>
       <Route exact path="/" render={() => <LoginPage />} />
-      <Route exact path="/test" render={() => <EditProfilePage />} />
     </Switch>
   </div>
 );
