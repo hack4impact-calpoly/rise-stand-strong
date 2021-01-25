@@ -24,7 +24,6 @@ export default () => {
   };
   const updatePhoneField = (e) => {
     setPhone(e.target.value);
-    console.log(phone);
   };
   const raiseError = () => {
     if (name === '' || email === '' || phone === '') {
