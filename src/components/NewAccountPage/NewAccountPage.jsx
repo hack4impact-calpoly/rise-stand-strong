@@ -1,6 +1,7 @@
-import React from 'react';
-import { Button } from 'react-bootstrap';
+import { React, useState } from 'react';
+import { Form, Button, Col } from 'react-bootstrap';
 import styled from 'styled-components';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const SubmitButton = styled(Button)`
   background-color: #6593D6;
@@ -8,71 +9,114 @@ const SubmitButton = styled(Button)`
   padding: 10px;
   border-radius: 10px;
   border: none;
+  margin-left: 20px;  
 `;
-class NewAccountPage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      fields: {},
-      errors: {},
-    };
-  }
+const StyledField = styled(Form.Control)`
+  margin-left: 20px;
+  font-size: 12px;
+  padding: 2px 5px;
+`;
+const StyledFeedback = styled(Form.Control.Feedback)`
+  margin-left: 20px; 
+  font-size: 10px;
+`;
+const StyledLabel = styled(Form.Label)`
+  margin-left: 20px; 
+  font-size: 20px;
+`;
+const StyledHeader = styled(Form.Label)`
+  margin-left: 20px; 
+  font-size: 30px;
+`;
 
-  handleValidation() {
-    const { fields } = this.state;
-    const errors = {};
-    let formIsValid = true;
+export default () => {
+  const [validated, setValidated] = useState(false);
+  const [firstname, setFirstName] = useState('');
+  const [lastname, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phonenumber, setPhoneNumber] = useState('');
 
-    if (!fields.name) {
-      formIsValid = false;
-      errors.name = 'Name cannot be empty';
-    }
-    if (!fields.email) {
-      formIsValid = false;
-      errors.email = 'Email cannot be empty';
-    }
-    if (!fields.phonenumber) {
-      formIsValid = false;
-      errors.phonenumber = 'Phone number cannot be empty';
-    }
-    this.setState({ errors });
-    return formIsValid;
-  }
-
-  handleChange(field, e) {
-    const { fields } = this.state;
-    fields[field] = e.target.value;
-    this.setState({ fields });
-  }
-
-  contactSubmit(e) {
-    e.preventDefault();
-    const fields = this.state;
-    if (this.handleValidation()) {
-      alert('Form submitted. Admin will need to approve the account.'); // eslint-disable-line no-alert
-      console.log(fields); // eslint-disable-line no-console
+  const handleChangeFirstName = (e) => {
+    setFirstName(e.target.value);
+  };
+  const handleChangeLastName = (e) => {
+    setLastName(e.target.value);
+  };
+  const handleChangeEmail = (e) => {
+    setEmail(e.target.value);
+  };
+  const handleChangePhoneNumber = (e) => {
+    setPhoneNumber(e.target.value);
+  };
+  const handleSubmit = (e) => {
+    const form = e.currentTarget;
+    if (form.checkValidity() === false) {
+      e.preventDefault();
+      e.stopPropagation();
     } else {
-      alert('Form has errors.'); // eslint-disable-line no-alert
+      alert('Form submitted. Admin will need to approve the account.'); // eslint-disable-line no-alert
     }
-  }
+    setValidated(true);
+  };
 
-  render() {
-    const { fields, errors } = this.state;
-    return (
-      <div>
-        <h1>Create New Account</h1>
-        <form name="newaccountform" onSubmit={this.contactSubmit.bind(this)}>
-          <input name="name" size="30" placeholder="Name" onChange={this.handleChange.bind(this, 'name')} value={fields.name} />
-          <span style={{ color: 'red' }}>{errors.name}</span>
-          <input name="email" size="30" placeholder="Email" onChange={this.handleChange.bind(this, 'email')} value={fields.email} />
-          <span style={{ color: 'red' }}>{errors.email}</span>
-          <input name="phonenumber" size="30" placeholder="Phone Number" onChange={this.handleChange.bind(this, 'phonenumber')} value={fields.phonenumber} />
-          <span style={{ color: 'red' }}>{errors.phonenumber}</span>
-          <SubmitButton type="submit">Submit</SubmitButton>
-        </form>
-      </div>
-    );
-  }
-}
-
-export default NewAccountPage;
+  return (
+    <Form noValidate validated={validated} onSubmit={handleSubmit}>
+      <StyledHeader>Create New Account</StyledHeader>
+      <Form.Row>
+        <Form.Group as={Col} md="4" controlId="validationCustom01">
+          <StyledLabel>First name</StyledLabel>
+          <StyledField
+            required
+            type="text"
+            placeholder="First name"
+            defaultValue={firstname}
+            onChange={handleChangeFirstName}
+          />
+          <StyledFeedback>Looks good!</StyledFeedback>
+          <StyledFeedback type="invalid"> Please fill in your first name. </StyledFeedback>
+        </Form.Group>
+        <Form.Group as={Col} md="4" controlId="validationCustom02">
+          <StyledLabel>Last name</StyledLabel>
+          <StyledField
+            required
+            type="text"
+            placeholder="Last name"
+            defaultValue={lastname}
+            onChange={handleChangeLastName}
+          />
+          <StyledFeedback>Looks good!</StyledFeedback>
+          <StyledFeedback type="invalid"> Please fill in your last name. </StyledFeedback>
+        </Form.Group>
+      </Form.Row>
+      <Form.Row>
+        <Form.Group as={Col} md="4" controlId="validationCustom03">
+          <StyledLabel>Email</StyledLabel>
+          <StyledField
+            required
+            type="text"
+            placeholder="Email"
+            defaultValue={email}
+            onChange={handleChangeEmail}
+          />
+          <StyledFeedback>Looks good!</StyledFeedback>
+          <StyledFeedback type="invalid"> Please fill in your email. </StyledFeedback>
+        </Form.Group>
+      </Form.Row>
+      <Form.Row>
+        <Form.Group as={Col} md="4" controlId="validationCustom04">
+          <StyledLabel>Phone number</StyledLabel>
+          <StyledField
+            required
+            type="text"
+            placeholder="Phone Number"
+            defaultValue={phonenumber}
+            onChange={handleChangePhoneNumber}
+          />
+          <StyledFeedback>Looks good!</StyledFeedback>
+          <StyledFeedback type="invalid"> Please fill in your phone number. </StyledFeedback>
+        </Form.Group>
+      </Form.Row>
+      <SubmitButton type="submit">Create Account</SubmitButton>
+    </Form>
+  );
+};
