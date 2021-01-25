@@ -33,8 +33,6 @@ export default () => {
     }
   };
   const handleSave = () => {
-    console.log(email);
-    console.log(phone);
     raiseError();
   };
 
