@@ -3,7 +3,6 @@ import { Route, Switch } from 'react-router-dom';
 import LoginPage from '../LoginPage/LoginPage';
 import NavBar from '../NavBar/NavBar';
 
-
 export default () => (
   <div className="App">
     <NavBar />
