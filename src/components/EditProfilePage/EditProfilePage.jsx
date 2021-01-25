@@ -16,7 +16,6 @@ export default () => {
   const [error, setError] = useState(false);
   const updateNameField = (e) => {
     setName(e.target.value);
-    console.log(name);
   };
   const updateEmailField = (e) => {
     setEmail(e.target.value);
