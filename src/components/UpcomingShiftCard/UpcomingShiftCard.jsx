@@ -1,17 +1,20 @@
 import React from 'react';
 import './UpcomingShiftCard.css';
+import Card from 'react-bootstrap/Card';
 
 export default () => (
 
-  <div className="upcomingShiftCard">
-    <div>
-      <h2 className="date">Tuesday, March 9th</h2>
-      <h3 className="time">8:00 PM - 8:00 AM</h3>
-    </div>
-    <div className="details">
-      <h3>Details</h3>
-      <i className="arrow" />
-    </div>
-  </div>
+  <Card>
+    <Card.Body>
+      <div>
+        <Card.Title>Tuesday, March 9th</Card.Title>
+        <Card.Text>8:00 PM - 8:00 AM</Card.Text>
+      </div>
+      <Card.Link href="#">
+        Details
+        <i className="arrow" />
+      </Card.Link>
+    </Card.Body>
+  </Card>
 
 );

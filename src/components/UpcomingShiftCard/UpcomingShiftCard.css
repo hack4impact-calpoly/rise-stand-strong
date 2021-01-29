@@ -1,37 +1,26 @@
-.upcomingShiftCard{
+.card{
   box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 4px;
-  margin: 20px 0px 15px 20px;
   width: 400px;
+  border: none;
+}
+.card-body{
   padding: 15px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.date{
-  font-size: 20px;
-  margin-bottom: 4px;
-}
-.time{
-  font-size: 15px;
+.card-title{
   margin: 0;
-}
-.details{
-  color: #6666FF;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 15px;
-}
-.details h3{
-  font-size: 15px;
-  margin: 0;
-  font-weight: lighter;
-  letter-spacing: 0.5px;
 }
 .arrow {
   border: solid #6666FF;
   border-width: 0 3px 3px 0;
+  display: inline-block;
   padding: 5px;
   transform: rotate(-45deg);
   -webkit-transform: rotate(-45deg);
+}
+.card-link{
+  color: #6666FF;
+  font-weight: lighter;
 }
