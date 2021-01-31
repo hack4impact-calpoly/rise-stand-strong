@@ -1,6 +1,7 @@
 import React from 'react';
+import { Card } from 'react-bootstrap';
+import { FaChevronRight } from 'react-icons/fa';
 import './UpcomingShiftCard.css';
-import Card from 'react-bootstrap/Card';
 
 export default () => (
 
@@ -12,7 +13,7 @@ export default () => (
       </div>
       <Card.Link href="#">
         Details
-        <i className="arrow" />
+        <FaChevronRight />
       </Card.Link>
     </Card.Body>
   </Card>

@@ -12,14 +12,6 @@
 .card-title{
   margin: 0;
 }
-.arrow {
-  border: solid #6666FF;
-  border-width: 0 3px 3px 0;
-  display: inline-block;
-  padding: 5px;
-  transform: rotate(-45deg);
-  -webkit-transform: rotate(-45deg);
-}
 .card-link{
   color: #6666FF;
   font-weight: lighter;
