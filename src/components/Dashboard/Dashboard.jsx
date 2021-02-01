@@ -38,7 +38,7 @@ export default (UserData) => (
       {UserData.name}
       .
     </StyledTitle>
-    <StyledTitle> Your Next Shift </StyledTitle>
+    <StyledSubtitle> Your Next Shift </StyledSubtitle>
     <StyledContainer>
       <StyledCardGroup>
         {ShiftData && ShiftData.length > 0 && ShiftData.map((item) => (
