@@ -1,6 +1,7 @@
 import { React } from 'react';
 import styled from 'styled-components';
 import { Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import UpcomingShiftCard from '../UpcomingShiftCard/UpcomingShiftCard';
 
 const StyledTitle = styled.h1`
@@ -29,6 +30,11 @@ const StyledButton = styled(Button)`
   color: #6666FF;
   margin-top: 15px;
 `;
+const StyledLink = styled(Link)`
+  color: #6666FF;
+  margin-top: 15px;
+  text-align: center;
+`;
 const UserInfo = {
   Name: 'Mary Dunn',
   Email: 'mary.dunn@gmail.com',
@@ -43,7 +49,7 @@ export default (UserData) => (
       </StyledTitle>
       <StyledSubtitle2>{UserInfo.Email}</StyledSubtitle2>
       <StyledSubtitle2>{UserInfo.CellPhoneNumber}</StyledSubtitle2>
-      <StyledButton variant="link">Edit contact information &gt; </StyledButton>
+      <StyledLink to="/editprofile">Edit contact information &gt;</StyledLink>
       <StyledButton variant="link">Change your password &gt; </StyledButton>
     </UserInfoContainer>
     <RecentShiftsContainer>
