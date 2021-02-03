@@ -4,6 +4,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import ForgotPassword from '../ForgotPassword/ForgotPassword';
 import NewAccountPage from '../NewAccountPage/NewAccountPage';
 import EditProfilePage from '../EditProfilePage/EditProfilePage';
+import ProfilePage from '../ProfilePage/ProfilePage';
 import NavBar from '../NavBar/NavBar';
 import Dashboard from '../Dashboard/Dashboard';
 
@@ -16,6 +17,7 @@ export default () => (
       <Route path="/newaccount" render={() => <NewAccountPage />} />
       <Route path="/editprofile" render={() => <EditProfilePage />} />
       <Route path="/dashboard" render={() => <Dashboard />} />
+      <Route path="/profilepage" render={() => <ProfilePage />} />
     </Switch>
   </div>
 );
