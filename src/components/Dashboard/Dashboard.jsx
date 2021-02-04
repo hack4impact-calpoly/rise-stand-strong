@@ -2,6 +2,7 @@ import React from 'react';
 import { CardColumns, Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import DemoCards from './DemoCards';
+import UpcomingShiftCard from '../UpcomingShiftCard/UpcomingShiftCard';
 
 const StyledCardGroup = styled(CardColumns)`
   margin: 20px;
@@ -31,6 +32,14 @@ const ShiftData = [
   },
 ];
 
+const CardData = [
+  {
+    from: '2021-03-9 8:00:00',
+    to: '2021-03-9 8:00:00',
+    link: '#',
+  },
+];
+
 export default (UserData) => (
   <div>
     <StyledTitle>
@@ -41,8 +50,9 @@ export default (UserData) => (
     <StyledSubtitle> Your Next Shift </StyledSubtitle>
     <StyledContainer>
       <StyledCardGroup>
-        {ShiftData && ShiftData.length > 0 && ShiftData.map((item) => (
-          <DemoCards CardData={item} />
+        {CardData && CardData.length > 0 && CardData.map((item) => (
+          <UpcomingShiftCard cardData={item} />
+
         ))}
       </StyledCardGroup>
       <Button variant="link">See All Upcoming Shifts &gt; </Button>
@@ -52,6 +62,7 @@ export default (UserData) => (
       <StyledCardGroup>
         {ShiftData && ShiftData.length > 0 && ShiftData.map((item) => (
           <DemoCards CardData={item} />
+
         ))}
       </StyledCardGroup>
       <Button variant="link">See All Announcements &gt;</Button>
