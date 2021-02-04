@@ -2,6 +2,7 @@ import React from 'react';
 import { CardColumns, Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import DemoCards from './DemoCards';
+import AnnouncementCard from '../AnnouncementCard/AnnouncementCard';
 
 const StyledCardGroup = styled(CardColumns)`
   margin: 20px;
@@ -31,6 +32,15 @@ const ShiftData = [
   },
 ];
 
+const Announcements = [
+  {
+    title: 'New Protocol',
+    text: 'This is the announcement.',
+    date: '2021-02-04',
+    link: '#',
+  },
+];
+
 export default (UserData) => (
   <div>
     <StyledTitle>
@@ -50,8 +60,8 @@ export default (UserData) => (
     <StyledSubtitle> Announcements </StyledSubtitle>
     <StyledContainer>
       <StyledCardGroup>
-        {ShiftData && ShiftData.length > 0 && ShiftData.map((item) => (
-          <DemoCards CardData={item} />
+        {Announcements && Announcements.length > 0 && Announcements.map((announcement) => (
+          <AnnouncementCard Announcement={announcement} />
         ))}
       </StyledCardGroup>
       <Button variant="link">See All Announcements &gt;</Button>
