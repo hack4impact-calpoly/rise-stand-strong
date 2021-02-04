@@ -23,7 +23,6 @@ export default (Announcement) => (
   <Card style={{ width: '18rem' }}>
     <Card.Body>
       <Card.Title>
-        {console.log(Announcement)}
         {Announcement.Announcement.title}
       </Card.Title>
       <Card.Subtitle className="mb-2 text-muted">{styleDate(Announcement.Announcement.date)}</Card.Subtitle>
