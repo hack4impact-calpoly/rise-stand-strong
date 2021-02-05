@@ -33,7 +33,7 @@ export default (cardData) => (
         </Card.Title>
         <Card.Text>
           {styleTime(cardData.cardData.from)}
-          AM-
+          AM -&nbsp;
           {styleTime(cardData.cardData.to)}
           PM
         </Card.Text>
