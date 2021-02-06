@@ -21,6 +21,7 @@ function createPost(post){
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             posts.push(post);
+
             const err = false;
 
             if (err){
@@ -29,7 +30,6 @@ function createPost(post){
             else{
                 resolve()
             }
-
         }, 2000);
     });
 }
