@@ -11,15 +11,17 @@ function styleDate(date) {
 }
 
 export default (Announcement) => (
-  <Card style={{ width: '18rem' }}>
+  <Card style={{ width: '18rem ' }}>
     <Card.Body>
-      <Card.Title>
-        {Announcement.Announcement.title}
-      </Card.Title>
-      <Card.Subtitle className="mb-2 text-muted">{styleDate(Announcement.Announcement.date)}</Card.Subtitle>
-      <Card.Text>
-        {Announcement.Announcement.text}
-      </Card.Text>
+      <div>
+        <Card.Title>
+          {Announcement.Announcement.title}
+        </Card.Title>
+        <Card.Subtitle className="mb-2 text-muted">{styleDate(Announcement.Announcement.date)}</Card.Subtitle>
+        <Card.Text>
+          {Announcement.Announcement.text}
+        </Card.Text>
+      </div>
       <Card.Link href={Announcement.Announcement.link}>
         Read More
       </Card.Link>
