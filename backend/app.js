@@ -7,6 +7,7 @@ const { ModalTitle } = require('react-bootstrap');
 const specs = swaggerJsdoc(swaggerSettings);
 
 const announcementsRouter = require('./routes/announcements');
+const shiftsRouter = require('./routes/shifts');
 
 const app = express()
 app.use(bodyParser.json())
@@ -16,6 +17,7 @@ app.use('/docs', swaggerUi.serve, swaggerUi.setup(specs));
 app.get('/docs')
 
 app.use('/announcements', announcementsRouter);
+app.use('/shifts', shiftsRouter);
 
 app.get('/', (req, res) => {
     res.send('RISE/Stand Strong')
