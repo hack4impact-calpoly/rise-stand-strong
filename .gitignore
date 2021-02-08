@@ -23,3 +23,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .eslintcache
+
+#amplify
+node_modules/
+/amplify/backend/src/node_modules
