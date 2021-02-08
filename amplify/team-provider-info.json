@@ -10,6 +10,11 @@
       "StackName": "amplify-rise-stand-strong-prod-55902",
       "StackId": "arn:aws:cloudformation:us-west-2:175465110757:stack/amplify-rise-stand-strong-prod-55902/bf186df0-69d2-11eb-a36e-06f35cd4e843",
       "AmplifyAppId": "d26oijlr19kg8a"
+    },
+    "categories": {
+      "auth": {
+        "risestandstrong9960cace": {}
+      }
     }
   }
 }

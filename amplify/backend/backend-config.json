@@ -1,1 +1,10 @@
-{}
+{
+  "auth": {
+    "risestandstrong9960cace": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}
