@@ -29,7 +29,7 @@ const router = express.Router();
  *           description: The information displayed in the announcement card.
  *         createdAt:
  *           type: string
- *           format: YYYY-MM-DD
+ *           format: YYYY-MM-DDTHH:MM:SS
  *           description: The date of the record creation.
  *         link:
  *           type: string
@@ -39,7 +39,7 @@ const router = express.Router();
  *          title: Valentine's Day Work Schedule
  *          author: John Doe
  *          text: With the upcoming Valentine's day comes an altered work schedule! Click the link to see any changes.
- *          createdAt: 2021-01-30
+ *          createdAt: 2021-01-30T10:30:00
  *          link: https://rise/updates/vday
  */
 
@@ -112,7 +112,7 @@ router.post('/', async (req, res) => {
  *         "404":
  *            description: Announcement with the specified id does not exist
  */
-router.put('/', async (req, res) => {
+router.put('/:id', async (req, res) => {
     res.end();
 })
 
@@ -133,7 +133,7 @@ router.put('/', async (req, res) => {
  *         "404":
  *            description: Announcement with the specified id does not exist
  */
-router.delete('/', async (req, res) => {
+router.delete('/:id', async (req, res) => {
     res.end();
 })
 
