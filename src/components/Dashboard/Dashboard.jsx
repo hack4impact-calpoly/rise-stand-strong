@@ -1,7 +1,7 @@
 import React from 'react';
 import { CardColumns, Button } from 'react-bootstrap';
 import styled from 'styled-components';
-import DemoCards from './DemoCards';
+import AnnouncementCard from '../AnnouncementCard/AnnouncementCard';
 import UpcomingShiftCard from '../UpcomingShiftCard/UpcomingShiftCard';
 
 const StyledCardGroup = styled(CardColumns)`
@@ -21,17 +21,14 @@ const StyledSubtitle = styled.h3`
   margin: 20px 0px 15px 20px;
 `;
 
-const ShiftData = [
+const Announcements = [
   {
-    Date: 'Tuesday March 20th',
-    Time: '8:00pm',
-  },
-  {
-    Date: 'Tuesday March 30th',
-    Time: '9:00pm',
+    title: 'New Protocol',
+    text: 'This is the announcement.',
+    date: '2021-02-04',
+    link: '#',
   },
 ];
-
 const CardData = [
   {
     from: '2021-03-9 8:00:00',
@@ -52,7 +49,6 @@ export default (UserData) => (
       <StyledCardGroup>
         {CardData && CardData.length > 0 && CardData.map((item) => (
           <UpcomingShiftCard cardData={item} />
-
         ))}
       </StyledCardGroup>
       <Button variant="link">See All Upcoming Shifts &gt; </Button>
@@ -60,9 +56,8 @@ export default (UserData) => (
     <StyledSubtitle> Announcements </StyledSubtitle>
     <StyledContainer>
       <StyledCardGroup>
-        {ShiftData && ShiftData.length > 0 && ShiftData.map((item) => (
-          <DemoCards CardData={item} />
-
+        {Announcements && Announcements.length > 0 && Announcements.map((announcement) => (
+          <AnnouncementCard Announcement={announcement} />
         ))}
       </StyledCardGroup>
       <Button variant="link">See All Announcements &gt;</Button>

@@ -22,6 +22,6 @@
         }
       ]
     },
-    "apis": ["./routes/books.js",
-             "./routes/announcements.js"]
+    "apis": ["./routes/announcements.js",
+            "./routes/shifts.js"]
 }
