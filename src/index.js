@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-filename-extension */
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
+import React from 'react'; // eslint-disable-line import/no-extraneous-dependencies
+import ReactDOM from 'react-dom'; // eslint-disable-line import/no-extraneous-dependencies
+import { Provider } from 'react-redux'; // eslint-disable-line import/no-extraneous-dependencies
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import store from './store/store';
