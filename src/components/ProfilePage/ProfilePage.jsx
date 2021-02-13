@@ -1,4 +1,4 @@
-import { React } from 'react';
+import { React } from 'react'; // eslint-disable-line import/no-extraneous-dependencies
 import styled from 'styled-components';
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';

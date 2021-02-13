@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'; // eslint-disable-line import/no-extraneous-dependencies
 import { CardColumns, Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import AnnouncementCard from '../AnnouncementCard/AnnouncementCard';
