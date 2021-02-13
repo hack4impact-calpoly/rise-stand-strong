@@ -1,4 +1,5 @@
 const express = require('express');
+const { postAnnouncement } = require('../utils/aws-utils');
 const router = express.Router();
 
 /**
@@ -88,7 +89,16 @@ router.get('/', async (req, res) => {
  *             
  */
 router.post('/', async (req, res) => {
-    res.end();
+    const { userSub } = req.params;
+    const body = req.body;
+
+    try {
+        await postAnnouncement(userSub, body);
+        res.send('Success');
+    }
+    catch (err) {
+        res.status(400).json({ error });
+    }
 })
 
 /**
