@@ -7,7 +7,14 @@ const awsmobile = {
     "aws_cognito_region": "us-west-2",
     "aws_user_pools_id": "us-west-2_P46uOdTPF",
     "aws_user_pools_web_client_id": "7f33o31rcb3fc1pibmkql045bi",
-    "oauth": {}
+    "oauth": {},
+    "aws_cloud_logic_custom": [
+        {
+            "name": "api85c594be",
+            "endpoint": "https://1nazz9rwh9.execute-api.us-west-2.amazonaws.com/prod",
+            "region": "us-west-2"
+        }
+    ]
 };
 
 
