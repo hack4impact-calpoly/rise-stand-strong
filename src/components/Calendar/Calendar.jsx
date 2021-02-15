@@ -1,34 +1,35 @@
 import React from 'react'; // eslint-disable-line import/no-extraneous-dependencies
+import styled from 'styled-components';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
-// import "@fullcalendar/core/main.css";
-// import "@fullcalendar/daygrid/main.css";
+import '@fullcalendar/daygrid/main.css';
+import ExampleShifts from './ExampleShifts';
 
-const example = {
-  shiftId: '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d',
-  startDateTime: '2021-02-15T09:00:00',
-  endDateTime: '2021-02-15T12:00:00',
-  primary: 'Jack Fales',
-  secondary: 'Justin Poist',
-  backup: '',
-};
+const CalendarContainer = styled.section`
+  margin: 40px;
+`;
+const renderEvents = ExampleShifts.map((item) => {
+  const singleEvent = {};
+
+  singleEvent.id = item.id;
+  singleEvent.title = item.primary;
+  singleEvent.start = item.startDateTime;
+  singleEvent.end = item.endDateTime;
+
+  return singleEvent;
+});
 
 const Calendar = () => {
-  const events = [{
-    id: example.id,
-    title: example.primary,
-    start: example.startDateTime,
-    end: example.endDateTime,
-  }];
+  const events = renderEvents;
 
   return (
-    <div>
+    <CalendarContainer>
       <FullCalendar
         defaultView="dayGridMonth"
         plugins={[dayGridPlugin]}
         events={events}
       />
-    </div>
+    </CalendarContainer>
   );
 };
 export default Calendar;
