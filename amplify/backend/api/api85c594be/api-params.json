@@ -1,12 +1,18 @@
 {
     "paths": [
         {
-            "name": "/items",
+            "name": "/shifts",
             "lambdaFunction": "risestandstrongcb34053a",
             "privacy": {
                 "open": true
-            },
-            "policyResourceName": "/items"
+            }
+        },
+        {
+            "name": "/announcements",
+            "lambdaFunction": "risestandstrongcb34053a",
+            "privacy": {
+                "open": true
+            }
         }
     ],
     "resourceName": "api85c594be",
@@ -31,5 +37,6 @@
                 "Arn"
             ]
         }
-    ]
+    ],
+    "uuid": "50d12c86"
 }
