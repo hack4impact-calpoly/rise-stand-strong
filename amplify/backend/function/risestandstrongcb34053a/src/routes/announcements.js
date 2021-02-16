@@ -89,11 +89,10 @@ router.get('/', async (req, res) => {
  *             
  */
 router.post('/', async (req, res) => {
-    const { userSub } = req.params;
     const body = req.body;
 
     try {
-        await postAnnouncement(userSub, body);
+        await postAnnouncement(body);
         res.send('Success');
     }
     catch (err) {
