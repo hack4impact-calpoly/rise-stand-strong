@@ -1,0 +1,42 @@
+{
+    "paths": [
+        {
+            "name": "/shifts",
+            "lambdaFunction": "risestandstrongcb34053a",
+            "privacy": {
+                "open": true
+            }
+        },
+        {
+            "name": "/announcements",
+            "lambdaFunction": "risestandstrongcb34053a",
+            "privacy": {
+                "open": true
+            }
+        }
+    ],
+    "resourceName": "api85c594be",
+    "apiName": "api85c594be",
+    "functionArns": [
+        {
+            "lambdaFunction": "risestandstrongcb34053a"
+        }
+    ],
+    "privacy": {
+        "auth": 0,
+        "unauth": 0,
+        "authRoleName": "amplify-rise-stand-strong-prod-55902-authRole",
+        "unAuthRoleName": "amplify-rise-stand-strong-prod-55902-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "risestandstrongcb34053a",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ],
+    "uuid": "50d12c86"
+}
