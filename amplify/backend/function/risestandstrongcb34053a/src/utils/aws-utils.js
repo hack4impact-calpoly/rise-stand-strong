@@ -1,5 +1,5 @@
-import { v4 as uuidv4 } from 'uuid';
 const AWS = require('aws-sdk');
+const { v4: uuidv4 } = require('uuid');
 
 /**
  * POST a new announcement into the announcements table in DynamoDB.
