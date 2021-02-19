@@ -1,4 +1,4 @@
-import React from 'react'; // eslint-disable-line import/no-extraneous-dependencies
+import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import LoginPage from '../LoginPage/LoginPage';
 import ForgotPassword from '../ForgotPassword/ForgotPassword';
