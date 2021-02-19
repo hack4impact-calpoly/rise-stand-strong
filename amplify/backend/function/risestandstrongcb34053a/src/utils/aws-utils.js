@@ -25,6 +25,22 @@ async function postAnnouncement(announcementBody) {
     }
 }
 
+
+async function getAnnouncements(){
+    const docClient = new AWS.DynamoDB.DocumentClient();
+    const params = {
+        TableName: 'announcements',
+    };
+
+    try {
+        await docClient.get(params).promise();
+    } catch (err) {
+        console.log(err);
+        throw err;
+    }
+}
+
 module.exports = {
-    postAnnouncement
+    postAnnouncement,
+    getAnnouncements
 };

@@ -1,4 +1,5 @@
 const express = require('express');
+const { getAnnouncement } = require('../../../../../../src/api');
 const { postAnnouncement } = require('../utils/aws-utils');
 const router = express.Router();
 
@@ -65,7 +66,13 @@ const router = express.Router();
  *                        $ref: '#/components/schemas/Announcement'
  */
 router.get('/', async (req, res) => {
-    res.end();
+    try{
+        const data = await getAnnouncements();
+        res.json(data);
+    }
+    catch (err){
+        res.status(400).json({err});
+    }
 })
 
 /**
