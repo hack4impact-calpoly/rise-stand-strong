@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-
+const { postShift } = require('../utils/aws-utils');
+const { v4: uuidv4 } = require('uuid');
 
 /**
  * @swagger
@@ -49,7 +50,20 @@ const router = express.Router();
  *            description: Admin privileges required
  */
 router.post('/', async (req, res) => {
-   res.end();
+   const newShift = {
+      ...req.body,
+      shiftId: uuidv4(),
+   }
+
+   try {
+       await postShift(newShift);
+       res.send(newShift);
+   }
+   catch (err) {
+      // TODO: Once we have the user pools and IAM set up throw a 403 if not
+      // allowed to access writing to a table
+       res.status(400).json({ error });
+   }
 })
 
 

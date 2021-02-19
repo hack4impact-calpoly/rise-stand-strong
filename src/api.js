@@ -10,3 +10,7 @@ export async function postAnnouncement(userSub, announcementBody) {
 
     await axios.post(`${BASE_URL}/${ANNOUNCEMENTS}`, { ...announcementBody });
 }
+
+export async function postShift(shiftBody) {
+    await axios.post(`${BASE_URL}/${SHIFTS}`, { ...shiftBody });
+}
