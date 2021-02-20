@@ -28,7 +28,7 @@ async function postAnnouncement(announcementBody) {
 }
 
 /**
- * POST a new announcement into the announcements table in DynamoDB.
+ * POST a new shift into the shifts table in DynamoDB.
  * Returns nothing. Throws error from DynamoDB if one occurs.
  * 
  * @param {*} shiftBody 
