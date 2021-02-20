@@ -1,4 +1,5 @@
 import { React, useState } from 'react';
+import { Auth } from 'aws-amplify';
 import { Form, Button, Col } from 'react-bootstrap';
 import styled from 'styled-components';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -29,12 +30,30 @@ const StyledHeader = styled(Form.Label)`
   font-size: 30px;
 `;
 
+/* async function signUp() {
+  try {
+    const { user } = await Auth.signUp({
+      password,
+      attributes: {
+        given_name,
+        family_name,
+        email,
+        phone_number,
+      }
+    });
+    console.log(user);
+  } catch (error) {
+    console.log('error signing up:', error);
+  }
+} */
+
 export default () => {
   const [validated, setValidated] = useState(false);
   const [firstname, setFirstName] = useState('');
   const [lastname, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [phonenumber, setPhoneNumber] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleChangeFirstName = (e) => {
     setFirstName(e.target.value);
@@ -48,12 +67,31 @@ export default () => {
   const handleChangePhoneNumber = (e) => {
     setPhoneNumber(e.target.value);
   };
-  const handleSubmit = (e) => {
+  const handleChangePassword = (e) => {
+    setPassword(e.target.value);
+  };
+  const handleSubmit = async (e) => {
     const form = e.currentTarget;
     if (form.checkValidity() === false) {
       e.preventDefault();
       e.stopPropagation();
     } else {
+      e.preventDefault();
+      try {
+        console.log(form);
+        const { newUser } = await Auth.signUp({
+          username: email,
+          password,
+          attributes: {
+            given_name: firstname,
+            family_name: lastname,
+            phone_number: phonenumber,
+          },
+        });
+        console.log(newUser);
+      } catch (error) {
+        console.log('error signing up:', error);
+      }
       alert('Form submitted. Admin will need to approve the account.'); // eslint-disable-line no-alert
     }
     setValidated(true);
@@ -114,6 +152,20 @@ export default () => {
           />
           <StyledFeedback>Looks good!</StyledFeedback>
           <StyledFeedback type="invalid"> Please fill in your phone number. </StyledFeedback>
+        </Form.Group>
+      </Form.Row>
+      <Form.Row>
+        <Form.Group as={Col} md="4" controlId="validationCustom05">
+          <StyledLabel>Password</StyledLabel>
+          <StyledField
+            required
+            type="text"
+            placeholder="Password"
+            defaultValue={password}
+            onChange={handleChangePassword}
+          />
+          <StyledFeedback>Looks good!</StyledFeedback>
+          <StyledFeedback type="invalid"> Please fill in your password. </StyledFeedback>
         </Form.Group>
       </Form.Row>
       <SubmitButton type="submit">Create Account</SubmitButton>
