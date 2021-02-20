@@ -12,7 +12,13 @@ async function postAnnouncement(userSub, announcementBody) {
 }
 
 async function getAnnouncements(userSub, announcementBody) {
-    await axios.get(`${BASE_URL}/${ANNOUNCEMENTS}`);
+    console.log("got here 1")
+    await axios.get(`${BASE_URL}/${ANNOUNCEMENTS}`)
+      .catch(function (error) {
+        // handle error
+        console.log("ERROR " + error);
+      });
+    console.log("got here 2")
 }
 
 

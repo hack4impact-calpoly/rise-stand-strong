@@ -1,5 +1,6 @@
 const express = require('express');
 const { getAnnouncement } = require('../../../../../../src/api');
+const { getAnnouncements } = require('../utils/aws-utils');
 const { postAnnouncement } = require('../utils/aws-utils');
 const router = express.Router();
 
@@ -67,7 +68,9 @@ const router = express.Router();
  */
 router.get('/', async (req, res) => {
     try{
+        console.log("GOT HERE")
         const data = await getAnnouncements();
+        console.log(data)
         res.json(data);
     }
     catch (err){
