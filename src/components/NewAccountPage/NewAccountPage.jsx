@@ -3,6 +3,7 @@ import { Auth } from 'aws-amplify';
 import { Form, Button, Col } from 'react-bootstrap';
 import styled from 'styled-components';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useHistory } from 'react-router-dom';
 
 const SubmitButton = styled(Button)`
   background-color: #6593D6;
@@ -30,23 +31,6 @@ const StyledHeader = styled(Form.Label)`
   font-size: 30px;
 `;
 
-/* async function signUp() {
-  try {
-    const { user } = await Auth.signUp({
-      password,
-      attributes: {
-        given_name,
-        family_name,
-        email,
-        phone_number,
-      }
-    });
-    console.log(user);
-  } catch (error) {
-    console.log('error signing up:', error);
-  }
-} */
-
 export default () => {
   const [validated, setValidated] = useState(false);
   const [firstname, setFirstName] = useState('');
@@ -54,6 +38,8 @@ export default () => {
   const [email, setEmail] = useState('');
   const [phonenumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmpassword, setConfirmPassword] = useState('');
+  const history = useHistory();
 
   const handleChangeFirstName = (e) => {
     setFirstName(e.target.value);
@@ -70,15 +56,23 @@ export default () => {
   const handleChangePassword = (e) => {
     setPassword(e.target.value);
   };
+  const handleChangeConfirmPassword = (e) => {
+    setConfirmPassword(e.target.value);
+  };
   const handleSubmit = async (e) => {
     const form = e.currentTarget;
+    const confirmField = form.elements[5];
+    if (confirmpassword !== password) {
+      confirmField.setCustomValidity('Passwords must match');
+    } else {
+      confirmField.setCustomValidity('');
+    }
     if (form.checkValidity() === false) {
       e.preventDefault();
       e.stopPropagation();
     } else {
       e.preventDefault();
       try {
-        console.log(form);
         const { newUser } = await Auth.signUp({
           username: email,
           password,
@@ -92,7 +86,8 @@ export default () => {
       } catch (error) {
         console.log('error signing up:', error);
       }
-      alert('Form submitted. Admin will need to approve the account.'); // eslint-disable-line no-alert
+      alert('Form submitted. Admin will need to to approve.'); // eslint-disable-line no-alert
+      history.push('/');
     }
     setValidated(true);
   };
@@ -146,7 +141,7 @@ export default () => {
           <StyledField
             required
             type="text"
-            placeholder="Phone Number"
+            placeholder="e.g. +1(999)999-9999"
             defaultValue={phonenumber}
             onChange={handleChangePhoneNumber}
           />
@@ -166,6 +161,20 @@ export default () => {
           />
           <StyledFeedback>Looks good!</StyledFeedback>
           <StyledFeedback type="invalid"> Please fill in your password. </StyledFeedback>
+        </Form.Group>
+      </Form.Row>
+      <Form.Row>
+        <Form.Group as={Col} md="5" controlId="validationCustom05">
+          <StyledLabel>Confirm Password</StyledLabel>
+          <StyledField
+            required
+            type="text"
+            placeholder="Password"
+            defaultValue={confirmpassword}
+            onChange={handleChangeConfirmPassword}
+          />
+          <StyledFeedback>Looks good!</StyledFeedback>
+          <StyledFeedback type="invalid"> Passwords must match. </StyledFeedback>
         </Form.Group>
       </Form.Row>
       <SubmitButton type="submit">Create Account</SubmitButton>
