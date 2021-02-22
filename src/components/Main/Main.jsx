@@ -6,6 +6,7 @@ import NewAccountPage from '../NewAccountPage/NewAccountPage';
 import EditProfilePage from '../EditProfilePage/EditProfilePage';
 import NavBar from '../NavBar/NavBar';
 import Dashboard from '../Dashboard/Dashboard';
+import AsyncAwaitPractice from '../AsyncAwaitPractice/promises';
 
 export default () => (
   <div className="App">
@@ -16,6 +17,7 @@ export default () => (
       <Route path="/newaccount" render={() => <NewAccountPage />} />
       <Route path="/editprofile" render={() => <EditProfilePage />} />
       <Route path="/dashboard" render={() => <Dashboard />} />
+      <Route path="/practice" render={() => <AsyncAwaitPractice />} />
     </Switch>
   </div>
 );
