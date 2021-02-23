@@ -1,5 +1,5 @@
 const express = require('express');
-const { getAnnouncement } = require('../../../../../../src/api');
+// const { getAnnouncement } = require('../../../../../../src/api');
 const { getAnnouncements } = require('../utils/aws-utils');
 const { postAnnouncement } = require('../utils/aws-utils');
 const router = express.Router();
@@ -74,7 +74,9 @@ router.get('/', async (req, res) => {
         res.json(data);
     }
     catch (err){
-        res.status(400).json({err});
+        // console.log("ERRORRfdsjklfjdskfj")
+        console.log(err)
+        res.status(400).json(err);
     }
 })
 
