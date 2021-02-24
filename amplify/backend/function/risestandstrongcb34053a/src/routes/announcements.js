@@ -68,9 +68,7 @@ const router = express.Router();
  */
 router.get('/', async (req, res) => {
     try{
-        console.log("GOT HERE")
         const data = await getAnnouncements();
-        console.log(data)
         res.json(data);
     }
     catch (err){

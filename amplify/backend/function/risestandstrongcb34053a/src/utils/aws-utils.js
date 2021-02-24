@@ -1,5 +1,8 @@
+const { CodeStarNotifications } = require('aws-sdk');
 const AWS = require('aws-sdk');
 const { v4: uuidv4 } = require('uuid');
+
+AWS.config.update({region: 'us-west-2'});
 
 /**
  * POST a new announcement into the announcements table in DynamoDB.
@@ -27,21 +30,30 @@ async function postAnnouncement(announcementBody) {
 
 
 async function getAnnouncements(){
+    function sortTable(data){
+        const topfive = [];
+        data.Items.forEach(element => {
+            topfive.push(element);
+        });
+        topfive.sort((a, b) => a.createdAt - b.createdAt);
+        topFive = topfive.slice(0, 5);
+        return topFive;
+    }
     const docClient = new AWS.DynamoDB.DocumentClient();
     var params = {
         TableName: 'announcements',
         Key: {
-            'id': "1"
+            'id': "5"
         }
     };
 
     try{
-        const data = await docClient.get(params).promise();
-        console.log(data);
-        // return data;
+        let data = await docClient.scan(params).promise();
+        data = sortTable(data)
+        return data;
     }
-    catch{
-        console.error("Unable to read item. Error JSON:", data);
+    catch (err){
+        console.log(err)
     }
 }
 

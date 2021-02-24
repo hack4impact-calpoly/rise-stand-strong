@@ -11,14 +11,12 @@ async function postAnnouncement(userSub, announcementBody) {
     await axios.post(`${BASE_URL}/${ANNOUNCEMENTS}`, { ...announcementBody });
 }
 
-async function getAnnouncements(userSub, announcementBody) {
-    console.log("got here 1")
+async function getAnnouncements(userSub) {
     await axios.get(`${BASE_URL}/${ANNOUNCEMENTS}`)
       .catch(function (error) {
         // handle error
         console.log("ERROR " + error);
       });
-    console.log("got here 2")
 }
 
 
