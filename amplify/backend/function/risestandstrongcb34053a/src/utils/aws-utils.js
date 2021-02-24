@@ -51,7 +51,31 @@ async function postShift(shiftBody) {
     }
 }
 
+/**
+ * GET a shift from the shifts table in DynamoDB.
+ * Returns a shift. Throws error from DynamoDB if one occurs.
+ * 
+ * @param {*} shiftBody 
+ */
+async function getShift(shiftBody) {
+    const docClient = new AWS.DynamoDB.DocumentClient();
+    const params = {
+        TableName: 'shifts',
+        Key: {
+            shiftId: shiftBody
+        }
+    };
+    try {
+        let shift = await docClient.get(params).promise();
+        return shift
+    } catch (err) {
+        console.log(err);
+        throw err;
+    }
+}
+
 module.exports = {
     postAnnouncement,
     postShift,
+    getShift,
 };

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { postShift } = require('../utils/aws-utils');
+const { getShift } = require('../utils/aws-utils');
 const { v4: uuidv4 } = require('uuid');
 
 /**
@@ -128,7 +129,14 @@ router.get('/', async (req, res) => {
  *            description: shiftId not found
  */
 router.get('/:shiftId', async (req, res) => {
-   res.end();
+   try {
+     shiftId = req.params.shiftId
+     const shift = await getShift(shiftId);
+     res.send(shift)
+   }
+   catch (err) {
+      res.status(404).json({ error });
+   }
 })
 
 
