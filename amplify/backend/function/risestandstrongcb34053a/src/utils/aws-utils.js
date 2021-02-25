@@ -52,17 +52,17 @@ async function postShift(shiftBody) {
 }
 
 /**
- * GET a shift from the shifts table in DynamoDB.
+ * GET a specific shift given a shiftId from the shifts table in DynamoDB.
  * Returns a shift. Throws error from DynamoDB if one occurs.
  * 
- * @param {*} shiftBody 
+ * @param {*} shiftId 
  */
-async function getShift(shiftBody) {
+async function getShift(shiftId) {
     const docClient = new AWS.DynamoDB.DocumentClient();
     const params = {
         TableName: 'shifts',
         Key: {
-            shiftId: shiftBody
+            shiftId: shiftId
         }
     };
     try {

@@ -129,8 +129,8 @@ router.get('/', async (req, res) => {
  *            description: shiftId not found
  */
 router.get('/:shiftId', async (req, res) => {
+   shiftId = req.params.shiftId
    try {
-     shiftId = req.params.shiftId
      const shift = await getShift(shiftId);
      res.send(shift)
    }
