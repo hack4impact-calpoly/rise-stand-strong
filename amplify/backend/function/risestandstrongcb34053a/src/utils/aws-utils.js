@@ -42,9 +42,6 @@ async function getAnnouncements(){
     const docClient = new AWS.DynamoDB.DocumentClient();
     var params = {
         TableName: 'announcements',
-        Key: {
-            'id': "5"
-        }
     };
 
     try{
