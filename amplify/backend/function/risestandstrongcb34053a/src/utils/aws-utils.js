@@ -35,7 +35,7 @@ async function getAnnouncements(){
         data.Items.forEach(element => {
             topfive.push(element);
         });
-        topfive.sort((a, b) => a.createdAt - b.createdAt);
+        topfive.sort((a, b) => b.createdAt - a.createdAt);
         topFive = topfive.slice(0, 5);
         return topFive;
     }
