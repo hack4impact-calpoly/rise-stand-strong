@@ -51,18 +51,17 @@ const router = express.Router();
  * 
  * /announcements:
  *    get:
- *      summary: Get a list of the 5 most recent announcements
+ *      summary: Get a list of all announcements in decending date order
  *      tags: [Announcements]
  *      requestBody:
  *         required: false
  *      responses:
  *         "200":
- *            description: A list of the 5 most recent announcements.
+ *            description: A list all sorted announcements.
  *            content:
  *               application/json:
  *                  schema:
  *                     type: array
- *                     maxItems: 5
  *                     items:
  *                        $ref: '#/components/schemas/Announcement'
  */

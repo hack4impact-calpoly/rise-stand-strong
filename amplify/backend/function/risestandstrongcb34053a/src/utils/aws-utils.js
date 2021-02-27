@@ -36,12 +36,12 @@ async function getAnnouncements(){
             topfive.push(element);
         });
         topfive.sort((a, b) => b.createdAt - a.createdAt);
-        topFive = topfive.slice(0, 5);
-        return topFive;
+        // topfive = topfive.slice(0, 5);
+        return topfive;
     }
     const docClient = new AWS.DynamoDB.DocumentClient();
     var params = {
-        TableName: 'announcements',
+        TableName : 'announcementsV2',
     };
 
     try{
