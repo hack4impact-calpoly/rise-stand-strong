@@ -28,6 +28,11 @@ async function postAnnouncement(announcementBody) {
 }
 
 
+/**
+ * GET a all announcements from announcements table in DynamoDB.
+ * Returns sorted (high -> low) list. Throws error from DynamoDB if one occurs.
+ *
+ */
 async function getAnnouncements(){
     function sortTable(data){
         const topfive = [];
