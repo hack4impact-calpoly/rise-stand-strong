@@ -1,4 +1,3 @@
-const { CodeStarNotifications } = require('aws-sdk');
 const AWS = require('aws-sdk');
 const { v4: uuidv4 } = require('uuid');
 
@@ -36,9 +35,8 @@ async function getAnnouncements(){
             topfive.push(element);
         });
         topfive.sort((a, b) => b.createdAt - a.createdAt);
-        // topfive = topfive.slice(0, 5);
         return topfive;
-    }
+    };
     const docClient = new AWS.DynamoDB.DocumentClient();
     var params = {
         TableName : 'announcementsV2',
@@ -46,11 +44,12 @@ async function getAnnouncements(){
 
     try{
         let data = await docClient.scan(params).promise();
-        data = sortTable(data)
+        data = sortTable(data);
         return data;
     }
     catch (err){
-        console.log(err)
+        console.log(err);
+        throw err;
     }
 }
 
