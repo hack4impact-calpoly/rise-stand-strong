@@ -36,9 +36,9 @@ async function postAnnouncement(announcementBody) {
 async function postShift(shiftBody) {
     const docClient = new AWS.DynamoDB.DocumentClient();
     const params = {
-        TableName: 'shifts',
+        TableName: 'shiftsV2',
         Item: {
-
+            pk: 'RSS',
             ...shiftBody,
         }
     };
@@ -51,7 +51,33 @@ async function postShift(shiftBody) {
     }
 }
 
+
+async function queryShiftsRange(startTimestamp, endTimestamp) {
+    const docClient = new AWS.DynamoDB.DocumentClient({ apiVersion: '2012-08-10'});
+    var params = {
+        TableName : "shiftsV2",
+        KeyConditionExpression: "#pk = :rss AND startTimestamp BETWEEN :start AND :end",
+        ExpressionAttributeNames:{
+            "#pk": "pk"
+        },
+        ExpressionAttributeValues: {
+            ":rss": 'RSS',
+            ":start": startTimestamp,
+            ":end": endTimestamp,
+        }
+    };
+
+    try {
+        const dbResponse = await docClient.query(params).promise();
+        return dbResponse.Items;
+    } catch(err) {
+        console.log(err);
+        throw err;
+    }
+}
+
 module.exports = {
     postAnnouncement,
     postShift,
+    queryShiftsRange,
 };
