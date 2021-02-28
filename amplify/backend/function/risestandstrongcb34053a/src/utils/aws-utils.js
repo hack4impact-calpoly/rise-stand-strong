@@ -29,7 +29,7 @@ async function postAnnouncement(announcementBody) {
 
 
 /**
- * GET a all announcements from announcements table in DynamoDB.
+ * GET all announcements from announcements table in DynamoDB.
  * Returns sorted (high -> low) list. Throws error from DynamoDB if one occurs.
  *
  */
