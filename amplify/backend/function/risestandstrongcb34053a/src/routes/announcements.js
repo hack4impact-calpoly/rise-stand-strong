@@ -17,7 +17,7 @@ const router = express.Router();
  *         - createdAt
  *         - link
  *       properties:
- *         id:
+ *         announcementId:
  *           type: integer
  *           description: The auto-generated id of the announcement.
  *         title:
@@ -110,7 +110,7 @@ router.post('/', async (req, res) => {
 /**
  * @swagger
  * 
- * /announcements/{id}:
+ * /announcements/{announcementId}:
  *    put:
  *      summary: Modify the contents of the specified announcement
  *      tags: [Announcements]
@@ -126,18 +126,18 @@ router.post('/', async (req, res) => {
  *         "403":
  *            description: Admin privileges required
  *         "404":
- *            description: Announcement with the specified id does not exist
+ *            description: Announcement with the specified announcementId does not exist
  */
-router.put('/:id', async (req, res) => {
+router.put('/:announcementId', async (req, res) => {
     res.end();
 })
 
 /**
  * @swagger
  * 
- * /announcements/{id}:
+ * /announcements/{announcementId}:
  *    delete:
- *      summary: Delete the announcement with the specified id
+ *      summary: Delete the announcement with the specified announcementId
  *      tags: [Announcements]
  *      requestBody:
  *         required: false
@@ -147,9 +147,9 @@ router.put('/:id', async (req, res) => {
  *         "403":
  *            description: Admin privileges required
  *         "404":
- *            description: Announcement with the specified id does not exist
+ *            description: Announcement with the specified announcementId does not exist
  */
-router.delete('/:id', async (req, res) => {
+router.delete('/:announcementId', async (req, res) => {
     res.end();
 })
 
