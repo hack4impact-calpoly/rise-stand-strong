@@ -1,4 +1,5 @@
 const express = require('express');
+const { getAnnouncements } = require('../utils/aws-utils');
 const { postAnnouncement } = require('../utils/aws-utils');
 const router = express.Router();
 
@@ -49,23 +50,29 @@ const router = express.Router();
  * 
  * /announcements:
  *    get:
- *      summary: Get a list of the 5 most recent announcements
+ *      summary: Get a list of all announcements in decending date order
  *      tags: [Announcements]
  *      requestBody:
  *         required: false
  *      responses:
  *         "200":
- *            description: A list of the 5 most recent announcements.
+ *            description: A list all sorted announcements.
  *            content:
  *               application/json:
  *                  schema:
  *                     type: array
- *                     maxItems: 5
  *                     items:
  *                        $ref: '#/components/schemas/Announcement'
  */
 router.get('/', async (req, res) => {
-    res.end();
+    try{
+        const data = await getAnnouncements();
+        res.json(data);
+    }
+    catch (err){
+        console.log(err)
+        res.status(400).json(err);
+    }
 })
 
 /**
