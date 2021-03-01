@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-
+const { postShift, queryShiftsRange } = require('../utils/aws-utils');
 
 /**
  * @swagger
@@ -15,14 +15,12 @@ const router = express.Router();
  *           application/json:
  *              schema:
  *                 properties:
- *                   startDateTime: 
+ *                   startTimestamp: 
  *                      type: String
- *                      format: YYYY-MM-DDTHH:MM:SS
- *                      description: The start date and time for this shift.
- *                   endDateTime: 
+ *                      description: The start timestamp for this shift.
+ *                   endTimestamp: 
  *                      type: String
- *                      format: YYYY-MM-DDTHH:MM:SS
- *                      description: The end date and time for this shift.
+ *                      description: The end timestamp for this shift.
  *                   primary: 
  *                      type: String
  *                      description: Full name for the primary volunteer on this shift.
@@ -33,14 +31,14 @@ const router = express.Router();
  *                      type: String
  *                      description: Full name for the backup volunteer on this shift.
  *                 example:
- *                   startDateTime: '2021-02-15T09:00:00'
- *                   endDateTime: '2021-02-15T12:00:00'
+ *                   startTimestamp: 1609520400
+ *                   endTimestamp: 1609520800
  *                   primary: 'Jack Fales'
  *                   secondary: 'Justin Poist'
  *                   backup: ''
  *      responses:
  *         "200":
- *             description: The created Shift. (Includes the shiftId)
+ *             description: The created Shift.
  *             content:
  *                application/json:
  *                   schema:
@@ -49,7 +47,19 @@ const router = express.Router();
  *            description: Admin privileges required
  */
 router.post('/', async (req, res) => {
-   res.end();
+   const newShift = {
+      ...req.body,
+   }
+
+   try {
+       await postShift(newShift);
+       res.send(newShift);
+   }
+   catch (err) {
+      // TODO: Once we have the user pools and IAM set up throw a 403 if not
+      // allowed to access writing to a table
+       res.status(400).json(err);
+   }
 })
 
 
@@ -62,18 +72,15 @@ router.post('/', async (req, res) => {
  *      tags: [Shifts]
  *      parameters:
  *         - in: query
- *           name: startDateTime
+ *           name: startTimestamp
  *           required: true
  *           schema:
- *              type: String
- *              format: YYYY-MM-DDTHH:MM:SS
+ *              type: Number
  *         - in: query
- *           name: endDateTime
+ *           name: endTimestamp
  *           required: true
  *           schema:
- *              type: String
- *              format: YYYY-MM-DDTHH:MM:SS
- *           description: The start
+ *              type: Number
  *      responses:
  *          "200":
  *             description: A list of all Shifts that match the time range given.
@@ -85,35 +92,51 @@ router.post('/', async (req, res) => {
  *                         $ref: '#/components/schemas/Shift'
  */
 router.get('/', async (req, res) => {
-   res.end();
+   const { startTimestamp, endTimestamp } = req.query;
+   const parsedStartTS = parseInt(startTimestamp);
+   const parsedEndTS = parseInt(endTimestamp);
+
+   if(Number.isNaN(parsedStartTS) || Number.isNaN(parsedEndTS)) {
+      res.status(400).send({
+         error: 'Invalid query parameters, startTimestamp and endTimestamp are both required and must be Numbers.',
+      });
+   } else {
+      try{
+         const matchingShifts = await queryShiftsRange(parsedStartTS, parsedEndTS);
+         res.send(matchingShifts);
+      } catch(err) {
+         console.log(err);
+         res.status(400).send(err);
+      }
+   }
 });
 
 
 /**
  * @swagger
  * 
- * /shifts/{id}:
+ * /shifts/{startTimestamp}:
  *    get:
- *      summary: Gets a shift with the specified shiftId
+ *      summary: Gets a shift with the specified startTimestamp
  *      tags: [Shifts]
  *      parameters:
- *         - name: shiftId
+ *         - name: startTimestamp
  *           in: path
  *           required: true
- *           description: shiftId of the desired Shift
+ *           description: startTimestamp of desired shift.
  *           schema:
- *              type: String
+ *              type: Number
  *      responses:
  *         "200":
- *            description: The Shift with the specified id.
+ *            description: The Shift with the specified startTimestamp.
  *            content:
  *               application/json:
  *                  schema:
  *                    $ref: '#/components/schemas/Shift'
  *         "404":
- *            description: shiftId not found
+ *            description: startTimestamp not found
  */
-router.get('/:shiftId', async (req, res) => {
+router.get('/:startTimestamp', async (req, res) => {
    res.end();
 })
 
@@ -121,31 +144,29 @@ router.get('/:shiftId', async (req, res) => {
 /**
  * @swagger
  * 
- * /shifts/{id}:
+ * /shifts/{startTimeStamp}:
  *    put:
- *      summary: Modifies a shift with the specified shiftId. Any ommitted fields in the request body will not be updated.
+ *      summary: Modifies a shift with the specified startTimestamp. Any ommitted fields in the request body will not be updated.
  *      tags: [Shifts]
  *      parameters:
- *         - name: shiftId
+ *         - name: startTimestamp
  *           in: path
  *           required: true
- *           description: shiftId of the specific Shift
+ *           description: startTimestamp of the specific Shift
  *           schema:
- *              type: String
+ *              type: Number
  *      requestBody:
  *         required: true
  *         content:
  *           application/json:
  *              schema:
  *                 properties:
- *                   startDateTime: 
- *                      type: String
- *                      format: YYYY-MM-DDTHH:MM:SS
- *                      description: The new start date and time for this shift.
- *                   endDateTime: 
- *                      type: String
- *                      format: YYYY-MM-DDTHH:MM:SS
- *                      description: The new end date and time for this shift.
+ *                   startTimestamp: 
+ *                      type: Number
+ *                      description: The new start timestamp for this shift.
+ *                   endTimestamp: 
+ *                      type: Number
+ *                      description: The new end timestamp for this shift.
  *                   primary: 
  *                      type: String
  *                      description: Full name for the new primary volunteer on this shift.
@@ -156,8 +177,8 @@ router.get('/:shiftId', async (req, res) => {
  *                      type: String
  *                      description: Full name for the new backup volunteer on this shift.
  *                 example:
- *                   startDateTime: '2021-02-15T09:00:00'
- *                   endDateTime: '2021-02-15T12:00:00'
+ *                   startTimestamp: 1609520400
+ *                   endTimestamp: 1613419200
  *                   primary: 'Jack Fales'
  *                   secondary: 'Justin Poist'
  *                   backup: ''
@@ -165,9 +186,9 @@ router.get('/:shiftId', async (req, res) => {
  *         "200":
  *            description: Success
  *         "404":
- *            description: shiftId not found
+ *            description: startTimestamp not found
  */
-router.put('/:shiftId', async (req, res) => {
+router.put('/:startTimestamp', async (req, res) => {
    res.end();
 })
 
@@ -175,15 +196,15 @@ router.put('/:shiftId', async (req, res) => {
 /**
  * @swagger
  * 
- * /shifts/{id}:
+ * /shifts/{startTimeStamp}:
  *    delete:
- *      summary: Deletes a shift with the specified shiftId
+ *      summary: Deletes a shift with the specified startTimeStamp
  *      tags: [Shifts]
  *      parameters:
- *         - name: shiftId
+ *         - name: startTimeStamp
  *           in: path
  *           required: true
- *           description: shiftId of the specific Shift
+ *           description: startTimeStamp of the specific Shift
  *           schema:
  *              type: String
  *      responses:
@@ -192,9 +213,9 @@ router.put('/:shiftId', async (req, res) => {
  *         "403":
  *            description: Admin privileges required
  *         "404":
- *            description: shiftId not found
+ *            description: startTimestamp not found
  */
-router.delete('/:shiftId', async (req, res) => {
+router.delete('/:startTimestamp', async (req, res) => {
    res.end();
 })
 
@@ -206,21 +227,18 @@ router.delete('/:shiftId', async (req, res) => {
  *     Shift:
  *       type: object
  *       required:
- *         - shiftId
- *         - startDateTime
- *         - endDateTime
+ *         - startTimestamp
+ *         - endTimestamp
  *       properties:
- *         shiftId:
+ *         pk:
  *           type: String
- *           description: Unique auto-generated ID used to identify a specific shift.
- *         startDateTime:
- *           type: String
- *           format: YYYY-MM-DDTHH:MM:SS
- *           description: The start date and time for this shift.
- *         endDateTime:
- *           type: String
- *           format: YYYY-MM-DDTHH:MM:SS
- *           description: The end date and time for this shift.
+ *           description: The partition key for this shift. (Always RSS)
+ *         startTimestamp:
+ *           type: Number
+ *           description: The start timestamp for this shift.
+ *         endTimestamp:
+ *           type: Number
+ *           description: The end timestamp for this shift.
  *         primary:
  *           type: string
  *           description: Full name for the primary volunteer on this shift.
@@ -231,9 +249,9 @@ router.delete('/:shiftId', async (req, res) => {
  *           type: string
  *           description: Full name for the backup volunteer on this shift.
  *       example:
- *          shiftId: '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d'
- *          startDateTime: '2021-02-15T09:00:00'
- *          endDateTime: '2021-02-15T12:00:00'
+ *          pk: 'RSS'
+ *          startTimestamp: 1613419200
+ *          endTimestamp: 1613419400
  *          primary: 'Jack Fales'
  *          secondary: 'Justin Poist'
  *          backup: ''

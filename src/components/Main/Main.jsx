@@ -7,6 +7,7 @@ import EditProfilePage from '../EditProfilePage/EditProfilePage';
 import ProfilePage from '../ProfilePage/ProfilePage';
 import NavBar from '../NavBar/NavBar';
 import Dashboard from '../Dashboard/Dashboard';
+import Calendar from '../Calendar/Calendar';
 
 export default () => (
   <div className="App">
@@ -18,6 +19,7 @@ export default () => (
       <Route path="/editprofile" render={() => <EditProfilePage />} />
       <Route path="/dashboard" render={() => <Dashboard />} />
       <Route path="/profilepage" render={() => <ProfilePage />} />
+      <Route path="/calendar" render={() => <Calendar />} />
     </Switch>
   </div>
 );

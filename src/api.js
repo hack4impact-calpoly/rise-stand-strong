@@ -7,10 +7,13 @@ const ANNOUNCEMENTS = '/announcements';
 const SHIFTS = '/shifts';
 
 export async function postAnnouncement(userSub, announcementBody) {
-
     await axios.post(`${BASE_URL}/${ANNOUNCEMENTS}`, { ...announcementBody });
 }
 
 export async function getAnnouncements(userSub) {
     await axios.get(`${BASE_URL}/${ANNOUNCEMENTS}`);
+}
+
+export async function postShift(shiftBody) {
+    await axios.post(`${BASE_URL}/${SHIFTS}`, { ...shiftBody });
 }
