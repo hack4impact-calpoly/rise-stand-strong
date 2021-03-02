@@ -82,6 +82,24 @@ async function postShift(shiftBody) {
     }
 }
 
+/**
+ * GET a specific shift given a startTimestamp from the shifts table in DynamoDB.
+ * Returns a shift. Throws error from DynamoDB if one occurs.
+ * 
+ * @param {*} startTimestamp 
+ */
+async function getShift(startTimestamp) {
+    const docClient = new AWS.DynamoDB.DocumentClient();
+    const params = {
+        TableName: 'shifts',
+        Key: {
+            startTimestamp: startTimestamp
+        }
+    };
+    try {
+        let shift = await docClient.get(params).promise();
+        return shift
+    } catch (err) {
 
 async function queryShiftsRange(startTimestamp, endTimestamp) {
     const docClient = new AWS.DynamoDB.DocumentClient({ apiVersion: '2012-08-10'});
@@ -111,5 +129,6 @@ module.exports = {
     postAnnouncement,
     getAnnouncements
     postShift,
+    getShift,
     queryShiftsRange,
 };
