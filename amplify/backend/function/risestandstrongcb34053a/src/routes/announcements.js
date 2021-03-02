@@ -1,4 +1,5 @@
 const express = require('express');
+const { getAnnouncements } = require('../utils/aws-utils');
 const { postAnnouncement } = require('../utils/aws-utils');
 const router = express.Router();
 
@@ -16,7 +17,7 @@ const router = express.Router();
  *         - createdAt
  *         - link
  *       properties:
- *         id:
+ *         announcementId:
  *           type: integer
  *           description: The auto-generated id of the announcement.
  *         title:
@@ -49,23 +50,29 @@ const router = express.Router();
  * 
  * /announcements:
  *    get:
- *      summary: Get a list of the 5 most recent announcements
+ *      summary: Get a list of all announcements in decending date order
  *      tags: [Announcements]
  *      requestBody:
  *         required: false
  *      responses:
  *         "200":
- *            description: A list of the 5 most recent announcements.
+ *            description: A list all sorted announcements.
  *            content:
  *               application/json:
  *                  schema:
  *                     type: array
- *                     maxItems: 5
  *                     items:
  *                        $ref: '#/components/schemas/Announcement'
  */
 router.get('/', async (req, res) => {
-    res.end();
+    try{
+        const data = await getAnnouncements();
+        res.json(data);
+    }
+    catch (err){
+        console.log(err)
+        res.status(400).json(err);
+    }
 })
 
 /**
@@ -103,7 +110,7 @@ router.post('/', async (req, res) => {
 /**
  * @swagger
  * 
- * /announcements/{id}:
+ * /announcements/{announcementId}:
  *    put:
  *      summary: Modify the contents of the specified announcement
  *      tags: [Announcements]
@@ -119,18 +126,18 @@ router.post('/', async (req, res) => {
  *         "403":
  *            description: Admin privileges required
  *         "404":
- *            description: Announcement with the specified id does not exist
+ *            description: Announcement with the specified announcementId does not exist
  */
-router.put('/:id', async (req, res) => {
+router.put('/:announcementId', async (req, res) => {
     res.end();
 })
 
 /**
  * @swagger
  * 
- * /announcements/{id}:
+ * /announcements/{announcementId}:
  *    delete:
- *      summary: Delete the announcement with the specified id
+ *      summary: Delete the announcement with the specified announcementId
  *      tags: [Announcements]
  *      requestBody:
  *         required: false
@@ -140,9 +147,9 @@ router.put('/:id', async (req, res) => {
  *         "403":
  *            description: Admin privileges required
  *         "404":
- *            description: Announcement with the specified id does not exist
+ *            description: Announcement with the specified announcementId does not exist
  */
-router.delete('/:id', async (req, res) => {
+router.delete('/:announcementId', async (req, res) => {
     res.end();
 })
 
