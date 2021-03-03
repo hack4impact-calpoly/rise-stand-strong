@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { postShift, queryShiftsRange } = require('../utils/aws-utils');
-const { getShift } = require('../utils/aws-utils');
-const { v4: uuidv4 } = require('uuid');
+const { postShift, queryShiftsRange, getShift, deleteShift, } = require('../utils/aws-utils');
 
 /**
  * @swagger
@@ -54,13 +52,13 @@ router.post('/', async (req, res) => {
    }
 
    try {
-       await postShift(newShift);
-       res.send(newShift);
+      await postShift(newShift);
+      res.send(newShift);
    }
    catch (err) {
       // TODO: Once we have the user pools and IAM set up throw a 403 if not
       // allowed to access writing to a table
-       res.status(400).json(err);
+      res.status(400).json(err);
    }
 })
 
@@ -139,14 +137,23 @@ router.get('/', async (req, res) => {
  *            description: startTimestamp not found
  */
 router.get('/:startTimestamp', async (req, res) => {
-   let startTimestamp = req.params.startTimestamp;
-   try {
-     const shift = await getShift(startTimestamp);
-     res.send(shift)
+   let { startTimestamp } = req.params;
+   const parsedTs = parseInt(startTimestamp);
+
+   if(isNaN(parsedTs)) {
+      res.status(400).send({
+         error: 'startTimestamp is required and must be a Number',
+      });
+   } else {
+      try {
+         const shift = await getShift(parsedTs);
+         res.send(shift);
+      } catch (err) {
+         res.status(404).json(err);
+      }
    }
-   catch (err) {
-      res.status(404).json({ error });
-   }
+
+
 })
 
 
@@ -225,7 +232,21 @@ router.put('/:startTimestamp', async (req, res) => {
  *            description: startTimestamp not found
  */
 router.delete('/:startTimestamp', async (req, res) => {
-   res.end();
+   const { startTimestamp } = req.params;
+   const parsedTs = parseInt(startTimestamp);
+
+   if(isNaN(parsedTs)) {
+      res.status(400).send({
+         error: 'startTimestamp is required and must be a Number',
+      });
+   } else {
+      try {
+         await deleteShift(parsedTs);
+         res.send();
+      } catch (err) {
+         res.status(400).send(err);
+      }
+   }
 })
 
 
