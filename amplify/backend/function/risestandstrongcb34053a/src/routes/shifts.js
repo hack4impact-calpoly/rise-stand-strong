@@ -195,7 +195,7 @@ router.get('/:startTimestamp', async (req, res) => {
  *      responses:
  *         "200":
  *            description: Success
- *         "404":
+ *         "400":
  *            description: startTimestamp not found
  */
 router.put('/:startTimestamp', async (req, res) => {
@@ -206,10 +206,10 @@ router.put('/:startTimestamp', async (req, res) => {
    }
    try {
      const shift = await putShift(shiftBody);
-     res.send(shift)
+     res.send(200)
    }
    catch (err) {
-      res.status(404).json({ error });
+      res.status(400).json({ error });
    }
 })
 
