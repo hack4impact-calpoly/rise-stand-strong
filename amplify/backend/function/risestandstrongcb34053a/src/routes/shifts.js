@@ -205,7 +205,7 @@ router.put('/:startTimestamp', async (req, res) => {
       ...req.body
    }
    try {
-     const shift = await putShift(body);
+     const shift = await putShift(shiftBody);
      res.send(shift)
    }
    catch (err) {
