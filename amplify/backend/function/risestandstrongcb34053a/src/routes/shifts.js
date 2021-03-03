@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { postShift, queryShiftsRange } = require('../utils/aws-utils');
 const { getShift } = require('../utils/aws-utils');
+const { putShift } = require('../utils/aws-utils');
 const { v4: uuidv4 } = require('uuid');
 
 /**
@@ -198,7 +199,18 @@ router.get('/:startTimestamp', async (req, res) => {
  *            description: startTimestamp not found
  */
 router.put('/:startTimestamp', async (req, res) => {
-   res.end();
+   let startTimestamp = req.params.startTimestamp;
+   let body = {
+      startTimestamp: parseInt(startTimestamp),
+      ...req.body
+   }
+   try {
+     const shift = await putShift(body);
+     res.send(shift)
+   }
+   catch (err) {
+      res.status(404).json({ error });
+   }
 })
 
 

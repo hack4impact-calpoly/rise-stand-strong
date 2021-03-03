@@ -91,7 +91,7 @@ async function postShift(shiftBody) {
 async function getShift(startTimestamp) {
     const docClient = new AWS.DynamoDB.DocumentClient();
     const params = {
-        TableName: 'shifts',
+        TableName: 'shiftsV2',
         Key: {
             startTimestamp: startTimestamp
         }
@@ -100,6 +100,34 @@ async function getShift(startTimestamp) {
         let shift = await docClient.get(params).promise();
         return shift
     } catch (err) {
+        console.log(err);
+        throw err;
+    }
+}
+
+/**
+ * PUT Modifies a shift with the specified startTimestamp from the shifts table in DynamoDB.
+ * Any ommitted fields in the request body will not be updated.
+ * Returns nothing. Throws error from DynamoDB if one occurs.
+ * 
+ * @param {*} shift
+ */
+async function putShift(shift) {
+    const docClient = new AWS.DynamoDB.DocumentClient();
+    const params = {
+        TableName: 'shiftsV2',
+        Item: {
+            pk: 'RSS',
+            ...shift
+        }
+    };
+    try {
+        await docClient.put(params).promise();
+    } catch (err) {
+        console.log(err);
+        throw err;
+    }
+}
 
 async function queryShiftsRange(startTimestamp, endTimestamp) {
     const docClient = new AWS.DynamoDB.DocumentClient({ apiVersion: '2012-08-10'});
@@ -126,9 +154,10 @@ async function queryShiftsRange(startTimestamp, endTimestamp) {
 }
 
 module.exports = {
+    getAnnouncements,
     postAnnouncement,
-    getAnnouncements
     postShift,
     getShift,
+    putShift,
     queryShiftsRange,
-};
+}
