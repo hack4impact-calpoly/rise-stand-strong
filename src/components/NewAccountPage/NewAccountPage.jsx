@@ -47,18 +47,18 @@ export default () => {
   const handleSubmit = async (e) => {
     const form = e.currentTarget;
     const confirmField = form.elements[5];
+    e.preventDefault();
+
     if (confirmPassword !== password) {
       confirmField.setCustomValidity('Passwords must match');
     } else {
       confirmField.setCustomValidity('');
     }
     if (form.checkValidity() === false) {
-      e.preventDefault();
       e.stopPropagation();
     } else {
-      e.preventDefault();
       try {
-        const { newUser } = await Auth.signUp({
+        await Auth.signUp({
           username: email,
           password,
           attributes: {
@@ -67,12 +67,11 @@ export default () => {
             phone_number: phoneNumber,
           },
         });
-        console.log(newUser);
+        alert('Form submitted. Admin will need to to approve.'); // eslint-disable-line no-alert
+        history.push('/');
       } catch (error) {
         console.log('error signing up:', error);
       }
-      alert('Form submitted. Admin will need to to approve.'); // eslint-disable-line no-alert
-      history.push('/');
     }
     setValidated(true);
   };

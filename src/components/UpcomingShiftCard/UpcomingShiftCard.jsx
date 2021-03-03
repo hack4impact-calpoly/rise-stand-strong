@@ -3,7 +3,7 @@ import { Card } from 'react-bootstrap';
 import { FaChevronRight } from 'react-icons/fa';
 import './UpcomingShiftCard.css';
 
-function styleDate(data) {
+const styleDate = (data) => {
   const date = data.split(' ')[0];
   const year = date.split('-')[0];
   let month = date.split('-')[1];
@@ -13,14 +13,14 @@ function styleDate(data) {
   month = months[parseInt(month, 10)];
 
   return (`${month} ${day}, ${year}`);
-}
+};
 
-function styleTime(data) {
+const styleTime = (data) => {
   const time = data.split(' ')[1];
   const hours = time.split(':')[0];
   const min = time.split(':')[1];
   return (`${hours}:${min}`);
-}
+};
 
 export default (cardData) => (
 
