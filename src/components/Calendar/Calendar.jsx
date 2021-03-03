@@ -8,6 +8,7 @@ import ExampleShifts from './ExampleShifts';
 const CalendarContainer = styled.section`
   margin: 40px;
 `;
+
 const renderEvents = ExampleShifts.map((item) => {
   const singleEvent = {};
 
