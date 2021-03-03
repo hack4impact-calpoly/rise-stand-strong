@@ -200,7 +200,7 @@ router.get('/:startTimestamp', async (req, res) => {
  */
 router.put('/:startTimestamp', async (req, res) => {
    const startTimestamp = req.params.startTimestamp;
-   let body = {
+   const shiftBody = {
       startTimestamp: parseInt(startTimestamp),
       ...req.body
    }
