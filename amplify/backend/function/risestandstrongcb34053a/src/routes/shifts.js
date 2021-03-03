@@ -199,7 +199,7 @@ router.get('/:startTimestamp', async (req, res) => {
  *            description: startTimestamp not found
  */
 router.put('/:startTimestamp', async (req, res) => {
-   let startTimestamp = req.params.startTimestamp;
+   const startTimestamp = req.params.startTimestamp;
    let body = {
       startTimestamp: parseInt(startTimestamp),
       ...req.body
