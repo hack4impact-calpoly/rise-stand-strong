@@ -114,18 +114,28 @@ async function postShift(shiftBody) {
 async function getShift(startTimestamp) {
     const docClient = new AWS.DynamoDB.DocumentClient();
     const params = {
-        TableName: 'shifts',
+        TableName: 'shiftsV2',
         Key: {
-            startTimestamp: startTimestamp
+            pk: 'RSS',
+            startTimestamp,
         }
     };
     try {
-        let shift = await docClient.get(params).promise();
-        return shift
+        let shiftResp = await docClient.get(params).promise();
+        return shiftResp.Item;
     } catch (err) {
+        console.log(err);
+        throw err;
     }
 }
 
+/**
+ * Function that returns all of the shift objects in DynamoDB that have
+ * startTimestamps inbetween startTimestamp and endTimestamp.
+ * 
+ * @param {Number} startTimestamp 
+ * @param {Number} endTimestamp 
+ */
 async function queryShiftsRange(startTimestamp, endTimestamp) {
     const docClient = new AWS.DynamoDB.DocumentClient({ apiVersion: '2012-08-10'});
     var params = {
@@ -150,6 +160,30 @@ async function queryShiftsRange(startTimestamp, endTimestamp) {
     }
 }
 
+/**
+ * Function that takes in a startTimestamp and deletes the corresponding 
+ * shift from DynamoDB. Throws an error if not found.
+ * 
+ * @param {Number} startTimestamp 
+ */
+async function deleteShift(startTimestamp) {
+    const docClient = new AWS.DynamoDB.DocumentClient({ apiVersion: '2012-08-10'});
+    const params = {
+        TableName: 'shiftsV2',
+        Key: {
+            pk: 'RSS',
+            startTimestamp,
+        }
+    };
+
+    try {
+        return await docClient.delete(params).promise();
+    } catch(err) {
+        console.log(err);
+        throw err;
+    }
+}
+
 module.exports = {
     postAnnouncement,
     getAnnouncements,
@@ -157,4 +191,5 @@ module.exports = {
     postShift,
     getShift,
     queryShiftsRange,
+    deleteShift,
 };
