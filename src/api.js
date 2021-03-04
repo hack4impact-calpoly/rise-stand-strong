@@ -17,3 +17,7 @@ export async function getAnnouncements(userSub) {
 export async function postShift(shiftBody) {
     await axios.post(`${BASE_URL}/${SHIFTS}`, { ...shiftBody });
 }
+
+export async function deleteAnnouncement(announcementId) {
+    await axios.delete(`${BASE_URL}/${ANNOUNCEMENTS}/${announcementId}`);
+}
