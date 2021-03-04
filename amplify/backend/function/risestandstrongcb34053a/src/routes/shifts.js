@@ -137,7 +137,7 @@ router.get('/', async (req, res) => {
  *            description: startTimestamp not found
  */
 router.get('/:startTimestamp', async (req, res) => {
-   let { startTimestamp } = req.params;
+   const { startTimestamp } = req.params;
    const parsedTs = parseInt(startTimestamp);
 
    if(isNaN(parsedTs)) {

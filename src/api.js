@@ -23,7 +23,7 @@ export async function getShift(startTimestamp) {
 }
 
 export async function getShiftsRange(startTimestamp, endTimestamp) {
-    return await axios.get(`${BASE_URL}/${SHIFTS}?startTimestamp=${startTimestamp}&&endTimestamp=${endTimestamp}`);
+    return await axios.get(`${BASE_URL}/${SHIFTS}?startTimestamp=${startTimestamp}&endTimestamp=${endTimestamp}`);
 }
 
 export async function deleteShift(startTimestamp) {

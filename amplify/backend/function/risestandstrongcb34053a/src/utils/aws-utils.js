@@ -107,7 +107,7 @@ async function getShift(startTimestamp) {
 }
 
 /**
- * Funciton that returns all of the shift objects in DynamoDB that have
+ * Function that returns all of the shift objects in DynamoDB that have
  * startTimestamps inbetween startTimestamp and endTimestamp.
  * 
  * @param {Number} startTimestamp 
