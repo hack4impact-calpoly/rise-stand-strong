@@ -18,16 +18,7 @@ export default function ResetPassword() {
   const [isConfirming, setIsConfirming] = useState(false);
   const [isSendingCode, setIsSendingCode] = useState(false);
 
-  function validateCodeForm() {
-    return username.length > 0;
-  }
-
-  function validateResetForm() {
-    return (
-      password.length > 0
-      && password === confirmPassword
-    );
-  }
+  const validateResetForm = () => (password.length > 0 && password === confirmPassword);
 
   async function handleSendCodeClick(event) {
     event.preventDefault();
@@ -75,7 +66,7 @@ export default function ResetPassword() {
         <button
           type="submit"
           isLoading={isSendingCode}
-          disabled={!validateCodeForm()}
+          disabled={!username}
         >
           Send Confirmation
         </button>
