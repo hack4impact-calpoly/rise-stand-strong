@@ -135,7 +135,7 @@ export default function ResetPassword() {
       <div className="success">
         <p>Your password has been reset.</p>
         <p>
-          <Link to="/login">
+          <Link to="/">
             Click here to login with your new credentials.
           </Link>
         </p>
