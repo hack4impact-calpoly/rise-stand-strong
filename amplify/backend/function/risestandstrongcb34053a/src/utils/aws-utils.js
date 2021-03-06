@@ -96,6 +96,7 @@ async function getShift(startTimestamp) {
             startTimestamp: startTimestamp
         }
     };
+    
     try {
         let shift = await docClient.get(params).promise();
         return shift
@@ -110,17 +111,20 @@ async function getShift(startTimestamp) {
  * Any ommitted fields in the request body will not be updated.
  * Returns nothing. Throws error from DynamoDB if one occurs.
  * 
- * @param {*} shift
+ * @param {*} shiftBody
+ * @param {*} startTimestamp
  */
-async function putShift(shift) {
+async function putShift(shiftBody, startTimestamp) {
     const docClient = new AWS.DynamoDB.DocumentClient();
     const params = {
         TableName: 'shiftsV2',
         Item: {
             pk: 'RSS',
-            ...shift
+            startTimestamp,
+            ...shiftBody
         }
     };
+    
     try {
         await docClient.put(params).promise();
     } catch (err) {
