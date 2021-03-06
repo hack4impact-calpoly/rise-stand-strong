@@ -218,7 +218,7 @@ router.put('/:startTimestamp', async (req, res) => {
       }
       try {
         await putShift(shiftBody);
-        res.send(200);
+        res.end();
       }
       catch (err) {
          res.status(400);
