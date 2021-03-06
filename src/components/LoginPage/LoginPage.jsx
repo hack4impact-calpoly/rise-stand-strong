@@ -100,7 +100,7 @@ export default () => {
         <Form.Row>
           <Form.Group as={Col} md="4" controlId="validationCustom03">
             <StyledLinkButton variant="link">Create New Account</StyledLinkButton>
-            <StyledLinkButton variant="link">Forgot Password?</StyledLinkButton>
+            <StyledLinkButton href="./ForgotPassword" variant="link">Forgot Password?</StyledLinkButton>
           </Form.Group>
         </Form.Row>
         <StyledButton type="submit">Login</StyledButton>
