@@ -1,7 +1,7 @@
-import shiftActions from './shiftActions';
+import counterActions from './counterAction';
 
-const actions = {
-  ...shiftActions,
+const allActions = {
+  counterActions,
 };
 
-export default actions;
+export default allActions;

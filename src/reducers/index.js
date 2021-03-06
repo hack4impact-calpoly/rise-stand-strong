@@ -1,9 +1,8 @@
 import { combineReducers } from 'redux';
-
-import shiftReducer from './shiftReducer';
+import counter from './counter';
 
 const rootReducer = combineReducers({
-  shifts: shiftReducer,
+  counter,
 });
 
 export default rootReducer;
