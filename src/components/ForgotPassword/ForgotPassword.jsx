@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { Auth } from 'aws-amplify';
 import { Link } from 'react-router-dom';
 import {
-  FormGroup,
-  FormControl,
-  FormLabel,
+  Form,
+  Button,
 } from 'react-bootstrap';
 
 export default function ResetPassword() {
@@ -53,33 +52,33 @@ export default function ResetPassword() {
 
   function renderRequestCodeForm() {
     return (
-      <form onSubmit={handleSendCodeClick}>
-        <FormGroup bsSize="large" controlId="email">
-          <FormLabel>Email</FormLabel>
-          <FormControl
+      <Form onSubmit={handleSendCodeClick}>
+        <Form.Group bsSize="large" controlId="email">
+          <Form.Label>Email</Form.Label>
+          <Form.Control
             autoFocus
             type="email"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
-        </FormGroup>
-        <button
+        </Form.Group>
+        <Button
           type="submit"
           isLoading={isSendingCode}
           disabled={!username}
         >
           Send Confirmation
-        </button>
-      </form>
+        </Button>
+      </Form>
     );
   }
 
   function renderConfirmationForm() {
     return (
       <form onSubmit={handleConfirmClick}>
-        <FormGroup bsSize="large" controlId="code">
-          <FormLabel>Confirmation Code</FormLabel>
-          <FormControl
+        <Form.Group bsSize="large" controlId="code">
+          <Form.Label>Confirmation Code</Form.Label>
+          <Form.Control
             autoFocus
             type="tel"
             value={code}
@@ -90,25 +89,25 @@ export default function ResetPassword() {
             {username}
             ) for the confirmation code.
           </div>
-        </FormGroup>
+        </Form.Group>
         <hr />
-        <FormGroup bsSize="large" controlId="password">
-          <FormLabel>New Password</FormLabel>
-          <FormControl
+        <Form.Group bsSize="large" controlId="password">
+          <Form.Label>New Password</Form.Label>
+          <Form.Control
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-        </FormGroup>
-        <FormGroup bsSize="large" controlId="confirmPassword">
-          <FormLabel>Confirm Password</FormLabel>
-          <FormControl
+        </Form.Group>
+        <Form.Group bsSize="large" controlId="confirmPassword">
+          <Form.Label>Confirm Password</Form.Label>
+          <Form.Control
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
-        </FormGroup>
-        <button
+        </Form.Group>
+        <Button
           block
           type="submit"
           bsSize="large"
@@ -116,7 +115,7 @@ export default function ResetPassword() {
           disabled={!validateResetForm()}
         >
           Confirm
-        </button>
+        </Button>
       </form>
     );
   }
