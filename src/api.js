@@ -14,9 +14,14 @@ export async function getAnnouncements() {
     await axios.get(`${BASE_URL}/${ANNOUNCEMENTS}`);
 }
 
+export async function deleteAnnouncement(announcementId) {
+    await axios.delete(`${BASE_URL}/${ANNOUNCEMENTS}/${announcementId}`);
+}
+
 export async function postShift(shiftBody) {
     await axios.post(`${BASE_URL}/${SHIFTS}`, { ...shiftBody });
 }
+
 
 export async function getShift(startTimestamp) {
     return await axios.get(`${BASE_URL}/${SHIFTS}/${startTimestamp}`);

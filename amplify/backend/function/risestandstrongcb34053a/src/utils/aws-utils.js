@@ -12,9 +12,9 @@ AWS.config.update({region: 'us-west-2'});
 async function postAnnouncement(announcementBody) {
     const docClient = new AWS.DynamoDB.DocumentClient();
     const params = {
-        TableName: 'announcements',
+        TableName: 'announcementsV3',
         Item: {
-            'id': uuidv4(),
+            'announcementId': uuidv4(),
             ...announcementBody
         }
     };
@@ -44,7 +44,7 @@ async function getAnnouncements(){
     };
     const docClient = new AWS.DynamoDB.DocumentClient();
     var params = {
-        TableName : 'announcementsV2',
+        TableName : 'announcementsV3',
     };
 
     try{
@@ -53,6 +53,29 @@ async function getAnnouncements(){
         return data;
     }
     catch (err){
+        console.log(err);
+        throw err;
+    }
+}
+
+/**
+ * DELETE an announcement of the specified announcementId from the announcements
+ * table in DynamoDB. Throws error from DynamoDB if one occurs.
+ *
+ * @param {String} announcementId
+ */
+async function deleteAnnouncement(announcementId){
+    const docClient = new AWS.DynamoDB.DocumentClient();
+    const params = {
+        TableName: 'announcementsV3',
+        Key: {
+            announcementId
+        }
+    };
+
+    try {
+        return await docClient.delete(params).promise();
+    } catch (err) {
         console.log(err);
         throw err;
     }
@@ -191,6 +214,7 @@ async function deleteShift(startTimestamp) {
 
 module.exports = {
     getAnnouncements,
+    deleteAnnouncement,
     postAnnouncement,
     postShift,
     getShift,
