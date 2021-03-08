@@ -121,7 +121,65 @@ async function postShift(shiftBody) {
     }
 }
 
+/**
+ * GET a specific shift given a startTimestamp from the shifts table in DynamoDB.
+ * Returns a shift. Throws error from DynamoDB if one occurs.
+ * 
+ * @param {*} startTimestamp 
+ */
+async function getShift(startTimestamp) {
+    const docClient = new AWS.DynamoDB.DocumentClient();
+    const params = {
+        TableName: 'shiftsV2',
+        Key: {
+            pk: 'RSS',
+            startTimestamp,
+        }
+    };
+    
+    try {
+        let shiftResp = await docClient.get(params).promise();
+        return shiftResp.Item;
+    } catch (err) {
+        console.log(err);
+        throw err;
+    }
+}
 
+/**
+ * PUT Modifies a shift with the specified startTimestamp from the shifts table in DynamoDB.
+ * Any ommitted fields in the request body will not be updated.
+ * Returns nothing. Throws error from DynamoDB if one occurs.
+ * 
+ * @param {*} shiftBody
+ * @param {*} startTimestamp
+ */
+async function putShift(shiftBody, startTimestamp) {
+    const docClient = new AWS.DynamoDB.DocumentClient();
+    const params = {
+        TableName: 'shiftsV2',
+        Item: {
+            pk: 'RSS',
+            startTimestamp,
+            ...shiftBody
+        }
+    };
+    
+    try {
+        await docClient.put(params).promise();
+    } catch (err) {
+        console.log(err);
+        throw err;
+    }
+}
+
+/**
+ * Function that returns all of the shift objects in DynamoDB that have
+ * startTimestamps inbetween startTimestamp and endTimestamp.
+ * 
+ * @param {Number} startTimestamp 
+ * @param {Number} endTimestamp 
+ */
 async function queryShiftsRange(startTimestamp, endTimestamp) {
     const docClient = new AWS.DynamoDB.DocumentClient({ apiVersion: '2012-08-10'});
     var params = {
@@ -146,10 +204,38 @@ async function queryShiftsRange(startTimestamp, endTimestamp) {
     }
 }
 
+/**
+ * Function that takes in a startTimestamp and deletes the corresponding 
+ * shift from DynamoDB. Throws an error if not found.
+ * 
+ * @param {Number} startTimestamp 
+ */
+async function deleteShift(startTimestamp) {
+    const docClient = new AWS.DynamoDB.DocumentClient({ apiVersion: '2012-08-10'});
+    const params = {
+        TableName: 'shiftsV2',
+        Key: {
+            pk: 'RSS',
+            startTimestamp,
+        }
+    };
+
+    try {
+        return await docClient.delete(params).promise();
+    } catch(err) {
+        console.log(err);
+        throw err;
+    }
+}
+
 module.exports = {
+    getAnnouncements,
     postAnnouncement,
     getAnnouncements,
     putAnnouncement,
     postShift,
+    getShift,
+    putShift,
     queryShiftsRange,
+    deleteShift,
 };
