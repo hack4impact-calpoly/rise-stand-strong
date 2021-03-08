@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { postShift, queryShiftsRange, getShift, deleteShift, } = require('../utils/aws-utils');
+const { postShift, queryShiftsRange, getShift, deleteShift, putShift} = require('../utils/aws-utils');
+const { v4: uuidv4 } = require('uuid');
+
 
 /**
  * @swagger
@@ -152,8 +154,6 @@ router.get('/:startTimestamp', async (req, res) => {
          res.status(404).json(err);
       }
    }
-
-
 })
 
 
@@ -201,11 +201,29 @@ router.get('/:startTimestamp', async (req, res) => {
  *      responses:
  *         "200":
  *            description: Success
- *         "404":
+ *         "400":
  *            description: startTimestamp not found
  */
 router.put('/:startTimestamp', async (req, res) => {
-   res.end();
+   const startTimestamp = req.params.startTimestamp;
+   const parsedStartTS = parseInt(startTimestamp);
+   if(Number.isNaN(parsedStartTS)) {
+      res.status(400).send({
+         error: 'Invalid query parameters, startTimestamp is required and must be a Number.',
+      });
+   } else {
+      const shiftBody = {
+         startTimestamp: parsedStartTS,
+         ...req.body
+      }
+      try {
+        await putShift(shiftBody);
+        res.end();
+      }
+      catch (err) {
+         res.status(400);
+      }
+   }
 })
 
 

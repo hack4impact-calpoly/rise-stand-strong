@@ -97,9 +97,37 @@ async function getShift(startTimestamp) {
             startTimestamp,
         }
     };
+    
     try {
         let shiftResp = await docClient.get(params).promise();
         return shiftResp.Item;
+    } catch (err) {
+        console.log(err);
+        throw err;
+    }
+}
+
+/**
+ * PUT Modifies a shift with the specified startTimestamp from the shifts table in DynamoDB.
+ * Any ommitted fields in the request body will not be updated.
+ * Returns nothing. Throws error from DynamoDB if one occurs.
+ * 
+ * @param {*} shiftBody
+ * @param {*} startTimestamp
+ */
+async function putShift(shiftBody, startTimestamp) {
+    const docClient = new AWS.DynamoDB.DocumentClient();
+    const params = {
+        TableName: 'shiftsV2',
+        Item: {
+            pk: 'RSS',
+            startTimestamp,
+            ...shiftBody
+        }
+    };
+    
+    try {
+        await docClient.put(params).promise();
     } catch (err) {
         console.log(err);
         throw err;
@@ -162,10 +190,11 @@ async function deleteShift(startTimestamp) {
 }
 
 module.exports = {
-    postAnnouncement,
     getAnnouncements,
+    postAnnouncement,
     postShift,
     getShift,
+    putShift,
     queryShiftsRange,
     deleteShift,
 };
