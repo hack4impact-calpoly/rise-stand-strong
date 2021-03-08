@@ -14,7 +14,7 @@ async function postAnnouncement(announcementBody) {
     const params = {
         TableName: 'announcementsV3',
         Item: {
-            'id': uuidv4(),
+            'announcementId': uuidv4(),
             ...announcementBody
         }
     };
@@ -61,7 +61,6 @@ async function getAnnouncements(){
 /**
  * Put updated announcement into table in DynamoDB.
  * Returns nothing.
- *
  */
 async function putAnnouncement(data){
     const docClient = new AWS.DynamoDB.DocumentClient();
@@ -95,6 +94,29 @@ async function putAnnouncement(data){
         console.log(err);
         throw err;
     }  
+
+  
+/**
+ * DELETE an announcement of the specified announcementId from the announcements
+ * table in DynamoDB. Throws error from DynamoDB if one occurs.
+ *
+ * @param {String} announcementId
+ */
+async function deleteAnnouncement(announcementId){
+    const docClient = new AWS.DynamoDB.DocumentClient();
+    const params = {
+        TableName: 'announcementsV3',
+        Key: {
+            announcementId
+        }
+    };
+
+    try {
+        return await docClient.delete(params).promise();
+    } catch (err) {
+        console.log(err);
+        throw err;
+    }
 }
 
 /**
@@ -230,6 +252,7 @@ async function deleteShift(startTimestamp) {
 
 module.exports = {
     getAnnouncements,
+    deleteAnnouncement,
     postAnnouncement,
     getAnnouncements,
     putAnnouncement,

@@ -18,6 +18,10 @@ export async function putAnnouncements(announcementBody) {
     await axios.put(`${BASE_URL}/${ANNOUNCEMENTS}`, { ...announcementBody });
 }
 
+  export async function deleteAnnouncement(announcementId) {
+    await axios.delete(`${BASE_URL}/${ANNOUNCEMENTS}/${announcementId}`);
+}
+
 export async function postShift(shiftBody) {
     await axios.post(`${BASE_URL}/${SHIFTS}`, { ...shiftBody });
 }
