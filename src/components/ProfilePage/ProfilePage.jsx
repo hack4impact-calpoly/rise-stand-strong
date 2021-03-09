@@ -8,38 +8,46 @@ const StyledTitle = styled.h1`
   font-size: 48px;
   text-align: center;
 `;
+
 const UserInfoContainer = styled.section`
   display:flex;
   flex-direction: column;
   justify-content:center;
   align-item:center;
 `;
+
 const RecentShiftsContainer = styled.section`
   margin: 50px 0px 15px 30px;
 `;
+
 const StyledSubtitle2 = styled.h6`
   margin-top: 20px;
   font-size: 14px;
   text-align: center;
 `;
+
 const StyledSubtitle = styled.h3`
   font-size: 36px;
   margin: 20px 0px 20px 0px;
 `;
+
 const StyledButton = styled(Button)`
   color: #6666FF;
   margin-top: 15px;
 `;
+
 const StyledLink = styled(Link)`
   color: #6666FF;
   margin-top: 15px;
   text-align: center;
 `;
+
 const UserInfo = {
   Name: 'Mary Dunn',
   Email: 'mary.dunn@gmail.com',
   CellPhoneNumber: '805 555-5555',
 };
+
 export default (UserData) => (
   <div>
     <UserInfoContainer>

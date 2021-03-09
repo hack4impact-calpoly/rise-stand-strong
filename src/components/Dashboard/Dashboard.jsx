@@ -9,14 +9,17 @@ const StyledCardGroup = styled(CardColumns)`
   font-size: 12px;
   
 `;
+
 const StyledContainer = styled.div`
   margin: 20px;
   padding: 10px;
   box-shadow: 0px 0px 7px 1px rgba(0, 0, 0, 0.15);
 `;
+
 const StyledTitle = styled.h2`
   margin: 20px 0px 15px 20px;
 `;
+
 const StyledSubtitle = styled.h3`
   margin: 20px 0px 15px 20px;
 `;
@@ -29,6 +32,7 @@ const Announcements = [
     link: '#',
   },
 ];
+
 const CardData = [
   {
     from: '2021-03-9 8:00:00',

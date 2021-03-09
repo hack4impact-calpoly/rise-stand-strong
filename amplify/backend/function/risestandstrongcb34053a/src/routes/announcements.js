@@ -1,5 +1,5 @@
 const express = require('express');
-const { postAnnouncement, getAnnouncements, putAnnouncement } = require('../utils/aws-utils');
+const { postAnnouncement, getAnnouncements, putAnnouncement, deleteAnnouncement } = require('../utils/aws-utils');
 const router = express.Router();
 const AWS = require('aws-amplify');
 
@@ -17,7 +17,7 @@ const AWS = require('aws-amplify');
  *         - createdAt
  *         - link
  *       properties:
- *         id:
+ *         announcementId:
  *           type: integer
  *           description: The auto-generated id of the announcement.
  *         title:
@@ -126,7 +126,7 @@ router.post('/', async (req, res) => {
  *         "403":
  *            description: Admin privileges required
  *         "404":
- *            description: Announcement with the specified id does not exist
+ *            description: Announcement with the specified announcementId does not exist
  */
 router.put('/:announcementId', async (req, res) => {
     const data = req.body;
@@ -143,9 +143,9 @@ router.put('/:announcementId', async (req, res) => {
 /**
  * @swagger
  * 
- * /announcements/{id}:
+ * /announcements/{announcementId}:
  *    delete:
- *      summary: Delete the announcement with the specified id
+ *      summary: Delete the announcement with the specified announcementId
  *      tags: [Announcements]
  *      requestBody:
  *         required: false
@@ -155,10 +155,17 @@ router.put('/:announcementId', async (req, res) => {
  *         "403":
  *            description: Admin privileges required
  *         "404":
- *            description: Announcement with the specified id does not exist
+ *            description: Announcement with the specified announcementId does not exist
  */
-router.delete('/:id', async (req, res) => {
-    res.end();
+router.delete('/:announcementId', async (req, res) => {
+    const { announcementId } = req.params;
+    
+    try {
+        await deleteAnnouncement(announcementId);
+        res.end();
+    } catch (err) {
+        res.status(400).json(err);
+    }
 })
 
 module.exports = router;
