@@ -47,12 +47,11 @@ async function getAnnouncements(){
         TableName : 'announcementsV3',
     };
 
-    try{
+    try {
         let data = await docClient.scan(params).promise();
         data = sortTable(data);
         return data;
-    }
-    catch (err){
+    } catch (err){
         console.log(err);
         throw err;
     }
@@ -61,37 +60,31 @@ async function getAnnouncements(){
 /**
  * Put updated announcement into table in DynamoDB.
  * Returns nothing.
- *
+ * *
+ * @param {String} announcementId
+ * @param {*} announcementBody 
  */
-async function putAnnouncement(data){
+async function putAnnouncement(announcementId, announcementBody){
     const docClient = new AWS.DynamoDB.DocumentClient();
     var params = {
         TableName : 'announcementsV3', //current tablename
         Key: {                         //used to find/not find desired object
-            announcementId: data.announcementId
+            announcementId: announcementId
         },
-        UpdateExpression: "set title = :title, author = :author, createdAt = :createdAt, link = :link, body = :body", //tells what to update
+        UpdateExpression: "set title = :title, author = :author, createdAt = :createdAt, link = :link, content = :content", //tells what to update
         ConditionExpression: "attribute_exists(announcementId)",  //only do the update if the item exits
         ExpressionAttributeValues:{ //assigns values to updates
-            ":title": data.title,
-            ":author": data.author,
-            ":createdAt": data.createdAt,
-            ":link": data.link,
-            ":body": data.body,
+            ":title": announcementBody.title,
+            ":author": announcementBody.author,
+            ":createdAt": announcementBody.createdAt,
+            ":link": announcementBody.link,
+            ":content": announcementBody.content,
         }
     };
 
-    try{
-        let broke = false;  //toggle for if the object is found in the table
-        let data = await docClient.update(params).promise().catch(err =>  broke = !broke);
-        if (!broke){ //if object found return data
-            return data;
-        }
-        else{        //if object not found return null
-            return null;
-        }
-    }
-    catch (err){
+    try {
+        await docClient.update(params).promise();
+    } catch (err) {
         console.log(err);
         throw err;
     }  

@@ -14,8 +14,8 @@ export async function getAnnouncements() {
     await axios.get(`${BASE_URL}/${ANNOUNCEMENTS}`);
 }
 
-export async function putAnnouncements(announcementBody) {
-    await axios.put(`${BASE_URL}/${ANNOUNCEMENTS}`, { ...announcementBody });
+export async function putAnnouncement(announcementId, announcementBody) {
+    await axios.put(`${BASE_URL}/${ANNOUNCEMENTS}/${announcementId}`, { ...announcementBody});
 }
 
 export async function postShift(shiftBody) {

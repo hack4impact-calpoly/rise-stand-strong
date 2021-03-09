@@ -1,9 +1,7 @@
 const express = require('express');
-const { getAnnouncements } = require('../utils/aws-utils');
-const { postAnnouncement } = require('../utils/aws-utils');
-const { putAnnouncement } = require('../utils/aws-utils');
+const { postAnnouncement, getAnnouncements, putAnnouncement } = require('../utils/aws-utils');
 const router = express.Router();
-const AWS_Auth = require("aws-amplify");
+const AWS = require('aws-amplify');
 
 /**
  * @swagger
@@ -112,7 +110,7 @@ router.post('/', async (req, res) => {
 /**
  * @swagger
  * 
- * /announcements/{id}:
+ * /announcements/{announcementId}:
  *    put:
  *      summary: Modify the contents of the specified announcement
  *      tags: [Announcements]
@@ -130,18 +128,16 @@ router.post('/', async (req, res) => {
  *         "404":
  *            description: Announcement with the specified id does not exist
  */
-router.put('/:id', async (req, res) => {
+router.put('/:announcementId', async (req, res) => {
     const data = req.body;
-    if (!AWS_Auth.Auth.currentAuthenticatedUser()){
-        res.status(203)
-    }
-     else{
-        const recieved = await putAnnouncement(data);
-        if (typeof recieved === undefined){
-            res.status(404);
-        }
-        res.status(200).json(data);
-    }
+    const announcementId = req.params.announcementId;
+
+    try {
+        await putAnnouncement(announcementId, data);
+        res.send('Success');
+    } catch(err) {
+        res.status(400).json(err);
+    }   
 })
 
 /**
