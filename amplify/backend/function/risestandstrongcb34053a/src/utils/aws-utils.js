@@ -47,17 +47,50 @@ async function getAnnouncements(){
         TableName : 'announcementsV3',
     };
 
-    try{
+    try {
         let data = await docClient.scan(params).promise();
         data = sortTable(data);
         return data;
-    }
-    catch (err){
+    } catch (err){
         console.log(err);
         throw err;
     }
 }
 
+/**
+ * Put updated announcement into table in DynamoDB.
+ * Returns nothing.
+ * 
+ * @param {String} announcementId
+ * @param {*} announcementBody 
+ */
+async function putAnnouncement(announcementId, announcementBody){
+    const docClient = new AWS.DynamoDB.DocumentClient();
+    var params = {
+        TableName : 'announcementsV3', //current tablename
+        Key: {                         //used to find/not find desired object
+            announcementId: announcementId
+        },
+        UpdateExpression: "set title = :title, author = :author, createdAt = :createdAt, link = :link, content = :content", //tells what to update
+        ConditionExpression: "attribute_exists(announcementId)",  //only do the update if the item exits
+        ExpressionAttributeValues:{ //assigns values to updates
+            ":title": announcementBody.title,
+            ":author": announcementBody.author,
+            ":createdAt": announcementBody.createdAt,
+            ":link": announcementBody.link,
+            ":content": announcementBody.content,
+        }
+    };
+
+    try {
+        await docClient.update(params).promise();
+    } catch (err) {
+        console.log(err);
+        throw err;
+    }  
+}
+
+  
 /**
  * DELETE an announcement of the specified announcementId from the announcements
  * table in DynamoDB. Throws error from DynamoDB if one occurs.
@@ -216,6 +249,7 @@ module.exports = {
     getAnnouncements,
     deleteAnnouncement,
     postAnnouncement,
+    putAnnouncement,
     postShift,
     getShift,
     putShift,

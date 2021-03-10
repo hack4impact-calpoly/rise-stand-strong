@@ -1,8 +1,7 @@
 const express = require('express');
-const { getAnnouncements } = require('../utils/aws-utils');
-const { postAnnouncement } = require('../utils/aws-utils');
-const { deleteAnnouncement } = require('../utils/aws-utils');
+const { postAnnouncement, getAnnouncements, putAnnouncement, deleteAnnouncement } = require('../utils/aws-utils');
 const router = express.Router();
+const AWS = require('aws-amplify');
 
 /**
  * @swagger
@@ -130,7 +129,15 @@ router.post('/', async (req, res) => {
  *            description: Announcement with the specified announcementId does not exist
  */
 router.put('/:announcementId', async (req, res) => {
-    res.end();
+    const data = req.body;
+    const announcementId = req.params.announcementId;
+
+    try {
+        await putAnnouncement(announcementId, data);
+        res.send('Success');
+    } catch(err) {
+        res.status(400).json(err);
+    }   
 })
 
 /**
