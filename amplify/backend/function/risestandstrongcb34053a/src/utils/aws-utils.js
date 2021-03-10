@@ -249,7 +249,6 @@ module.exports = {
     getAnnouncements,
     deleteAnnouncement,
     postAnnouncement,
-    getAnnouncements,
     putAnnouncement,
     postShift,
     getShift,

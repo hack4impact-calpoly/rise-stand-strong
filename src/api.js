@@ -15,7 +15,7 @@ export async function getAnnouncements() {
 }
 
 export async function putAnnouncement(announcementId, announcementBody) {
-    await axios.put(`${BASE_URL}/${ANNOUNCEMENTS}/${announcementId}`, { ...announcementBody});
+    await axios.put(`${BASE_URL}/${ANNOUNCEMENTS}/${announcementId}`, { ...announcementBody });
 }
 
   export async function deleteAnnouncement(announcementId) {
