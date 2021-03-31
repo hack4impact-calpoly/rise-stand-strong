@@ -10,7 +10,7 @@
 
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { increment, decrement } from './actions/myIndex';
+import { increment, decrement, logInOut } from './actions/myIndex';
 
 function App() {
   const counter = useSelector((state) => state.counter);
@@ -19,12 +19,13 @@ function App() {
   return (
     <div className="App">
       <h1>
-        Counter
+        <p>Counter</p>
         {counter}
       </h1>
       <button type="button" onClick={() => dispatch(increment(5))}>+</button>
       <button type="button" onClick={() => dispatch(decrement())}>-</button>
-      {islogged ? <h3>ALLOWED</h3> : 'NOT ALLOWED'}
+      <p>{islogged ? <h3>ALLOWED</h3> : 'NOT ALLOWED'}</p>
+      <button type="button" onClick={() => dispatch(logInOut())}>Log in / Log out</button>
     </div>
   );
 }

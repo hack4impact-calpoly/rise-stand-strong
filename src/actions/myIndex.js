@@ -10,3 +10,9 @@ export const decrement = () => (
     type: 'Decrement',
   }
 );
+
+export const logInOut = () => (
+  {
+    type: 'SignIn',
+  }
+);

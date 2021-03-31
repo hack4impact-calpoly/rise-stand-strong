@@ -11,7 +11,6 @@ import App from './App';
 // import store from './store/store';
 
 const Store = createStore(allReducer);
-console.log(Store);
 
 // // ALL BELOW IS REDUX FROM SCRATCH
 // // DOUBLE // MEANS COMMENT
