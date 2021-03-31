@@ -5,55 +5,59 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
 import { createStore } from 'redux';
+import allReducer from './reducers/myIndex';
 
 import App from './App';
-import store from './store/store';
+// import store from './store/store';
 
-// ALL BELOW IS REDUX FROM SCRATCH
-// DOUBLE // MEANS COMMENT
+const Store = createStore(allReducer);
+console.log(Store);
 
-// Store -> is a globalized state used thoughout
+// // ALL BELOW IS REDUX FROM SCRATCH
+// // DOUBLE // MEANS COMMENT
 
-// Action -> Increment -> Does something
+// // Store -> is a globalized state used thoughout
 
-const increment = () => (
-  {
-    type: 'Increment',
-  }
-);
+// // Action -> Increment -> Does something
 
-const decrement = () => (
-  {
-    type: 'Decrement',
-  }
-);
+// const increment = () => (
+//   {
+//     type: 'Increment',
+//   }
+// );
 
-// Reducer -> modifies the store based on the action
-const counter = (state = 0, action) => {
-  switch (action.type) {
-    case 'Increment':
-      return state + 1;
-    case 'Decrement':
-      return state - 1;
-    default:
-      return state;
-  }
-};
+// const decrement = () => (
+//   {
+//     type: 'Decrement',
+//   }
+// );
 
-const Store = createStore(counter);
+// // Reducer -> modifies the store based on the action
+// const counter = (state = 0, action) => {
+//   switch (action.type) {
+//     case 'Increment':
+//       return state + 1;
+//     case 'Decrement':
+//       return state - 1;
+//     default:
+//       return state;
+//   }
+// };
 
-// Display on console
-Store.subscribe(() => console.log(Store.getState()));
+// const Store = createStore(counter);
 
-// dispatch -> executes an action
-Store.dispatch(increment());
-Store.dispatch(decrement());
-Store.dispatch(decrement());
+// // Display on console
+// Store.subscribe(() => console.log(Store.getState()));
+
+// // dispatch -> executes an action
+// Store.dispatch(increment());
+// Store.dispatch(decrement());
+// Store.dispatch(decrement());
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Provider store={store}>
+      <Provider store={Store}>
         <App />
       </Provider>
     </BrowserRouter>
