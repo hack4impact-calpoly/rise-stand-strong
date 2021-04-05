@@ -1,71 +1,92 @@
 {
-  "name": "rise-stand-strong",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@fortawesome/free-solid-svg-icons": "^5.15.2",
-    "@fullcalendar/core": "^5.5.1",
-    "@fullcalendar/daygrid": "^5.5.0",
-    "@fullcalendar/react": "^5.5.0",
-    "@testing-library/jest-dom": "^5.11.8",
-    "@testing-library/react": "^11.2.2",
-    "@testing-library/user-event": "^12.6.0",
-    "aws-amplify": "^3.3.17",
-    "axios": "^0.21.1",
-    "bootstrap": "^4.6.0",
-    "font-awesome": "^4.7.0",
-    "react": "^17.0.1",
-    "react-bootstrap": "^1.4.3",
-    "react-dom": "^17.0.1",
-    "react-icons": "^4.1.0",
-    "react-redux": "^7.2.2",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.1",
-    "reactjs-popup": "^2.0.4",
-    "redux": "^4.0.5",
-    "redux-devtools-extension": "^2.13.8",
-    "redux-thunk": "^2.3.0",
-    "styled-components": "^5.2.1",
-    "web-vitals": "^0.2.4"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "lint": "eslint --ext .js,.jsx ./src --quiet",
-    "lint:fix": "eslint --ext .js,.jsx ./src --fix --quiet"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint"
-    }
-  },
-  "devDependencies": {
-    "eslint": "^7.17.0",
-    "eslint-config-airbnb": "^18.2.1",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-react": "^7.22.0",
-    "eslint-plugin-react-hooks": "^4.2.0",
-    "husky": "^4.3.6"
-  }
+   "name": "rise-stand-strong",
+   "type": "module",
+   "version": "0.1.0",
+   "private": true,
+   "engines": {
+      "node": ">=8.3.0"
+   },
+   "dependencies": {
+      "@fortawesome/free-solid-svg-icons": "^5.15.2",
+      "@fullcalendar/core": "^5.5.1",
+      "@fullcalendar/daygrid": "^5.5.0",
+      "@fullcalendar/react": "^5.5.0",
+      "@testing-library/jest-dom": "^5.11.8",
+      "@testing-library/react": "^11.2.2",
+      "@testing-library/user-event": "^12.6.0",
+      "aws-amplify": "^3.3.17",
+      "axios": "^0.21.1",
+      "bootstrap": "^4.6.0",
+      "font-awesome": "^4.7.0",
+      "react": "^17.0.1",
+      "react-bootstrap": "^1.4.3",
+      "react-dom": "^17.0.1",
+      "react-icons": "^4.1.0",
+      "react-redux": "^7.2.2",
+      "react-router-dom": "^5.2.0",
+      "react-scripts": "4.0.1",
+      "reactjs-popup": "^2.0.4",
+      "redux": "^4.0.5",
+      "redux-devtools-extension": "^2.13.8",
+      "redux-thunk": "^2.3.0",
+      "styled-components": "^5.2.1",
+      "web-vitals": "^0.2.4"
+   },
+   "scripts": {
+      "start": "react-scripts start",
+      "build": "react-scripts build",
+      "test": "react-scripts test",
+      "eject": "react-scripts eject",
+      "lint": "eslint --ext .js,.jsx ./src --quiet",
+      "lint:fix": "eslint --ext .js,.jsx ./src --fix --quiet",
+      "format": "prettier --write \"**/*.+(js|jsx|json|css|md)\""
+   },
+   "eslintConfig": {
+      "extends": [
+         "react-app",
+         "react-app/jest"
+      ]
+   },
+   "browserslist": {
+      "production": [
+         ">0.2%",
+         "not dead",
+         "not op_mini all"
+      ],
+      "development": [
+         "last 1 chrome version",
+         "last 1 firefox version",
+         "last 1 safari version"
+      ]
+   },
+   "lint-staged": {
+      "*.+(js|jsx)": [
+         "eslint --fix",
+         "git add"
+      ],
+      "*.+(json|css|md)": [
+         "prettier --write",
+         "git add"
+      ]
+   },
+   "husky": {
+      "hooks": {
+         "pre-commit": "lint-staged"
+      }
+   },
+   "devDependencies": {
+      "eslint": "^7.17.0",
+      "eslint-config-airbnb": "^18.2.1",
+      "eslint-config-node": "^4.1.0",
+      "eslint-config-prettier": "^8.1.0",
+      "eslint-plugin-import": "^2.22.1",
+      "eslint-plugin-jsx-a11y": "^6.4.1",
+      "eslint-plugin-node": "^11.1.0",
+      "eslint-plugin-prettier": "^3.3.1",
+      "eslint-plugin-react": "^7.22.0",
+      "eslint-plugin-react-hooks": "^4.2.0",
+      "husky": "^4.3.6",
+      "lint-staged": "^10.5.4",
+      "prettier": "^2.2.1"
+   }
 }

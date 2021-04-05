@@ -1,16 +1,16 @@
-.card{
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 4px;
-  border: none;
+.card {
+   box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 4px;
+   border: none;
 }
-.card-body{
-  padding: 15px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.card-body {
+   padding: 15px 20px;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
 }
-.card-title{
-  margin: 0;
+.card-title {
+   margin: 0;
 }
-.card-link{
-  font-weight: lighter;
+.card-link {
+   font-weight: lighter;
 }

@@ -1,20 +1,20 @@
 import { INITIALIZE_SHIFT } from '../constants';
 
 const initialState = {
-  shifts: [],
+   shifts: [],
 };
 
 const shiftReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case INITIALIZE_SHIFT:
-      console.log('Initializing shift store');
+   switch (action.type) {
+      case INITIALIZE_SHIFT:
+         console.log('Initializing shift store');
 
-      return {
-        shifts: ['initialized'],
-      };
-    default:
-      return state;
-  }
+         return {
+            shifts: ['initialized'],
+         };
+      default:
+         return state;
+   }
 };
 
 export default shiftReducer;

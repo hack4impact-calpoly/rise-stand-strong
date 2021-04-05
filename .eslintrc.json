@@ -1,35 +1,41 @@
 {
-    "env": {
-        "browser": true,
-        "es2021": true
-    },
-    "extends": [
-        "plugin:react/recommended",
-        "airbnb"
-    ],
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": 12,
-        "sourceType": "module"
-    },
-    "plugins": [
-        "react"
-    ],
-    "rules": {
-        "import/no-extraneous-dependencies": [
-            "error",
-            {
-                    "devDependencies": true
-            }
-        ]
-    },
-    "settings": {
-        "import/resolver": {
-            "node": {
-                "extensions": [".js", ".jsx", ".ts", ".tsx"]
-            }
-        }
-    }
+   "env": {
+      "node": true,
+      "browser": true,
+      "es2021": true
+   },
+   "extends": ["airbnb", "prettier", "plugin:node/recommended"],
+   "parserOptions": {
+      "ecmaFeatures": {
+         "jsx": true
+      },
+      "ecmaVersion": 12,
+      "sourceType": "module"
+   },
+   "plugins": ["prettier"],
+   "ignorePatterns": ["/amplify"],
+   "rules": {
+      "prettier/prettier": "error",
+      "no-console": "off",
+      "node/no-missing-import": [
+         "error",
+         {
+            "allowModules": [],
+            "tryExtensions": [".js", ".json", ".jsx"]
+         }
+      ],
+      "import/no-extraneous-dependencies": [
+         "error",
+         {
+            "devDependencies": true
+         }
+      ]
+   },
+   "settings": {
+      "import/resolver": {
+         "node": {
+            "extensions": [".js", ".jsx", ".ts", ".tsx"]
+         }
+      }
+   }
 }

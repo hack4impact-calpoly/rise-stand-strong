@@ -1,24 +1,24 @@
 {
-  "name": "risestandstrongcb34053a",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "dependencies": {
-    "aws-sdk": "^2.843.0",
-    "aws-serverless-express": "^3.3.5",
-    "body-parser": "^1.17.1",
-    "express": "^4.15.2",
-    "swagger-jsdoc": "^6.0.2",
-    "swagger-ui-express": "^4.1.6",
-    "uuid": "^8.3.2"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.7"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon index.js"
-  },
-  "author": "",
-  "license": "ISC"
+   "name": "risestandstrongcb34053a",
+   "version": "1.0.0",
+   "description": "",
+   "main": "index.js",
+   "dependencies": {
+      "aws-sdk": "^2.843.0",
+      "aws-serverless-express": "^3.3.5",
+      "body-parser": "^1.17.1",
+      "express": "^4.15.2",
+      "swagger-jsdoc": "^6.0.2",
+      "swagger-ui-express": "^4.1.6",
+      "uuid": "^8.3.2"
+   },
+   "devDependencies": {
+      "nodemon": "^2.0.7"
+   },
+   "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "dev": "nodemon index.js"
+   },
+   "author": "",
+   "license": "ISC"
 }
