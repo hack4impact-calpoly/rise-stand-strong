@@ -1,7 +1,7 @@
 import shiftActions from './shiftActions';
 
 const actions = {
-  ...shiftActions,
+   ...shiftActions,
 };
 
 export default actions;

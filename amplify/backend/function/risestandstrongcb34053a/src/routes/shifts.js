@@ -1,12 +1,17 @@
 const express = require('express');
 const router = express.Router();
-const { postShift, queryShiftsRange, getShift, deleteShift, putShift} = require('../utils/aws-utils');
+const {
+   postShift,
+   queryShiftsRange,
+   getShift,
+   deleteShift,
+   putShift,
+} = require('../utils/aws-utils');
 const { v4: uuidv4 } = require('uuid');
-
 
 /**
  * @swagger
- * 
+ *
  * /shifts:
  *    post:
  *      summary: Creates a new shift
@@ -17,19 +22,19 @@ const { v4: uuidv4 } = require('uuid');
  *           application/json:
  *              schema:
  *                 properties:
- *                   startTimestamp: 
+ *                   startTimestamp:
  *                      type: String
  *                      description: The start timestamp for this shift.
- *                   endTimestamp: 
+ *                   endTimestamp:
  *                      type: String
  *                      description: The end timestamp for this shift.
- *                   primary: 
+ *                   primary:
  *                      type: String
  *                      description: Full name for the primary volunteer on this shift.
- *                   secondary: 
+ *                   secondary:
  *                      type: String
  *                      description: Full name for the secondary volunteer on this shift.
- *                   backup: 
+ *                   backup:
  *                      type: String
  *                      description: Full name for the backup volunteer on this shift.
  *                 example:
@@ -51,23 +56,21 @@ const { v4: uuidv4 } = require('uuid');
 router.post('/', async (req, res) => {
    const newShift = {
       ...req.body,
-   }
+   };
 
    try {
       await postShift(newShift);
       res.send(newShift);
-   }
-   catch (err) {
+   } catch (err) {
       // TODO: Once we have the user pools and IAM set up throw a 403 if not
       // allowed to access writing to a table
       res.status(400).json(err);
    }
-})
-
+});
 
 /**
  * @swagger
- * 
+ *
  * /shifts:
  *    get:
  *      summary: Lists all shift objects within the given time range
@@ -90,7 +93,7 @@ router.post('/', async (req, res) => {
  *                application/json:
  *                   schema:
  *                      type: array
- *                      items: 
+ *                      items:
  *                         $ref: '#/components/schemas/Shift'
  */
 router.get('/', async (req, res) => {
@@ -98,25 +101,28 @@ router.get('/', async (req, res) => {
    const parsedStartTS = parseInt(startTimestamp);
    const parsedEndTS = parseInt(endTimestamp);
 
-   if(Number.isNaN(parsedStartTS) || Number.isNaN(parsedEndTS)) {
+   if (Number.isNaN(parsedStartTS) || Number.isNaN(parsedEndTS)) {
       res.status(400).send({
-         error: 'Invalid query parameters, startTimestamp and endTimestamp are both required and must be Numbers.',
+         error:
+            'Invalid query parameters, startTimestamp and endTimestamp are both required and must be Numbers.',
       });
    } else {
-      try{
-         const matchingShifts = await queryShiftsRange(parsedStartTS, parsedEndTS);
+      try {
+         const matchingShifts = await queryShiftsRange(
+            parsedStartTS,
+            parsedEndTS
+         );
          res.send(matchingShifts);
-      } catch(err) {
+      } catch (err) {
          console.log(err);
          res.status(400).send(err);
       }
    }
 });
 
-
 /**
  * @swagger
- * 
+ *
  * /shifts/{startTimestamp}:
  *    get:
  *      summary: Gets a shift with the specified startTimestamp
@@ -142,7 +148,7 @@ router.get('/:startTimestamp', async (req, res) => {
    const { startTimestamp } = req.params;
    const parsedTs = parseInt(startTimestamp);
 
-   if(isNaN(parsedTs)) {
+   if (isNaN(parsedTs)) {
       res.status(400).send({
          error: 'startTimestamp is required and must be a Number',
       });
@@ -154,12 +160,11 @@ router.get('/:startTimestamp', async (req, res) => {
          res.status(404).json(err);
       }
    }
-})
-
+});
 
 /**
  * @swagger
- * 
+ *
  * /shifts/{startTimeStamp}:
  *    put:
  *      summary: Modifies a shift with the specified startTimestamp. Any ommitted fields in the request body will not be updated.
@@ -177,19 +182,19 @@ router.get('/:startTimestamp', async (req, res) => {
  *           application/json:
  *              schema:
  *                 properties:
- *                   startTimestamp: 
+ *                   startTimestamp:
  *                      type: Number
  *                      description: The new start timestamp for this shift.
- *                   endTimestamp: 
+ *                   endTimestamp:
  *                      type: Number
  *                      description: The new end timestamp for this shift.
- *                   primary: 
+ *                   primary:
  *                      type: String
  *                      description: Full name for the new primary volunteer on this shift.
- *                   secondary: 
+ *                   secondary:
  *                      type: String
  *                      description: Full name for the new secondary volunteer on this shift.
- *                   backup: 
+ *                   backup:
  *                      type: String
  *                      description: Full name for the new backup volunteer on this shift.
  *                 example:
@@ -207,29 +212,28 @@ router.get('/:startTimestamp', async (req, res) => {
 router.put('/:startTimestamp', async (req, res) => {
    const startTimestamp = req.params.startTimestamp;
    const parsedStartTS = parseInt(startTimestamp);
-   if(Number.isNaN(parsedStartTS)) {
+   if (Number.isNaN(parsedStartTS)) {
       res.status(400).send({
-         error: 'Invalid query parameters, startTimestamp is required and must be a Number.',
+         error:
+            'Invalid query parameters, startTimestamp is required and must be a Number.',
       });
    } else {
       const shiftBody = {
          startTimestamp: parsedStartTS,
-         ...req.body
-      }
+         ...req.body,
+      };
       try {
-        await putShift(shiftBody);
-        res.end();
-      }
-      catch (err) {
+         await putShift(shiftBody);
+         res.end();
+      } catch (err) {
          res.status(400);
       }
    }
-})
-
+});
 
 /**
  * @swagger
- * 
+ *
  * /shifts/{startTimeStamp}:
  *    delete:
  *      summary: Deletes a shift with the specified startTimeStamp
@@ -253,7 +257,7 @@ router.delete('/:startTimestamp', async (req, res) => {
    const { startTimestamp } = req.params;
    const parsedTs = parseInt(startTimestamp);
 
-   if(isNaN(parsedTs)) {
+   if (isNaN(parsedTs)) {
       res.status(400).send({
          error: 'startTimestamp is required and must be a Number',
       });
@@ -265,8 +269,7 @@ router.delete('/:startTimestamp', async (req, res) => {
          res.status(400).send(err);
       }
    }
-})
-
+});
 
 /**
  * @swagger
@@ -304,6 +307,5 @@ router.delete('/:startTimestamp', async (req, res) => {
  *          secondary: 'Justin Poist'
  *          backup: ''
  */
-
 
 module.exports = router;

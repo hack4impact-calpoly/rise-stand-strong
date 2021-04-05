@@ -1,5 +1,6 @@
 {
    "env": {
+      "node": true,
       "browser": true,
       "es2021": true
    },
@@ -12,9 +13,17 @@
       "sourceType": "module"
    },
    "plugins": ["prettier"],
+   "ignorePatterns": ["/amplify"],
    "rules": {
       "prettier/prettier": "error",
       "no-console": "off",
+      "node/no-missing-import": [
+         "error",
+         {
+            "allowModules": [],
+            "tryExtensions": [".js", ".json", ".jsx"]
+         }
+      ],
       "import/no-extraneous-dependencies": [
          "error",
          {

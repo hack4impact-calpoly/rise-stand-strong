@@ -10,16 +10,16 @@ import Dashboard from '../Dashboard/Dashboard';
 import Calendar from '../Calendar/Calendar';
 
 export default () => (
-  <div className="App">
-    <NavBar />
-    <Switch>
-      <Route exact path="/" render={() => <LoginPage />} />
-      <Route path="/forgotpassword" render={() => <ForgotPassword />} />
-      <Route path="/newaccount" render={() => <NewAccountPage />} />
-      <Route path="/editprofile" render={() => <EditProfilePage />} />
-      <Route path="/dashboard" render={() => <Dashboard />} />
-      <Route path="/profilepage" render={() => <ProfilePage />} />
-      <Route path="/calendar" render={() => <Calendar />} />
-    </Switch>
-  </div>
+   <div className="App">
+      <NavBar />
+      <Switch>
+         <Route exact path="/" render={() => <LoginPage />} />
+         <Route path="/forgotpassword" render={() => <ForgotPassword />} />
+         <Route path="/newaccount" render={() => <NewAccountPage />} />
+         <Route path="/editprofile" render={() => <EditProfilePage />} />
+         <Route path="/dashboard" render={() => <Dashboard />} />
+         <Route path="/profilepage" render={() => <ProfilePage />} />
+         <Route path="/calendar" render={() => <Calendar />} />
+      </Switch>
+   </div>
 );

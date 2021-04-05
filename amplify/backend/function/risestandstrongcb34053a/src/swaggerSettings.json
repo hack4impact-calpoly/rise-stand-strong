@@ -1,27 +1,25 @@
 {
-    "definition": {
+   "definition": {
       "openapi": "3.0.0",
       "info": {
-        "title": "Rise Stand Strong Backend API",
-        "version": "0.1.0",
-        "description":
-          "This is a simple CRUD API application made with Express and documented with Swagger",
-        "license": {
-          "name": "MIT",
-          "url": "https://spdx.org/licenses/MIT.html"
-        },
-        "contact": {
-          "name": "Hack4Impact",
-          "url": "https://calpoly.hack4impact.org/",
-          "email": "jackfales@gmail.com"
-        }
+         "title": "Rise Stand Strong Backend API",
+         "version": "0.1.0",
+         "description": "This is a simple CRUD API application made with Express and documented with Swagger",
+         "license": {
+            "name": "MIT",
+            "url": "https://spdx.org/licenses/MIT.html"
+         },
+         "contact": {
+            "name": "Hack4Impact",
+            "url": "https://calpoly.hack4impact.org/",
+            "email": "jackfales@gmail.com"
+         }
       },
       "servers": [
-        {
-          "url": "http://localhost:3000"
-        }
+         {
+            "url": "http://localhost:3000"
+         }
       ]
-    },
-    "apis": ["./routes/announcements.js",
-            "./routes/shifts.js"]
+   },
+   "apis": ["./routes/announcements.js", "./routes/shifts.js"]
 }

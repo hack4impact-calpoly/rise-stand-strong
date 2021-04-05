@@ -1,5 +1,10 @@
 const express = require('express');
-const { postAnnouncement, getAnnouncements, putAnnouncement, deleteAnnouncement } = require('../utils/aws-utils');
+const {
+   postAnnouncement,
+   getAnnouncements,
+   putAnnouncement,
+   deleteAnnouncement,
+} = require('../utils/aws-utils');
 const router = express.Router();
 const AWS = require('aws-amplify');
 
@@ -45,9 +50,9 @@ const AWS = require('aws-amplify');
  *          link: https://rise/updates/vday
  */
 
- /**
+/**
  * @swagger
- * 
+ *
  * /announcements:
  *    get:
  *      summary: Get a list of all announcements in decending date order
@@ -65,19 +70,18 @@ const AWS = require('aws-amplify');
  *                        $ref: '#/components/schemas/Announcement'
  */
 router.get('/', async (req, res) => {
-    try{
-        const data = await getAnnouncements();
-        res.json(data);
-    }
-    catch (err){
-        console.log(err)
-        res.status(400).json(err);
-    }
-})
+   try {
+      const data = await getAnnouncements();
+      res.json(data);
+   } catch (err) {
+      console.log(err);
+      res.status(400).json(err);
+   }
+});
 
 /**
  * @swagger
- * 
+ *
  * /announcements:
  *    post:
  *      summary: Creates a new announcement
@@ -93,23 +97,22 @@ router.get('/', async (req, res) => {
  *                description: Announcement created successfully
  *             "400":
  *                description: Body not formatted correctly
- *             
+ *
  */
 router.post('/', async (req, res) => {
-    const body = req.body;
+   const body = req.body;
 
-    try {
-        await postAnnouncement(body);
-        res.send('Success');
-    }
-    catch (err) {
-        res.status(400).json({ error });
-    }
-})
+   try {
+      await postAnnouncement(body);
+      res.send('Success');
+   } catch (err) {
+      res.status(400).json({ error });
+   }
+});
 
 /**
  * @swagger
- * 
+ *
  * /announcements/{announcementId}:
  *    put:
  *      summary: Modify the contents of the specified announcement
@@ -129,20 +132,20 @@ router.post('/', async (req, res) => {
  *            description: Announcement with the specified announcementId does not exist
  */
 router.put('/:announcementId', async (req, res) => {
-    const data = req.body;
-    const announcementId = req.params.announcementId;
+   const data = req.body;
+   const announcementId = req.params.announcementId;
 
-    try {
-        await putAnnouncement(announcementId, data);
-        res.send('Success');
-    } catch(err) {
-        res.status(400).json(err);
-    }   
-})
+   try {
+      await putAnnouncement(announcementId, data);
+      res.send('Success');
+   } catch (err) {
+      res.status(400).json(err);
+   }
+});
 
 /**
  * @swagger
- * 
+ *
  * /announcements/{announcementId}:
  *    delete:
  *      summary: Delete the announcement with the specified announcementId
@@ -158,14 +161,14 @@ router.put('/:announcementId', async (req, res) => {
  *            description: Announcement with the specified announcementId does not exist
  */
 router.delete('/:announcementId', async (req, res) => {
-    const { announcementId } = req.params;
-    
-    try {
-        await deleteAnnouncement(announcementId);
-        res.end();
-    } catch (err) {
-        res.status(400).json(err);
-    }
-})
+   const { announcementId } = req.params;
+
+   try {
+      await deleteAnnouncement(announcementId);
+      res.end();
+   } catch (err) {
+      res.status(400).json(err);
+   }
+});
 
 module.exports = router;

@@ -6,31 +6,31 @@ import '@fullcalendar/daygrid/main.css';
 import ExampleShifts from './ExampleShifts';
 
 const CalendarContainer = styled.section`
-  margin: 40px;
+   margin: 40px;
 `;
 
 const renderEvents = ExampleShifts.map((item) => {
-  const singleEvent = {};
+   const singleEvent = {};
 
-  singleEvent.id = item.id;
-  singleEvent.title = item.primary;
-  singleEvent.start = item.startDateTime;
-  singleEvent.end = item.endDateTime;
+   singleEvent.id = item.id;
+   singleEvent.title = item.primary;
+   singleEvent.start = item.startDateTime;
+   singleEvent.end = item.endDateTime;
 
-  return singleEvent;
+   return singleEvent;
 });
 
 const Calendar = () => {
-  const events = renderEvents;
+   const events = renderEvents;
 
-  return (
-    <CalendarContainer>
-      <FullCalendar
-        defaultView="dayGridMonth"
-        plugins={[dayGridPlugin]}
-        events={events}
-      />
-    </CalendarContainer>
-  );
+   return (
+      <CalendarContainer>
+         <FullCalendar
+            defaultView="dayGridMonth"
+            plugins={[dayGridPlugin]}
+            events={events}
+         />
+      </CalendarContainer>
+   );
 };
 export default Calendar;
