@@ -25,7 +25,7 @@ const styleDate = (date) => {
 };
 
 export default (Announcement) => (
-   <Card style={{ width: '18rem ' }}>
+   <Card>
       <Card.Body>
          <div>
             <Card.Title>{Announcement.Announcement.title}</Card.Title>
