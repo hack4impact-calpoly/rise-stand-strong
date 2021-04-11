@@ -8,12 +8,14 @@ import ProfilePage from '../ProfilePage/ProfilePage';
 import NavBar from '../NavBar/NavBar';
 import Dashboard from '../Dashboard/Dashboard';
 import Calendar from '../Calendar/Calendar';
+import ShiftDetails from '../Shifts/ShiftDetails';
 
 export default () => (
    <div className="App">
       <NavBar />
       <Switch>
          <Route exact path="/" render={() => <LoginPage />} />
+         <Route path="/shift/:startTimestamp" render={() => <ShiftDetails />} />
          <Route path="/forgotpassword" render={() => <ForgotPassword />} />
          <Route path="/newaccount" render={() => <NewAccountPage />} />
          <Route path="/editprofile" render={() => <EditProfilePage />} />
