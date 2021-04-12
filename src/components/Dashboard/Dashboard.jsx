@@ -29,6 +29,7 @@ const Announcements = [
       text: 'This is the announcement.',
       date: '2021-02-04',
       link: '#',
+      postedby: 'Admin',
    },
 ];
 
