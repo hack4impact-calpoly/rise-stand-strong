@@ -9,11 +9,15 @@ import Logo from './Logo.svg';
 const StyledAll = styled.div`
    display: flex;
    flex-direction: column;
+   justify-content: center;
+   allign-items: center;
 `;
 
 const StyledTitle = styled.h2`
    display: flex;
    justify-content: center;
+   color: #024e6b;
+   font-size: 48px;
 `;
 const StyledImage = styled.img`
    display: flex;
@@ -22,28 +26,33 @@ const StyledImage = styled.img`
 const StyledText = styled.div`
    margin-left: 20px;
    font-size: 20px;
+   color: #024e6b;
 `;
 const StyledInput = styled(Form.Control)`
    display: flex;
    flex-direction: center;
-   width: 100%; !important
+   width: 100%;
+   color: #024e6b;
 `;
 const StyledFeedback = styled(Form.Control.Feedback)`
    margin-left: 20px;
    font-size: 10px;
+   color: #024e6b;
 `;
 const StyledButton = styled(Button)`
    display: flex;
    justify-content: center;
+   background-color: #024e6b;
 `;
 const StyledLinkButton = styled(Button)`
    display: flex;
    margin-left: auto;
+   color: #024e6b;
 `;
-
 const StyledLinkButtonAcc = styled(Button)`
    display: flex;
    margin-left: auto;
+   color: #024e6b;
 `;
 
 // margin-left: 10px;
@@ -93,7 +102,9 @@ export default () => {
          )}
          <Form noValidate validated={validated} onSubmit={handleSubmit}>
             <StyledAll>
-               <StyledImage src={Logo} alt="Logo" />
+               <StyledTitle>
+                  <StyledImage src={Logo} alt="Logo" />
+               </StyledTitle>
                <StyledTitle>Volunteer</StyledTitle>
                <StyledTitle>System</StyledTitle>
                <Form.Row>
