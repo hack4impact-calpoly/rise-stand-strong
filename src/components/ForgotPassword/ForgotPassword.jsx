@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Auth } from 'aws-amplify';
-import { Link } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
+import './ForgotPassword.css';
+import styled from 'styled-components';
+import Icon from './LockIcon';
 
 export default function ResetPassword() {
    const [code, setCode] = useState('');
@@ -11,16 +13,61 @@ export default function ResetPassword() {
 
    const [codeSent, setCodeSent] = useState(false);
    const [confirmed, setConfirmed] = useState(false);
+   const [newPassword, setNewPassword] = useState(false);
    const [isConfirming, setIsConfirming] = useState(false);
    const [isSendingCode, setIsSendingCode] = useState(false);
+   const [isSendingPassword, setIsSendingPassword] = useState(false);
 
-   const validateResetForm = () =>
-      password.length > 0 && password === confirmPassword;
+   const StyledForm = styled(Form)`
+      margin: 30px;
+      position: relative;
+      height: 85vh;
+      font-family: nunito, sans-serif;
+   `;
+   const StyledTitle = styled(Form.Label)`
+      font-weight: 500;
+      font-size: 36px;
+      line-height: 49px;
+      text-align: center;
+   `;
+   const StyledCaption = styled(Form.Label)`
+      padding-bottom: 20px;
+      size: 16px;
+      line-height: 22px;
+      text-align: center;
+   `;
+   const StyledSubtitle = styled(Form.Label)`
+      font-weight: 600;
+      size: 18px;
+      line-height: 25px;
+   `;
+   const SubmitButton = styled(Button)`
+      background-color: #ae4c33;
+      padding: 10px 20px;
+      border-radius: 6px;
+      position: absolute;
+      border: none;
+      line-height: 27px;
+      font-size: 20px;
+      right: 0px;
+      bottom: 0px;
+   `;
+   const SubmitButtonFullWidth = styled(Button)`
+      background-color: #ae4c33;
+      padding: 10px 20px;
+      border-radius: 6px;
+      bottom: 0;
+      position: absolute;
+      right: 0;
+      border: none;
+      line-height: 27px;
+      font-size: 20px;
+      width: 100%;
+   `;
 
    async function handleSendCodeClick(event) {
       event.preventDefault();
       setIsSendingCode(true);
-
       try {
          await Auth.forgotPassword(username);
          setCodeSent(true);
@@ -32,11 +79,8 @@ export default function ResetPassword() {
 
    async function handleConfirmClick(event) {
       event.preventDefault();
-
       setIsConfirming(true);
-
       try {
-         await Auth.forgotPasswordSubmit(username, code, password);
          setConfirmed(true);
       } catch (error) {
          window.alert(error);
@@ -44,95 +88,132 @@ export default function ResetPassword() {
       }
    }
 
+   async function handlePasswordSetClick(event) {
+      event.preventDefault();
+      setIsSendingPassword(true);
+      try {
+         await Auth.forgotPasswordSubmit(username, code, password);
+         setNewPassword(true);
+      } catch (error) {
+         window.alert(error);
+         setIsSendingPassword(false);
+      }
+   }
+
    function renderRequestCodeForm() {
       return (
-         <Form onSubmit={handleSendCodeClick}>
+         <StyledForm onSubmit={handleSendCodeClick}>
+            <div className="title-container">
+               <StyledTitle>Forgot password</StyledTitle>
+            </div>
             <Form.Group bsSize="large" controlId="email">
-               <Form.Label>Email</Form.Label>
+               <StyledCaption>
+                  Please enter the email that your RISE volunteer account is
+                  associated with.
+               </StyledCaption>
+               <StyledSubtitle>Email</StyledSubtitle>
                <Form.Control
+                  className="email-box"
                   autoFocus
                   type="email"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                />
             </Form.Group>
-            <Button
-               type="submit"
-               isLoading={isSendingCode}
-               disabled={!username}
-            >
-               Send Confirmation
-            </Button>
-         </Form>
+            <SubmitButton type="submit" isLoading={isSendingCode}>
+               Submit
+            </SubmitButton>
+         </StyledForm>
       );
    }
 
    function renderConfirmationForm() {
       return (
-         <form onSubmit={handleConfirmClick}>
+         <StyledForm onSubmit={handleConfirmClick}>
+            <div className="title-container">
+               <StyledTitle>Forgot password</StyledTitle>
+            </div>
             <Form.Group bsSize="large" controlId="code">
-               <Form.Label>Confirmation Code</Form.Label>
+               <StyledCaption>
+                  An email has been sent to ({username}) to verify you are
+                  trying to change your password.
+               </StyledCaption>
+               <StyledSubtitle>
+                  Please enter the verification code:
+               </StyledSubtitle>
                <Form.Control
                   autoFocus
                   type="tel"
                   value={code}
                   onChange={(e) => setCode(e.target.value)}
                />
-               <div>
-                  Please check your email ({username}) for the confirmation
-                  code.
-               </div>
             </Form.Group>
-            <hr />
+            <SubmitButton type="submit" isLoading={isConfirming}>
+               Verify
+            </SubmitButton>
+         </StyledForm>
+      );
+   }
+
+   function renderNewPasswordForm() {
+      return (
+         <StyledForm onSubmit={handlePasswordSetClick}>
+            <Form.Group bsSize="large" controlId="code">
+               <div className="title-container">
+                  <StyledTitle>Change password</StyledTitle>
+               </div>
+               <StyledCaption>
+                  Password reset has been verified. Please set a new password.
+               </StyledCaption>
+            </Form.Group>
             <Form.Group bsSize="large" controlId="password">
-               <Form.Label>New Password</Form.Label>
+               <StyledSubtitle>New Password</StyledSubtitle>
                <Form.Control
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                />
+               <Form.Label>*Password must be 6 characters or longer</Form.Label>
             </Form.Group>
             <Form.Group bsSize="large" controlId="confirmPassword">
-               <Form.Label>Confirm Password</Form.Label>
+               <StyledSubtitle>Confirm new password</StyledSubtitle>
                <Form.Control
                   type="password"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                />
             </Form.Group>
-            <Button
-               block
-               type="submit"
-               bsSize="large"
-               isLoading={isConfirming}
-               disabled={!validateResetForm()}
-            >
-               Confirm
-            </Button>
-         </form>
+            <SubmitButton type="submit" isLoading={isSendingPassword}>
+               Submit
+            </SubmitButton>
+         </StyledForm>
       );
    }
 
    function renderSuccessMessage() {
       return (
-         <div className="success">
-            <p>Your password has been reset.</p>
-            <p>
-               <Link to="/">
-                  Click here to login with your new credentials.
-               </Link>
-            </p>
-         </div>
+         <StyledForm>
+            <div className="success">
+               <div className="title-container">
+                  <h1 className="title">Password changed</h1>
+               </div>
+               <div className="icon">
+                  <Icon />
+               </div>
+               <p>Your password has been successfully changed!</p>
+               <a href="/">
+                  <SubmitButtonFullWidth type="submit" isLoading={isConfirming}>
+                     Return to login
+                  </SubmitButtonFullWidth>
+               </a>
+            </div>
+         </StyledForm>
       );
    }
 
-   const then = !confirmed ? renderConfirmationForm() : renderSuccessMessage();
+   const last = !newPassword ? renderNewPasswordForm() : renderSuccessMessage();
+   const then = !confirmed ? renderConfirmationForm() : last;
    const iff = !codeSent ? renderRequestCodeForm() : then;
 
-   return (
-      <div>
-         <h1>Forgot Password</h1>
-         {iff}
-      </div>
-   );
+   return <div className="forgotPasswordPage">{iff}</div>;
 }
