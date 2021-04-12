@@ -70,6 +70,7 @@ export default (Announcement) => (
          <StyledSubtitle>
             {styleDate(Announcement.Announcement.date)}
          </StyledSubtitle>
+         <p />
          <StyledBody className="text-center">
             {Announcement.Announcement.text}
          </StyledBody>
