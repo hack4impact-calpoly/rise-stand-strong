@@ -4,28 +4,43 @@ import styled from 'styled-components';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Form, Col, Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
+import Logo from './Logo.svg';
 
 const StyledTitle = styled.h2`
-   margin: 20px 0px 15px 20px;
+   display: flex;
+   justify-content: center;
 `;
-
-const StyledInput = styled(Form.Control)`
+const StyledImage = styled.img`
+   margin-left: 150px;
+`;
+const StyledText = styled.div`
    margin-left: 20px;
-   font-size: 12px;
-   padding: 2px 5px;
+   font-size: 20px;
+`;
+const StyledInput = styled(Form.Control)`
+   display: flex;
+   flex-direction: center;
 `;
 const StyledFeedback = styled(Form.Control.Feedback)`
    margin-left: 20px;
    font-size: 10px;
 `;
 const StyledButton = styled(Button)`
-   margin-left: 20px;
-   font-size: 12px;
+   display: flex;
+   justify-content: center;
 `;
 const StyledLinkButton = styled(Button)`
-   margin-left: 10px;
-   font-size: 10px;
+   display: flex;
+   flex-direction: right;
 `;
+
+const StyledLinkButtonAcc = styled(Button)`
+   display: flex;
+   flex-direction: center;
+`;
+
+// margin-left: 10px;
+// font-size: 10px;
 
 export default () => {
    const [validated, setValidated] = useState(false);
@@ -70,13 +85,15 @@ export default () => {
             </div>
          )}
          <Form noValidate validated={validated} onSubmit={handleSubmit}>
-            <StyledTitle>Login Page</StyledTitle>
+            <StyledImage src={Logo} alt="Logo" />
+            <StyledTitle>Volunteer System</StyledTitle>
             <Form.Row>
                <Form.Group as={Col} md="4" controlId="validationCustom01">
+                  <StyledText>Email</StyledText>
                   <StyledInput
                      required
                      type="username"
-                     placeholder="Username"
+                     placeholder=""
                      defaultValue={username}
                      onChange={handleUsername}
                   />
@@ -89,10 +106,11 @@ export default () => {
             </Form.Row>
             <Form.Row>
                <Form.Group as={Col} md="4" controlId="validationCustom02">
+                  <StyledText>Password</StyledText>
                   <StyledInput
                      type="password"
                      required
-                     placeholder="Password"
+                     placeholder=""
                      defaultValue={password}
                      onChange={handlePassword}
                   />
@@ -105,15 +123,17 @@ export default () => {
             </Form.Row>
             <Form.Row>
                <Form.Group as={Col} md="4" controlId="validationCustom03">
-                  <StyledLinkButton variant="link">
-                     Create New Account
-                  </StyledLinkButton>
                   <StyledLinkButton href="./ForgotPassword" variant="link">
                      Forgot Password?
                   </StyledLinkButton>
                </Form.Group>
             </Form.Row>
-            <StyledButton type="submit">Login</StyledButton>
+            <StyledButton type="submit" block>
+               Login
+            </StyledButton>
+            <StyledLinkButtonAcc variant="link">
+               First Time? Create New Account
+            </StyledLinkButtonAcc>
          </Form>
       </div>
    );
