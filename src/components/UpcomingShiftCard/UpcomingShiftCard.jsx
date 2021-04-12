@@ -3,8 +3,14 @@ import { Card } from 'react-bootstrap';
 import styled from 'styled-components';
 import './UpcomingShiftCard.css';
 
+const Header1 = styled.h1`
+   font-family: Arial;
+   font-weight: Bold;
+   font-size: 18px;
+`;
+
 const StyledText = styled.h3`
-   font-style: bold;
+   font-weight: Bold;
    font-size: 18px;
    color: rgba(2, 78, 107, 1);
 `;
@@ -40,7 +46,9 @@ export default (cardData) => {
          <Card.Body>
             <div>
                <Card.Title>
-                  {DOW[df.getDay()]}, {months[df.getMonth()]} {df.getDate()}
+                  <Header1>
+                     {DOW[df.getDay()]}, {months[df.getMonth()]} {df.getDate()}
+                  </Header1>
                </Card.Title>
                <Card.Text>
                   {df.toLocaleString('en-US', {

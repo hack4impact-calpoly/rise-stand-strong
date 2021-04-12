@@ -30,14 +30,14 @@ const Header3 = styled.h3`
 `;
 const Header4 = styled.h4`
    font-family: Arial;
-   font-weight: normal;
+   font-weight: bold;
    font-size: 18px;
    text-align: center;
    color: rgba(2, 78, 107, 1);
 `;
 const Header5 = styled.h4`
    font-family: Arial;
-   font-weight: normal;
+   font-weight: Bold;
    font-size: 18px;
    text-align: center;
    color: rgba(81, 40, 84, 1);
@@ -57,8 +57,16 @@ const StyledCardGroup = styled(CardColumns)`
 const Announcements = [
    {
       title: 'New Protocol',
-      text: 'This is the announcement.',
-      date: '2021-02-04',
+      text:
+         'Hello all, after several points of feedback from our volunteers, we have decided to alter some standards...',
+      date: '2021-03-31',
+      link: '#',
+   },
+   {
+      title: 'Dont eat the cheese!',
+      text:
+         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna et dolor scelerisque tincidunt cras etiam...',
+      date: '2021-02-014',
       link: '#',
    },
 ];
