@@ -6,12 +6,18 @@ import { Form, Col, Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import Logo from './Logo.svg';
 
+const StyledAll = styled.div`
+   display: flex;
+   flex-direction: column;
+`;
+
 const StyledTitle = styled.h2`
    display: flex;
    justify-content: center;
 `;
 const StyledImage = styled.img`
-   margin-left: 150px;
+   display: flex;
+   justify-content: space-evenly;
 `;
 const StyledText = styled.div`
    margin-left: 20px;
@@ -20,6 +26,7 @@ const StyledText = styled.div`
 const StyledInput = styled(Form.Control)`
    display: flex;
    flex-direction: center;
+   width: 100%; !important
 `;
 const StyledFeedback = styled(Form.Control.Feedback)`
    margin-left: 20px;
@@ -31,12 +38,12 @@ const StyledButton = styled(Button)`
 `;
 const StyledLinkButton = styled(Button)`
    display: flex;
-   flex-direction: right;
+   margin-left: auto;
 `;
 
 const StyledLinkButtonAcc = styled(Button)`
    display: flex;
-   flex-direction: center;
+   margin-left: auto;
 `;
 
 // margin-left: 10px;
@@ -85,55 +92,55 @@ export default () => {
             </div>
          )}
          <Form noValidate validated={validated} onSubmit={handleSubmit}>
-            <StyledImage src={Logo} alt="Logo" />
-            <StyledTitle>Volunteer System</StyledTitle>
-            <Form.Row>
-               <Form.Group as={Col} md="4" controlId="validationCustom01">
-                  <StyledText>Email</StyledText>
-                  <StyledInput
-                     required
-                     type="username"
-                     placeholder=""
-                     defaultValue={username}
-                     onChange={handleUsername}
-                  />
-                  <StyledFeedback>looks good!</StyledFeedback>
-                  <StyledFeedback type="invalid">
-                     {' '}
-                     please input username.{' '}
-                  </StyledFeedback>
-               </Form.Group>
-            </Form.Row>
-            <Form.Row>
-               <Form.Group as={Col} md="4" controlId="validationCustom02">
-                  <StyledText>Password</StyledText>
-                  <StyledInput
-                     type="password"
-                     required
-                     placeholder=""
-                     defaultValue={password}
-                     onChange={handlePassword}
-                  />
-                  <StyledFeedback>looks good!</StyledFeedback>
-                  <StyledFeedback type="invalid">
-                     {' '}
-                     please input password{' '}
-                  </StyledFeedback>
-               </Form.Group>
-            </Form.Row>
-            <Form.Row>
-               <Form.Group as={Col} md="4" controlId="validationCustom03">
-                  <StyledLinkButton href="./ForgotPassword" variant="link">
-                     Forgot Password?
-                  </StyledLinkButton>
-               </Form.Group>
-            </Form.Row>
-            <StyledButton type="submit" block>
-               Login
-            </StyledButton>
-            <StyledLinkButtonAcc variant="link">
-               First Time? Create New Account
-            </StyledLinkButtonAcc>
+            <StyledAll>
+               <StyledImage src={Logo} alt="Logo" />
+               <StyledTitle>Volunteer</StyledTitle>
+               <StyledTitle>System</StyledTitle>
+               <Form.Row>
+                  <Form.Group as={Col} md="4" controlId="validationCustom01">
+                     <StyledText>Email</StyledText>
+                     <StyledInput
+                        required
+                        type="username"
+                        placeholder=""
+                        defaultValue={username}
+                        onChange={handleUsername}
+                     />
+                     <StyledFeedback>looks good!</StyledFeedback>
+                     <StyledFeedback type="invalid">
+                        {' '}
+                        please input username.{' '}
+                     </StyledFeedback>
+                  </Form.Group>
+               </Form.Row>
+               <Form.Row>
+                  <Form.Group as={Col} md="4" controlId="validationCustom02">
+                     <StyledText>Password</StyledText>
+                     <StyledInput
+                        type="password"
+                        required
+                        placeholder=""
+                        defaultValue={password}
+                        onChange={handlePassword}
+                     />
+                     <StyledFeedback>looks good!</StyledFeedback>
+                     <StyledFeedback type="invalid">
+                        {' '}
+                        please input password{' '}
+                     </StyledFeedback>
+                  </Form.Group>
+               </Form.Row>
+               <StyledLinkButton href="./ForgotPassword" variant="link">
+                  Forgot your password?
+               </StyledLinkButton>
+               <StyledButton type="submit" block>
+                  Login
+               </StyledButton>
+               <StyledLinkButtonAcc variant="link">
+                  First Time? &nbsp;
+                  <b>Create new account</b>
+               </StyledLinkButtonAcc>
+            </StyledAll>
          </Form>
       </div>
    );
