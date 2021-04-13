@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { Auth } from 'aws-amplify';
 import { Form, Button } from 'react-bootstrap';
-import './ForgotPassword.css';
 import styled from 'styled-components';
-import Icon from './LockIcon';
+import { ReactComponent as LockIcon } from './LockIcon.svg';
 
 export default function ResetPassword() {
    const [code, setCode] = useState('');
@@ -23,6 +22,13 @@ export default function ResetPassword() {
       position: relative;
       height: 85vh;
       font-family: nunito, sans-serif;
+   `;
+   const StyledTitleContainer = styled.div`
+      font-family: nunito, sans-serif;
+      font-style: normal;
+      font-size: 36px;
+      line-height: 49px;
+      text-align: center;
    `;
    const StyledTitle = styled(Form.Label)`
       font-weight: 500;
@@ -64,6 +70,11 @@ export default function ResetPassword() {
       font-size: 20px;
       width: 100%;
    `;
+   const StyledIconContainer = styled.div`
+      text-align: center;
+      padding-top: 75px;
+      padding-bottom: 45px;
+   `;
 
    async function handleSendCodeClick(event) {
       event.preventDefault();
@@ -103,9 +114,9 @@ export default function ResetPassword() {
    function renderRequestCodeForm() {
       return (
          <StyledForm onSubmit={handleSendCodeClick}>
-            <div className="title-container">
+            <StyledTitleContainer>
                <StyledTitle>Forgot password</StyledTitle>
-            </div>
+            </StyledTitleContainer>
             <Form.Group bsSize="large" controlId="email">
                <StyledCaption>
                   Please enter the email that your RISE volunteer account is
@@ -194,12 +205,12 @@ export default function ResetPassword() {
       return (
          <StyledForm>
             <div className="success">
-               <div className="title-container">
+               <StyledTitleContainer>
                   <h1 className="title">Password changed</h1>
-               </div>
-               <div className="icon">
-                  <Icon />
-               </div>
+               </StyledTitleContainer>
+               <StyledIconContainer>
+                  <LockIcon />
+               </StyledIconContainer>
                <p>Your password has been successfully changed!</p>
                <a href="/">
                   <SubmitButtonFullWidth type="submit" isLoading={isConfirming}>
