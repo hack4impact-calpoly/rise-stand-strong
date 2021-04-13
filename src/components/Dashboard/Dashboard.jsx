@@ -2,7 +2,7 @@ import React from 'react';
 import { CardColumns, Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import AnnouncementCard from '../AnnouncementCard/AnnouncementCard';
-import UpcomingShiftCard from '../UpcomingShiftCard/UpcomingShiftCard';
+import UpcomingShiftCard from '../Shifts/UpcomingShiftCard/UpcomingShiftCard';
 
 const StyledCardGroup = styled(CardColumns)`
    margin: 20px;

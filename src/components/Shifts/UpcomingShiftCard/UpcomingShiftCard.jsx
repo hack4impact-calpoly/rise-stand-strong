@@ -51,7 +51,7 @@ export default (cardData) => (
                PM
             </Card.Text>
          </div>
-         <Card.Link href="#">
+         <Card.Link href={`/shift/${cardData.cardData.from}`}>
             Details
             <FaChevronRight />
          </Card.Link>
