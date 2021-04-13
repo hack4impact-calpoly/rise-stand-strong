@@ -4,19 +4,18 @@ import { Form, Button, Col } from 'react-bootstrap';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye } from '@fortawesome/free-solid-svg-icons';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import './fonts.css';
 
 const SubmitButton = styled(Button)`
    background-color: #024e6b;
    color: white;
    padding: 10px 20px;
+   margin-bottom: 50px;
    border-radius: 6px;
    border: none;
-   position: absolute;
    right: 32px;
    font-size: 20px;
-   bottom: 50px;
 `;
 
 const StyledField = styled(Form.Control)`
@@ -41,7 +40,7 @@ const StyledLabel = styled(Form.Label)`
 `;
 
 const StyledSubheader = styled(Form.Label)`
-   margin-left: 33px;
+   margin-left: 42px;
    margin-bottom: 35px;
    font-size: 14px;
    color: #525252;
@@ -71,7 +70,8 @@ const StyledHideButton = styled(Button)`
    color: #024e6b;
    border: none;
    position: absolute;
-   right: 40px;
+   flex-direction: row;
+   justify-content: flex-end;
    font-size: 16px;
    top: 31px;
    font-family: 'Nunito Sans', sans-serif;
@@ -85,19 +85,12 @@ export default () => {
    const [email, setEmail] = useState('');
    const [phoneNumber, setPhoneNumber] = useState('');
    const [password, setPassword] = useState('');
-   // const [confirmPassword, setConfirmPassword] = useState('');
    const history = useHistory();
+   const [passwordShown, setPasswordShown] = useState(false);
 
    const handleSubmit = async (e) => {
       const form = e.currentTarget;
-      // const confirmField = form.elements[5];
       e.preventDefault();
-
-      // if (confirmPassword !== password) {
-      //    confirmField.setCustomValidity('Passwords must match');
-      // } else {
-      //    confirmField.setCustomValidity('');
-      // }
       if (form.checkValidity() === false) {
          e.stopPropagation();
       } else {
@@ -120,17 +113,26 @@ export default () => {
       setValidated(true);
    };
 
+   const toggleShowPassword = () => {
+      if (passwordShown) {
+         setPasswordShown(false);
+      } else {
+         setPasswordShown(true);
+      }
+   };
+
    return (
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
          <StyledHeader>Register an account</StyledHeader>
-         <StyledSubheader>All fields are required</StyledSubheader>
+         <Form.Row>
+            <StyledSubheader>All fields are required</StyledSubheader>
+         </Form.Row>
          <Form.Row>
             <Form.Group as={Col} md="4" controlId="validationCustom01">
                <StyledLabel>First name</StyledLabel>
                <StyledField
                   required
                   type="text"
-                  // placeholder="First name"
                   defaultValue={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
                />
@@ -140,12 +142,13 @@ export default () => {
                   Please fill in your first name.{' '}
                </StyledFeedback>
             </Form.Group>
+         </Form.Row>
+         <Form.Row>
             <Form.Group as={Col} md="4" controlId="validationCustom02">
                <StyledLabel>Last name</StyledLabel>
                <StyledField
                   required
                   type="text"
-                  // placeholder="Last name"
                   defaultValue={lastName}
                   onChange={(e) => setLastName(e.target.value)}
                />
@@ -162,7 +165,6 @@ export default () => {
                <StyledField
                   required
                   type="text"
-                  // placeholder="Email"
                   defaultValue={email}
                   onChange={(e) => setEmail(e.target.value)}
                />
@@ -179,7 +181,6 @@ export default () => {
                <StyledField
                   required
                   type="text"
-                  // placeholder="e.g. +1(999)999-9999"
                   defaultValue={phoneNumber}
                   onChange={(e) => setPhoneNumber(e.target.value)}
                />
@@ -195,13 +196,17 @@ export default () => {
                <StyledLabel>Password</StyledLabel>
                <StyledField
                   required
-                  type="text"
-                  // placeholder="Password"
+                  type={passwordShown ? 'text' : 'password'}
                   defaultValue={password}
                   onChange={(e) => setPassword(e.target.value)}
                />
-               <StyledHideButton>
-                  Hide <FontAwesomeIcon icon={faEye} />
+               <StyledHideButton onClick={toggleShowPassword}>
+                  {passwordShown ? 'Hide ' : 'Show '}
+                  {passwordShown ? (
+                     <FontAwesomeIcon icon={faEye} />
+                  ) : (
+                     <FontAwesomeIcon icon={faEyeSlash} />
+                  )}
                </StyledHideButton>
                <StyledFeedback>Looks good!</StyledFeedback>
                <StyledFeedback type="invalid">
@@ -213,23 +218,6 @@ export default () => {
                </StyledComment>
             </Form.Group>
          </Form.Row>
-         {/* <Form.Row>
-            <Form.Group as={Col} md="5" controlId="validationCustom05">
-               <StyledLabel>Confirm Password</StyledLabel>
-               <StyledField
-                  required
-                  type="text"
-                  placeholder="Password"
-                  defaultValue={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-               />
-               <StyledFeedback>Looks good!</StyledFeedback>
-               <StyledFeedback type="invalid">
-                  {' '}
-                  Passwords must match.{' '}
-               </StyledFeedback>
-            </Form.Group>
-         </Form.Row> */}
          <SubmitButton type="submit">Register</SubmitButton>
       </Form>
    );
