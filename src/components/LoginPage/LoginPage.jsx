@@ -10,7 +10,7 @@ import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 import Logo from './Logo.svg';
 
-const StyledAll = styled.div`
+const StyledContainer = styled.div`
    display: flex;
    flex-direction: column;
    justify-content: space-between;
@@ -32,7 +32,8 @@ const StyledText = styled.div`
    margin-bottom: 3px;
    font-size: 18px;
    font-weight: 700;
-   color: #024e6b;
+   font-family: 'Nunito Sans', sans-serif;
+   margin-bottom: 5px;
 `;
 const StyledInput = styled(Form.Control)`
    margin-left: 33px;
@@ -41,6 +42,7 @@ const StyledInput = styled(Form.Control)`
    padding: 2px 5px;
    width: calc(100vw - 65px);
    color: #024e6b;
+   border-radius: 5px;
 `;
 const StyledFeedback = styled(Form.Control.Feedback)`
    margin-left: 20px;
@@ -56,6 +58,7 @@ const StyledButton = styled(Button)`
    background-color: #024e6b;
    font-size: 18px;
    font-weight: 700;
+   border-radius: 5px;
 `;
 const StyledLinkButton = styled(Button)`
    padding: 10px;
@@ -133,7 +136,7 @@ export default () => {
             </div>
          )}
          <Form noValidate validated={validated} onSubmit={handleSubmit}>
-            <StyledAll>
+            <StyledContainer>
                <StyledTitle>
                   <StyledImage src={Logo} alt="Logo" />
                </StyledTitle>
@@ -178,17 +181,17 @@ export default () => {
                      <b>Show</b> <FontAwesomeIcon icon={faEyeSlash} />
                   </StyledHideButton>
                </StyledButtonAndEye>
-               <StyledLinkButton href="./ForgotPassword" variant="link">
+               <StyledLinkButton href="/forgotPassword" variant="link">
                   Forgot your password?
                </StyledLinkButton>
                <StyledButton type="submit" block>
                   Log In
                </StyledButton>
-               <StyledLinkButtonAcc variant="link">
+               <StyledLinkButtonAcc href="/newaccount" variant="link">
                   First Time? &nbsp;
                   <b>Create new account</b>
                </StyledLinkButtonAcc>
-            </StyledAll>
+            </StyledContainer>
          </Form>
       </div>
    );
