@@ -4,13 +4,16 @@ import styled from 'styled-components';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Form, Col, Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+
 import Logo from './Logo.svg';
 
 const StyledAll = styled.div`
    display: flex;
    flex-direction: column;
-   justify-content: center;
-   allign-items: center;
+   justify-content: space-between;
 `;
 
 const StyledTitle = styled.h2`
@@ -18,20 +21,25 @@ const StyledTitle = styled.h2`
    justify-content: center;
    color: #024e6b;
    font-size: 48px;
+   font-weight: 700;
 `;
 const StyledImage = styled.img`
    display: flex;
-   justify-content: space-evenly;
+   justify-content: center;
 `;
 const StyledText = styled.div`
-   margin-left: 20px;
-   font-size: 20px;
+   margin-left: 33px;
+   margin-bottom: 3px;
+   font-size: 18px;
+   font-weight: 700;
    color: #024e6b;
 `;
 const StyledInput = styled(Form.Control)`
-   display: flex;
-   flex-direction: center;
-   width: 100%;
+   margin-left: 33px;
+   margin-top: -7px;
+   margin-bottom: 3px;
+   padding: 2px 5px;
+   width: calc(100vw - 65px);
    color: #024e6b;
 `;
 const StyledFeedback = styled(Form.Control.Feedback)`
@@ -40,23 +48,47 @@ const StyledFeedback = styled(Form.Control.Feedback)`
    color: #024e6b;
 `;
 const StyledButton = styled(Button)`
-   display: flex;
-   justify-content: center;
+   margin-left: 33px;
+   margin-top: 50px;
+   margin-bottom: 3px;
+   padding: 2px 5px;
+   width: calc(100vw - 65px);
    background-color: #024e6b;
+   font-size: 18px;
+   font-weight: 700;
 `;
 const StyledLinkButton = styled(Button)`
+   padding: 10px;
    display: flex;
    margin-left: auto;
    color: #024e6b;
+   font-size: 16px;
+   font-weight: 700;
+   font-family: 'Nunito Sans', sans-serif;
+   margin-top: -30px;
+   margin-right: 20px;
 `;
 const StyledLinkButtonAcc = styled(Button)`
    display: flex;
-   margin-left: auto;
+   justify-content: center;
    color: #024e6b;
 `;
-
-// margin-left: 10px;
-// font-size: 10px;
+const StyledHideButton = styled(Button)`
+   background-color: transparent;
+   color: #024e6b;
+   border: none;
+   font-size: 16px;
+   font-family: 'Nunito Sans', sans-serif;
+   font-weight: 600;
+`;
+const StyledButtonAndEye = styled.div`
+   z-index: 1;
+   padding: 20px;
+   display: flex;
+   margin-left: auto;
+   margin-top: -75px;
+   margin-right: 10px;
+`;
 
 export default () => {
    const [validated, setValidated] = useState(false);
@@ -141,11 +173,16 @@ export default () => {
                      </StyledFeedback>
                   </Form.Group>
                </Form.Row>
+               <StyledButtonAndEye>
+                  <StyledHideButton>
+                     <b>Show</b> <FontAwesomeIcon icon={faEyeSlash} />
+                  </StyledHideButton>
+               </StyledButtonAndEye>
                <StyledLinkButton href="./ForgotPassword" variant="link">
                   Forgot your password?
                </StyledLinkButton>
                <StyledButton type="submit" block>
-                  Login
+                  Log In
                </StyledButton>
                <StyledLinkButtonAcc variant="link">
                   First Time? &nbsp;
