@@ -1,6 +1,7 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const StyledModal = styled(Modal.Dialog)`
    font-family: 'Nunito', sans-serif;
@@ -34,7 +35,7 @@ const StyledButton = styled(Button)`
    background: #512854;
 `;
 
-const styleDate = (date) => {
+/* const styleDate = (date) => {
    const year = date.split('-')[0];
    let month = date.split('-')[1];
    const day = date.split('-')[2];
@@ -55,28 +56,44 @@ const styleDate = (date) => {
    ];
    month = months[parseInt(month, 10)];
    return `${month} ${day}, ${year}`;
-};
+}; */
 
-export default (Announcement) => (
-   <StyledModal style={{ width: '18rem ' }}>
-      <Modal.Header className="text-center">
-         <StyledAnnouncements>Announcements</StyledAnnouncements>
-      </Modal.Header>
-      <Modal.Body>
-         <StyledTitle>{Announcement.Announcement.title}</StyledTitle>
-         <StyledSubtitle>
-            Posted By:{Announcement.Announcement.PostedBy}n
-         </StyledSubtitle>
-         <StyledSubtitle>
-            {styleDate(Announcement.Announcement.date)}
-         </StyledSubtitle>
-         <p />
-         <StyledBody className="text-center">
-            {Announcement.Announcement.text}
-         </StyledBody>
-      </Modal.Body>
-      <Modal.Footer>
-         <StyledButton>Close</StyledButton>
-      </Modal.Footer>
-   </StyledModal>
-);
+const AnnouncementModal = (props) => {
+   const { show, onHide, AnnouncementInfo } = props;
+   console.log(show);
+   return (
+      <StyledModal style={{ width: '18rem ' }} show={show} backdrop="static">
+         <Modal.Header className="text-center">
+            <StyledAnnouncements>Announcements</StyledAnnouncements>
+         </Modal.Header>
+         <Modal.Body>
+            <StyledTitle>{AnnouncementInfo.title}</StyledTitle>
+            <StyledSubtitle>
+               Posted By:{AnnouncementInfo.PostedBy}
+            </StyledSubtitle>
+            <p />
+            <StyledBody className="text-center">
+               {AnnouncementInfo.text}
+            </StyledBody>
+         </Modal.Body>
+         <Modal.Footer>
+            <StyledButton onClick={onHide}>Close</StyledButton>
+         </Modal.Footer>
+      </StyledModal>
+   );
+};
+AnnouncementModal.propTypes = {
+   show: PropTypes.string.isRequired,
+   onHide: PropTypes.func.isRequired,
+   AnnouncementInfo: PropTypes.objectOf(PropTypes.any),
+};
+AnnouncementModal.defaultProps = {
+   AnnouncementInfo: {
+      title: 'New Protocol',
+      text: 'This is the announcement.',
+      date: '2021-02-04',
+      link: '#',
+      postedby: 'Admin',
+   },
+};
+export default AnnouncementModal;
