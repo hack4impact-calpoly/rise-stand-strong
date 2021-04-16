@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Auth } from 'aws-amplify';
 import { Form, Button } from 'react-bootstrap';
 import styled from 'styled-components';
-import { ReactComponent as LockIcon } from './LockIcon.svg';
+import LockIcon from './LockIcon.svg';
 
 export default function ResetPassword() {
    const [code, setCode] = useState('');
@@ -209,7 +209,7 @@ export default function ResetPassword() {
                   <h1 className="title">Password changed</h1>
                </StyledTitleContainer>
                <StyledIconContainer>
-                  <LockIcon />
+                  <img src={LockIcon} alt="Lock Icon" />
                </StyledIconContainer>
                <p>Your password has been successfully changed!</p>
                <a href="/">
