@@ -26,15 +26,12 @@ const styleDate = (date) => {
 };
 
 export default (Announcement) => {
-   const [showModal, setShowModal] = useState('false');
-   const handleCloseModal = () => {
-      console.log('handle close');
-      setShowModal('false');
+   const [showModal, setShowModal] = useState(false);
+   const toggleModal = () => {
+      setShowModal(!showModal);
    };
-   const handleShowModal = () => {
-      console.log('handle show');
-      setShowModal('true');
-   };
+   console.log('Announcement');
+   console.log(Announcement);
    return (
       <>
          <Card style={{ width: '18rem ' }}>
@@ -46,12 +43,12 @@ export default (Announcement) => {
                   </Card.Subtitle>
                   <Card.Text>{Announcement.Announcement.text}</Card.Text>
                </div>
-               <Card.Link onClick={handleShowModal}>Read More</Card.Link>
+               <Card.Link onClick={toggleModal}>Read More</Card.Link>
             </Card.Body>
          </Card>
          <AnnouncementModal
             show={showModal}
-            onHide={handleCloseModal}
+            onHide={toggleModal}
             AnnouncementInfo={Announcement}
          />
       </>

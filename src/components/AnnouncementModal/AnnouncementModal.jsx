@@ -3,7 +3,7 @@ import { Modal, Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-const StyledModal = styled(Modal.Dialog)`
+const StyledModal = styled(Modal)`
    font-family: 'Nunito', sans-serif;
 `;
 
@@ -35,7 +35,7 @@ const StyledButton = styled(Button)`
    background: #512854;
 `;
 
-/* const styleDate = (date) => {
+const styleDate = (date) => {
    const year = date.split('-')[0];
    let month = date.split('-')[1];
    const day = date.split('-')[2];
@@ -56,24 +56,26 @@ const StyledButton = styled(Button)`
    ];
    month = months[parseInt(month, 10)];
    return `${month} ${day}, ${year}`;
-}; */
+};
 
 const AnnouncementModal = (props) => {
    const { show, onHide, AnnouncementInfo } = props;
-   console.log(show);
+   console.log('Announcemnt Info');
    return (
       <StyledModal style={{ width: '18rem ' }} show={show} backdrop="static">
          <Modal.Header className="text-center">
             <StyledAnnouncements>Announcements</StyledAnnouncements>
          </Modal.Header>
          <Modal.Body>
-            <StyledTitle>{AnnouncementInfo.title}</StyledTitle>
+            <StyledTitle>{AnnouncementInfo.Announcement.title}</StyledTitle>
             <StyledSubtitle>
-               Posted By:{AnnouncementInfo.PostedBy}
+               Posted By: {AnnouncementInfo.Announcement.postedby}
+               <br />
+               {styleDate(AnnouncementInfo.Announcement.date)}
             </StyledSubtitle>
             <p />
             <StyledBody className="text-center">
-               {AnnouncementInfo.text}
+               {AnnouncementInfo.Announcement.text}
             </StyledBody>
          </Modal.Body>
          <Modal.Footer>
@@ -83,7 +85,7 @@ const AnnouncementModal = (props) => {
    );
 };
 AnnouncementModal.propTypes = {
-   show: PropTypes.string.isRequired,
+   show: PropTypes.bool.isRequired,
    onHide: PropTypes.func.isRequired,
    AnnouncementInfo: PropTypes.objectOf(PropTypes.any),
 };

@@ -26,7 +26,7 @@ const StyledSubtitle = styled.h3`
 const Announcements = [
    {
       title: 'New Protocol',
-      text: 'This is the announcement.',
+      text: 'This is the announcement. Here is some more text.',
       date: '2021-02-04',
       link: '#',
       postedby: 'Admin',
