@@ -10,12 +10,16 @@ import './fonts.css';
 const SubmitButton = styled(Button)`
    background-color: #024e6b;
    color: white;
-   padding: 10px 20px;
-   margin-bottom: 50px;
+   padding: 8px 20px;
    border-radius: 6px;
    border: none;
    right: 32px;
    font-size: 20px;
+   display: flex;
+   justify-content: flex-end;
+   margin-left: auto;
+   margin-top: 50px;
+   margin-right: 35px;
 `;
 
 const StyledField = styled(Form.Control)`
@@ -69,13 +73,19 @@ const StyledHideButton = styled(Button)`
    background-color: transparent;
    color: #024e6b;
    border: none;
-   position: absolute;
-   flex-direction: row;
-   justify-content: flex-end;
+   z-index: 1;
    font-size: 16px;
-   top: 31px;
    font-family: 'Nunito Sans', sans-serif;
    font-weight: 600;
+`;
+
+const StyledButtonAndEye = styled.div`
+   padding: 20px;
+   display: flex;
+   justify-content: flex-end;
+   margin-left: auto;
+   margin-top: -125px;
+   margin-right: 20px;
 `;
 
 export default () => {
@@ -200,14 +210,6 @@ export default () => {
                   defaultValue={password}
                   onChange={(e) => setPassword(e.target.value)}
                />
-               <StyledHideButton onClick={toggleShowPassword}>
-                  {passwordShown ? 'Hide ' : 'Show '}
-                  {passwordShown ? (
-                     <FontAwesomeIcon icon={faEye} />
-                  ) : (
-                     <FontAwesomeIcon icon={faEyeSlash} />
-                  )}
-               </StyledHideButton>
                <StyledFeedback>Looks good!</StyledFeedback>
                <StyledFeedback type="invalid">
                   {' '}
@@ -218,6 +220,16 @@ export default () => {
                </StyledComment>
             </Form.Group>
          </Form.Row>
+         <StyledButtonAndEye>
+            <StyledHideButton onClick={toggleShowPassword}>
+               {passwordShown ? 'Hide ' : 'Show '}
+               {passwordShown ? (
+                  <FontAwesomeIcon icon={faEye} />
+               ) : (
+                  <FontAwesomeIcon icon={faEyeSlash} />
+               )}
+            </StyledHideButton>
+         </StyledButtonAndEye>
          <SubmitButton type="submit">Register</SubmitButton>
       </Form>
    );
