@@ -3,7 +3,7 @@ import { CardColumns, Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import { FaChevronRight } from 'react-icons/fa';
 import AnnouncementCard from '../AnnouncementCard/AnnouncementCard';
-import UpcomingShiftCard from '../UpcomingShiftCard/UpcomingShiftCard';
+import UpcomingShiftCard from '../Shifts/UpcomingShiftCard/UpcomingShiftCard';
 
 const Header1 = styled.h1`
    font-family: Arial;
