@@ -30,6 +30,7 @@
       "redux-devtools-extension": "^2.13.8",
       "redux-thunk": "^2.3.0",
       "styled-components": "^5.2.1",
+      "typeface-nunito-sans": "^1.1.13",
       "web-vitals": "^0.2.4"
    },
    "scripts": {
