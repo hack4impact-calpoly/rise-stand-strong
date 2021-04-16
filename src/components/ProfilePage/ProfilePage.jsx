@@ -2,7 +2,7 @@ import { React } from 'react';
 import styled from 'styled-components';
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import UpcomingShiftCard from '../UpcomingShiftCard/UpcomingShiftCard';
+import UpcomingShiftCard from '../Shifts/UpcomingShiftCard/UpcomingShiftCard';
 
 const StyledTitle = styled.h1`
    font-size: 48px;
