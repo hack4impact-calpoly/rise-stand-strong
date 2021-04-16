@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
 import styled from 'styled-components';
+import { FaChevronRight } from 'react-icons/fa';
 import './UpcomingShiftCard.css';
 
 const Header1 = styled.h1`
@@ -56,7 +57,7 @@ export default (cardData) => {
                      minute: 'numeric',
                      hour12: true,
                   })}
-                  -&nbsp;
+                  &nbsp;-&nbsp;
                   {dt.toLocaleString('en-US', {
                      hour: 'numeric',
                      minute: 'numeric',
@@ -65,7 +66,9 @@ export default (cardData) => {
                </Card.Text>
             </div>
             <Card.Link href="#">
-               <StyledText>Details &gt;</StyledText>
+               <StyledText>
+                  Details <FaChevronRight />
+               </StyledText>
             </Card.Link>
          </Card.Body>
       </Card>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
 import styled from 'styled-components';
+import { FaChevronRight } from 'react-icons/fa';
 
 const Header1 = styled.h1`
    font-family: Arial;
@@ -37,7 +38,16 @@ const AAContainer = styled.div`
 
 const HeaderContainer = styled.div`
    display: flex;
+   flex-wrap: wrap;
 `;
+const CardTitle = styled(Card.Title)`
+   flex-basis: 50%;
+`;
+const CardSubtitle = styled(Card.Subtitle)`
+   flex-basis: 50%;
+   text-align: right;
+`;
+
 export default (Announcement) => {
    const d = new Date(Announcement.Announcement.date);
    const months = [
@@ -59,21 +69,23 @@ export default (Announcement) => {
          <Card.Body>
             <div>
                <HeaderContainer>
-                  <Card.Title>
+                  <CardTitle>
                      <Header1>{Announcement.Announcement.title}</Header1>
-                  </Card.Title>
-                  <Card.Subtitle className="mb-2 text-muted">
+                  </CardTitle>
+                  <CardSubtitle className="mb-2 text-muted">
                      <Header2>
                         {months[d.getMonth()]} {d.getDate()}, {d.getFullYear()}
                      </Header2>
-                  </Card.Subtitle>
+                  </CardSubtitle>
                </HeaderContainer>
                <Card.Text>
                   <Header3>{Announcement.Announcement.text}</Header3>
                </Card.Text>
                <AAContainer>
                   <Card.Link href={Announcement.Announcement.link}>
-                     <Header4> Read More &gt;</Header4>
+                     <Header4>
+                        Read More <FaChevronRight />
+                     </Header4>
                   </Card.Link>
                </AAContainer>
             </div>

@@ -1,9 +1,9 @@
 import React from 'react';
 import { CardColumns, Button } from 'react-bootstrap';
 import styled from 'styled-components';
+import { FaChevronRight } from 'react-icons/fa';
 import AnnouncementCard from '../AnnouncementCard/AnnouncementCard';
 import UpcomingShiftCard from '../UpcomingShiftCard/UpcomingShiftCard';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Header1 = styled.h1`
    font-family: Arial;
@@ -100,7 +100,9 @@ export default (UserData) => (
          </StyledCardGroup>
          <ButtonContainer>
             <Button variant="link">
-               <Header4>See all your upcoming shifts &gt;</Header4>
+               <Header4>
+                  See all your upcoming shifts <FaChevronRight />
+               </Header4>
             </Button>
          </ButtonContainer>
       </ShiftDiv>
@@ -115,7 +117,9 @@ export default (UserData) => (
       </StyledCardGroup>
       <ButtonContainer>
          <Button variant="link">
-            <Header5>See all announcements &gt;</Header5>
+            <Header5>
+               See all announcements <FaChevronRight />
+            </Header5>
          </Button>
       </ButtonContainer>
    </div>
