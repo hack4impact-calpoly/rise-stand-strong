@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 const StyledModal = styled(Modal)`
+   left: 50%;
    font-family: 'Nunito', sans-serif;
 `;
 
