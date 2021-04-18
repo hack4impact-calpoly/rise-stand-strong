@@ -8,8 +8,8 @@
    },
    "dependencies": {
       "@fortawesome/fontawesome-svg-core": "^1.2.35",
-      "@fortawesome/free-solid-svg-icons": "^5.15.3",
       "@fortawesome/free-regular-svg-icons": "^5.15.3",
+      "@fortawesome/free-solid-svg-icons": "^5.15.3",
       "@fortawesome/react-fontawesome": "^0.1.14",
       "@fullcalendar/core": "^5.5.1",
       "@fullcalendar/daygrid": "^5.5.0",
@@ -20,7 +20,7 @@
       "aws-amplify": "^3.3.17",
       "axios": "^0.21.1",
       "bootstrap": "^4.6.0",
-      "date-fns": "^2.19.0",
+      "date-fns": "^2.21.1",
       "font-awesome": "^4.7.0",
       "prop-types": "^15.7.2",
       "react": "^17.0.1",
@@ -36,6 +36,7 @@
       "redux-devtools-extension": "^2.13.8",
       "redux-thunk": "^2.3.0",
       "styled-components": "^5.2.1",
+      "typeface-nunito-sans": "^1.1.13",
       "web-vitals": "^0.2.4"
    },
    "scripts": {
