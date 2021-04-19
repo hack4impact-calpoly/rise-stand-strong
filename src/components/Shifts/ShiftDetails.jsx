@@ -63,7 +63,6 @@ const PositionedLogo = styled(RiseLogo)`
 export default () => {
    const [selectedState, setSelectedState] = useState([false, false, false]);
    const history = useHistory();
-   console.log(selectedState);
 
    // TODO: Get the user phone number from their account
    const userPhone = '(123) 456-7891';
