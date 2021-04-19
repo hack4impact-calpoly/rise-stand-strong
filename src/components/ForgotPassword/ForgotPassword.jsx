@@ -20,23 +20,46 @@ export default function ResetPassword() {
    const [isSendingPassword, setIsSendingPassword] = useState(false);
    const [passwordShown, setPasswordShown] = useState(false);
 
+   const StyledFormContainer = styled.div`
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      @media only screen and (min-width: 768px) {
+         justify-content: center;
+         align-items: center;
+      }
+   `;
    const StyledTitleContainer = styled.div`
       font-family: nunito, sans-serif;
       font-style: normal;
       text-align: center;
    `;
    const StyledTitle = styled(Form.Label)`
+      font-family: nunito, sans-serif;
+      font-style: normal;
       font-size: 36px;
       font-weight: 500;
       text-align: center;
       margin-bottom: 20px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+      @media only screen and (min-width: 767px) {
+         margin-left: auto;
+         margin-right: auto;
+      }
    `;
    const StyledCaption = styled(Form.Label)`
       font-family: nunito, sans-serif;
-      margin-left: 42px;
       margin-bottom: 35px;
       font-size: 16px;
+      margin-left: 32px;
+      margin-right: 32px;
       font-weight: 400;
+      @media only screen and (min-width: 767px) {
+         margin-left: 0;
+      }
    `;
    const StyledSubtitle = styled(Form.Label)`
       font-family: nunito, sans-serif;
@@ -46,6 +69,9 @@ export default function ResetPassword() {
       size: 18px;
       line-height: 25px;
       margin-top: 20px;
+      @media only screen and (min-width: 769px) {
+         margin-left: 0;
+      }
    `;
    const StyledInput = styled(Form.Control)`
       margin-left: 33px;
@@ -53,12 +79,20 @@ export default function ResetPassword() {
       margin-bottom: 3px;
       padding: 2px 5px;
       width: calc(100vw - 65px);
+      @media only screen and (min-width: 769px) {
+         width: calc(40vw - 65px);
+         margin-left: auto;
+         margin-right: auto;
+      }
    `;
    const StyledLabel = styled(Form.Label)`
       font-family: nunito, sans-serif;
       margin-left: 33px;
       margin-bottom: 25px;
       font-size: 13px;
+      @media only screen and (min-width: 769px) {
+         width: 100%;
+      }
    `;
    const SubmitButton = styled(Button)`
       font-family: nunito, sans-serif;
@@ -73,9 +107,9 @@ export default function ResetPassword() {
       margin-left: auto;
       margin-top: 50px;
       margin-right: 35px;
-      position: absolute;
-      bottom: 30px;
-      left: calc(100vw - 150px);
+      @media only screen and (min-width: 769px) {
+         margin-right: 0;
+      }
    `;
    const SubmitButtonContainer = styled.div`
       text-align: center;
@@ -92,15 +126,16 @@ export default function ResetPassword() {
       justify-content: flex-end;
       margin-left: auto;
       margin-top: 50px;
-      margin-right: 10%;
-      margin-left: 10%;
-      width: 80%;
+      margin-right: auto;
       position: absolute;
-      bottom: 30px;
+      width: 80%;
       right: 0;
       left: 0;
       text-align: center;
       display: inline-block;
+      @media only screen and (min-width: 769px) {
+         width: 457px;
+      }
    `;
    const StyledIconContainer = styled.div`
       text-align: center;
@@ -131,9 +166,6 @@ export default function ResetPassword() {
       margin-left: auto;
       margin-top: -75px;
       margin-right: 20px;
-   `;
-   const StyledForm = styled(Form)`
-      height: 85vh;
    `;
 
    async function handleSendCodeClick(event) {
@@ -173,64 +205,66 @@ export default function ResetPassword() {
 
    function renderRequestCodeForm() {
       return (
-         <StyledForm onSubmit={handleSendCodeClick}>
-            <StyledTitleContainer>
-               <StyledTitle>Forgot password</StyledTitle>
+         <StyledFormContainer>
+            <Form onSubmit={handleSendCodeClick}>
+               <StyledTitleContainer>
+                  <StyledTitle>Forgot password</StyledTitle>
+                  <Form.Row>
+                     <StyledCaption>
+                        Please enter the email that your RISE volunteer account
+                        is associated with.
+                     </StyledCaption>
+                  </Form.Row>
+               </StyledTitleContainer>
                <Form.Row>
-                  <StyledCaption>
-                     Please enter the email that your RISE volunteer account is
-                     associated with.
-                  </StyledCaption>
+                  <Form.Group bsSize="large" controlId="email">
+                     <StyledSubtitle>Email</StyledSubtitle>
+                     <StyledInput
+                        className="email-box"
+                        autoFocus
+                        type="email"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                     />
+                  </Form.Group>
                </Form.Row>
-            </StyledTitleContainer>
-            <Form.Row>
-               <Form.Group bsSize="large" controlId="email">
-                  <StyledSubtitle>Email</StyledSubtitle>
-                  <StyledInput
-                     className="email-box"
-                     autoFocus
-                     type="email"
-                     value={username}
-                     onChange={(e) => setUsername(e.target.value)}
-                  />
-               </Form.Group>
-            </Form.Row>
-            <SubmitButton type="submit" isLoading={isSendingCode}>
-               Submit
-            </SubmitButton>
-         </StyledForm>
+               <SubmitButton type="submit" isLoading={isSendingCode}>
+                  Submit
+               </SubmitButton>
+            </Form>
+         </StyledFormContainer>
       );
    }
 
    function renderConfirmationForm() {
       return (
-         <Form onSubmit={handleConfirmClick}>
-            <StyledTitleContainer>
+         <StyledFormContainer>
+            <Form onSubmit={handleConfirmClick}>
                <StyledTitle>Forgot password</StyledTitle>
-            </StyledTitleContainer>
-            <Form.Row>
-               <StyledCaption>
-                  An email has been sent to ({username}) to verify you are
-                  trying to change your password.
-               </StyledCaption>
-            </Form.Row>
-            <Form.Row>
-               <Form.Group bsSize="large" controlId="code">
-                  <StyledSubtitle>
-                     Please enter the verification code:
-                  </StyledSubtitle>
-                  <StyledInput
-                     autoFocus
-                     type="tel"
-                     value={code}
-                     onChange={(e) => setCode(e.target.value)}
-                  />
-               </Form.Group>
-            </Form.Row>
-            <SubmitButton type="submit" isLoading={isConfirming}>
-               Verify
-            </SubmitButton>
-         </Form>
+               <Form.Row>
+                  <StyledCaption>
+                     An email has been sent to ({username}) to verify you are
+                     trying to change your password.
+                  </StyledCaption>
+               </Form.Row>
+               <Form.Row>
+                  <Form.Group bsSize="large" controlId="code">
+                     <StyledSubtitle>
+                        Please enter the verification code:
+                     </StyledSubtitle>
+                     <StyledInput
+                        autoFocus
+                        type="tel"
+                        value={code}
+                        onChange={(e) => setCode(e.target.value)}
+                     />
+                  </Form.Group>
+               </Form.Row>
+               <SubmitButton type="submit" isLoading={isConfirming}>
+                  Verify
+               </SubmitButton>
+            </Form>
+         </StyledFormContainer>
       );
    }
 
@@ -243,8 +277,8 @@ export default function ResetPassword() {
          }
       };
       return (
-         <Form onSubmit={handlePasswordSetClick}>
-            <StyledTitleContainer>
+         <StyledFormContainer>
+            <Form onSubmit={handlePasswordSetClick}>
                <StyledTitle>Change password</StyledTitle>
                <Form.Row>
                   <StyledCaption>
@@ -252,81 +286,83 @@ export default function ResetPassword() {
                      password.
                   </StyledCaption>
                </Form.Row>
-            </StyledTitleContainer>
 
-            <Form.Row>
-               <Form.Group as={Col} md="5" controlId="password">
-                  <StyledSubtitle>New Password</StyledSubtitle>
-                  <StyledInput
-                     type={passwordShown ? 'text' : 'password'}
-                     required
-                     value={password}
-                     onChange={(e) => setPassword(e.target.value)}
-                  />
-                  <StyledLabel>
-                     *Password must be 6 characters or longer
-                  </StyledLabel>
-               </Form.Group>
-            </Form.Row>
-            <StyledButtonAndEye>
-               <StyledHideButton onClick={toggleShowPassword}>
-                  {passwordShown ? 'Hide ' : 'Show '}
-                  {passwordShown ? (
-                     <FontAwesomeIcon icon={faEye} />
-                  ) : (
-                     <FontAwesomeIcon icon={faEyeSlash} />
-                  )}
-               </StyledHideButton>
-            </StyledButtonAndEye>
-
-            <Form.Row>
-               <Form.Group as={Col} md="5" controlId="confirmPassword">
-                  <StyledSubtitle>Confirm new password</StyledSubtitle>
-                  <StyledInput
-                     type={passwordShown ? 'text' : 'password'}
-                     required
-                     value={confirmPassword}
-                     onChange={(e) => setConfirmPassword(e.target.value)}
-                  />
-               </Form.Group>
-            </Form.Row>
-            <StyledButtonAndEye2>
-               <StyledHideButton onClick={toggleShowPassword}>
-                  {passwordShown ? 'Hide ' : 'Show '}
-                  {passwordShown ? (
-                     <FontAwesomeIcon icon={faEye} />
-                  ) : (
-                     <FontAwesomeIcon icon={faEyeSlash} />
-                  )}
-               </StyledHideButton>
-            </StyledButtonAndEye2>
-            <SubmitButton type="submit" isLoading={isSendingPassword}>
-               Submit
-            </SubmitButton>
-         </Form>
+               <Form.Row>
+                  <Form.Group as={Col} md="5" controlId="password">
+                     <StyledSubtitle>New Password</StyledSubtitle>
+                     <StyledInput
+                        type={passwordShown ? 'text' : 'password'}
+                        required
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                     />
+                     <StyledLabel>
+                        *Password must be 6 characters or longer
+                     </StyledLabel>
+                  </Form.Group>
+               </Form.Row>
+               <StyledButtonAndEye>
+                  <StyledHideButton onClick={toggleShowPassword}>
+                     {passwordShown ? 'Hide ' : 'Show '}
+                     {passwordShown ? (
+                        <FontAwesomeIcon icon={faEye} />
+                     ) : (
+                        <FontAwesomeIcon icon={faEyeSlash} />
+                     )}
+                  </StyledHideButton>
+               </StyledButtonAndEye>
+               <Form.Row>
+                  <Form.Group as={Col} md="5" controlId="confirmPassword">
+                     <StyledSubtitle>Confirm new password</StyledSubtitle>
+                     <StyledInput
+                        type={passwordShown ? 'text' : 'password'}
+                        required
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                     />
+                  </Form.Group>
+               </Form.Row>
+               <StyledButtonAndEye2>
+                  <StyledHideButton onClick={toggleShowPassword}>
+                     {passwordShown ? 'Hide ' : 'Show '}
+                     {passwordShown ? (
+                        <FontAwesomeIcon icon={faEye} />
+                     ) : (
+                        <FontAwesomeIcon icon={faEyeSlash} />
+                     )}
+                  </StyledHideButton>
+               </StyledButtonAndEye2>
+               <SubmitButton type="submit" isLoading={isSendingPassword}>
+                  Submit
+               </SubmitButton>
+            </Form>
+         </StyledFormContainer>
       );
    }
 
    function renderSuccessMessage() {
       return (
-         <Form>
-            <StyledTitleContainer>
+         <StyledFormContainer>
+            <Form>
                <StyledTitle>Password changed</StyledTitle>
-            </StyledTitleContainer>
-            <StyledIconContainer>
-               <img src={LockIcon} alt="Lock Icon" />
-            </StyledIconContainer>
-            <StyledCaption>
-               Your password has been successfully changed!
-            </StyledCaption>
-            <a href="/">
-               <SubmitButtonContainer>
-                  <SubmitButtonFullWidth type="submit" isLoading={isConfirming}>
-                     Return to login
-                  </SubmitButtonFullWidth>
-               </SubmitButtonContainer>
-            </a>
-         </Form>
+               <StyledIconContainer>
+                  <img src={LockIcon} alt="Lock Icon" />
+               </StyledIconContainer>
+               <StyledCaption>
+                  Your password has been successfully changed!
+               </StyledCaption>
+               <a href="/">
+                  <SubmitButtonContainer>
+                     <SubmitButtonFullWidth
+                        type="submit"
+                        isLoading={isConfirming}
+                     >
+                        Return to login
+                     </SubmitButtonFullWidth>
+                  </SubmitButtonContainer>
+               </a>
+            </Form>
+         </StyledFormContainer>
       );
    }
 
