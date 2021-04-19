@@ -35,22 +35,14 @@ const StyledTitle = styled.h2`
    }
 `;
 const StyledImage = styled.img`
-   display: flex;
-   justify-content: center;
+   display: block;
+   margin-left: auto;
+   margin-right: auto;
    @media only screen and (min-width: 768px) {
-      max-width: 200%;
+      max-width: 200px;
       height: auto;
    }
 `;
-/*
-@media only screen and (min-width: 768px) {
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-      width: 347px;
-      height: 220px;
-   }
-*/
 const StyledText = styled.div`
    margin-left: 33px;
    font-size: 18px;
