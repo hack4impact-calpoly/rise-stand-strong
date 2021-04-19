@@ -14,26 +14,52 @@ const StyledContainer = styled.div`
    display: flex;
    flex-direction: column;
    justify-content: space-between;
+   @media only screen and (min-width: 768px) {
+      justify-content: center;
+      align-items: center;
+   }
 `;
 
 const StyledTitle = styled.h2`
-   display: flex;
-   justify-content: center;
+   display: block;
+   margin-left: auto;
+   margin-right: auto;
    color: #024e6b;
    font-size: 48px;
    font-weight: 700;
+   text-align: center;
+   @media only screen and (min-width: 767px) {
+      margin-left: auto;
+      margin-right: auto;
+      padding: 40px;
+   }
 `;
 const StyledImage = styled.img`
    display: flex;
    justify-content: center;
+   @media only screen and (min-width: 768px) {
+      max-width: 200%;
+      height: auto;
+   }
 `;
+/*
+@media only screen and (min-width: 768px) {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 347px;
+      height: 220px;
+   }
+*/
 const StyledText = styled.div`
    margin-left: 33px;
-   margin-bottom: 3px;
    font-size: 18px;
    font-weight: 700;
    font-family: 'Nunito Sans', sans-serif;
    margin-bottom: 5px;
+   @media only screen and (min-width: 769px) {
+      margin-left: 0px;
+   }
 `;
 const StyledInput = styled(Form.Control)`
    margin-left: 33px;
@@ -43,6 +69,13 @@ const StyledInput = styled(Form.Control)`
    width: calc(100vw - 65px);
    color: #024e6b;
    border-radius: 5px;
+   @media only screen and (min-width: 769px) {
+      width: calc(40vw - 65px);
+      height: 53px;
+      border-radius: 5px;
+      margin-left: auto;
+      margin-right: auto;
+   }
 `;
 const StyledFeedback = styled(Form.Control.Feedback)`
    margin-left: 20px;
@@ -50,7 +83,6 @@ const StyledFeedback = styled(Form.Control.Feedback)`
    color: #024e6b;
 `;
 const StyledButton = styled(Button)`
-   margin-left: 33px;
    margin-top: 50px;
    margin-bottom: 3px;
    padding: 2px 5px;
@@ -59,6 +91,13 @@ const StyledButton = styled(Button)`
    font-size: 18px;
    font-weight: 700;
    border-radius: 5px;
+   margin-left: auto;
+   margin-right: auto;
+   @media only screen and (min-width: 769px) {
+      width: calc(40vw - 65px);
+      height: 53px;
+      border-radius: 5px;
+   }
 `;
 const StyledLinkButton = styled(Button)`
    padding: 10px;
@@ -70,6 +109,12 @@ const StyledLinkButton = styled(Button)`
    font-family: 'Nunito Sans', sans-serif;
    margin-top: -30px;
    margin-right: 20px;
+   @media only screen and (min-width: 769px) {
+      margin-left: calc(29vw - 65px);
+      margin-top: -20px;
+      height: 53px;
+      border-radius: 5px;
+   }
 `;
 const StyledLinkButtonAcc = styled(Button)`
    display: flex;
@@ -87,10 +132,13 @@ const StyledHideButton = styled(Button)`
 const StyledButtonAndEye = styled.div`
    z-index: 1;
    padding: 20px;
-   display: flex;
    margin-left: auto;
    margin-top: -75px;
    margin-right: 10px;
+   @media only screen and (min-width: 769px) {
+      margin-left: calc(33vw - 65px);
+      margin-top: -85px;
+   }
 `;
 
 export default () => {
@@ -137,11 +185,8 @@ export default () => {
          )}
          <Form noValidate validated={validated} onSubmit={handleSubmit}>
             <StyledContainer>
-               <StyledTitle>
-                  <StyledImage src={Logo} alt="Logo" />
-               </StyledTitle>
-               <StyledTitle>Volunteer</StyledTitle>
-               <StyledTitle>System</StyledTitle>
+               <StyledImage src={Logo} alt="Logo" />
+               <StyledTitle>Volunteer &nbsp;System</StyledTitle>
                <Form.Row>
                   <Form.Group as={Col} md="4" controlId="validationCustom01">
                      <StyledText>Email</StyledText>
