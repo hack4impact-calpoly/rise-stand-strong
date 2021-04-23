@@ -7,6 +7,9 @@ import UpcomingShiftCard from '../Shifts/UpcomingShiftCard/UpcomingShiftCard';
 const StyledTitle = styled.h1`
    font-size: 48px;
    text-align: center;
+   font-family: nunito, sans-serif;
+   font-weight: 700px;
+   line-height: 65px;
 `;
 
 const UserInfoContainer = styled.section`
@@ -18,28 +21,51 @@ const UserInfoContainer = styled.section`
 
 const RecentShiftsContainer = styled.section`
    margin: 50px 0px 15px 30px;
+   margin-right: 30px;
 `;
 
 const StyledSubtitle2 = styled.h6`
-   margin-top: 20px;
-   font-size: 14px;
+   margin-top: 10px;
+   font-size: 16px;
    text-align: center;
+   font-family: nunito, sans-serif;
+   line-height: 22px;
 `;
 
 const StyledSubtitle = styled.h3`
    font-size: 36px;
    margin: 20px 0px 20px 0px;
+   font-family: nunito, sans-serif;
+   font-weight: 600px;
+   line-height: 49px;
 `;
 
 const StyledButton = styled(Button)`
-   color: #6666ff;
+   color: #ae4c33;
    margin-top: 15px;
+   font-family: nunito, sans-serif;
+   font-size: 18px;
+   line-height: 25px;
+   font-weight: bold;
+`;
+
+const StyledButton2 = styled(Button)`
+   color: #024e6b;
+   margin-top: 15px;
+   font-family: nunito, sans-serif;
+   font-size: 18px;
+   line-height: 25px;
+   font-weight: bold;
 `;
 
 const StyledLink = styled(Link)`
-   color: #6666ff;
+   color: #ae4c33;
    margin-top: 15px;
    text-align: center;
+   font-family: nunito, sans-serif;
+   font-size: 18px;
+   line-height: 25px;
+   font-weight: bold;
 `;
 
 const UserInfo = {
@@ -71,9 +97,11 @@ export default (UserData) => (
       <RecentShiftsContainer>
          <StyledSubtitle>Recent Shifts</StyledSubtitle>
          <UpcomingShiftCard cardData={CardData} />
-         <StyledButton variant="link">
-            See all your past shifts &gt;{' '}
-         </StyledButton>
+         <UserInfoContainer>
+            <StyledButton2 variant="link">
+               See all your past shifts &gt;{' '}
+            </StyledButton2>
+         </UserInfoContainer>
       </RecentShiftsContainer>
    </div>
 );
