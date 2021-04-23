@@ -83,6 +83,7 @@ export default function ResetPassword() {
          width: calc(40vw - 65px);
          margin-left: auto;
          margin-right: auto;
+         min-width: 500px;
       }
    `;
    const StyledLabel = styled(Form.Label)`
@@ -90,8 +91,10 @@ export default function ResetPassword() {
       margin-left: 33px;
       margin-bottom: 25px;
       font-size: 13px;
+      width: 500px;
       @media only screen and (min-width: 769px) {
-         width: 100%;
+         width: width: calc(40vw - 65px);;
+         margin-left: 0;
       }
    `;
    const SubmitButton = styled(Button)`
