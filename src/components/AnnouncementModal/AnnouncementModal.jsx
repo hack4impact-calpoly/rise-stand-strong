@@ -63,7 +63,7 @@ const AnnouncementModal = (props) => {
    const { show, onHide, AnnouncementInfo } = props;
    console.log('Announcemnt Info');
    return (
-      <StyledModal style={{ width: '18rem ' }} show={show} backdrop="static">
+      <StyledModal centered show={show} backdrop="static">
          <Modal.Header className="text-center">
             <StyledAnnouncements>Announcements</StyledAnnouncements>
          </Modal.Header>
