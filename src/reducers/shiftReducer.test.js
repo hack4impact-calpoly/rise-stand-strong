@@ -23,7 +23,7 @@ describe('shiftReducer tests', () => {
    describe('INITIALIZE_SHIFT tests', () => {
       it('Should initialize shifts according to action', () => {
          // Arrange
-         const testShits = [
+         const testShifts = [
             {
                startTimestamp: 1614386408390,
                endTimestamp: 1614386408690,
@@ -39,11 +39,11 @@ describe('shiftReducer tests', () => {
          // Act
          const computedState = shiftReducer(undefined, {
             type: INITIALIZE_SHIFT,
-            shifts: testShits,
+            shifts: testShifts,
          });
 
          // Assert
-         expect(computedState.shifts).toEqual(testShits);
+         expect(computedState.shifts).toEqual(testShifts);
       });
    });
 
