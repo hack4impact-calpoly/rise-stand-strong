@@ -52,6 +52,18 @@ const StyledInput = styled(Form.Control)`
    width: calc(100vw - 65px);
 `;
 
+const SubmitButtonContainer = styled.div`
+   padding: 8px 20px;
+   border-radius: 6px;
+   border: none;
+   line-height: 27px;
+   font-size: 20px;
+   display: flex;
+   justify-content: flex-end;
+   margin-left: auto;
+   margin-top: 50px;
+   margin-right: 35px;
+`;
 const SubmitButton = styled(Button)`
    font-family: nunito, sans-serif;
    background-color: #ae4c33;
@@ -63,8 +75,6 @@ const SubmitButton = styled(Button)`
    display: flex;
    justify-content: flex-end;
    margin-left: auto;
-   margin-top: 50px;
-   margin-right: 35px;
 `;
 
 const CancelButton = styled(Button)`
@@ -83,34 +93,6 @@ const CancelButton = styled(Button)`
    margin-left: 35px;
 `;
 
-const SubmitButtonContainer = styled.div`
-   text-align: center;
-`;
-
-const SubmitButtonFullWidth = styled(Button)`
-   font-family: nunito, sans-serif;
-   background-color: #ae4c33;
-   padding: 8px 20px;
-   border-radius: 6px;
-   border: none;
-   line-height: 27px;
-   font-size: 20px;
-   display: flex;
-   justify-content: flex-end;
-   margin-left: auto;
-   margin-top: 50px;
-   margin-right: auto;
-   position: absolute;
-   width: 80%;
-   right: 0;
-   left: 0;
-   text-align: center;
-   display: inline-block;
-   @media only screen and (min-width: 769px) {
-      width: 457px;
-   }
-`;
-
 const StyledHideButton = styled(Button)`
    background-color: transparent;
    color: #024e6b;
@@ -121,12 +103,13 @@ const StyledHideButton = styled(Button)`
    font-weight: 600;
 `;
 const StyledButtonAndEye = styled.div`
+   z-index: 1;
    padding: 20px;
    display: flex;
+   margin-top: -75px;
    justify-content: flex-end;
    margin-left: auto;
-   margin-top: -125px;
-   margin-right: 20px;
+   margin-right: 10px;
 `;
 
 const StyledFeedback = styled(Form.Control.Feedback)`
@@ -143,7 +126,7 @@ const StyledComment = styled(Form.Label)`
    font-weight: 400;
 `;
 
-export default function ChangePassword() {
+export default () => {
    const [validated, setValidated] = useState(false);
    const [oldPassword, setOldPassword] = useState('');
    const [newPassword, setNewPassword] = useState('');
@@ -170,6 +153,8 @@ export default function ChangePassword() {
       console.log('handle cancel');
    };
 
+   const validatePassword = () => newPassword.length > 6;
+
    const toggleShowOldPassword = () => {
       if (oldPasswordShown) {
          setOldPasswordShown(false);
@@ -184,104 +169,87 @@ export default function ChangePassword() {
          setNewPasswordShown(true);
       }
    };
-
-   function renderChangePasswordForm() {
-      return (
-         <StyledFormContainer>
-            <Form
-               noValidate
-               validated={validated}
-               onSubmit={handleSubmit}
-               onCancel={handleCancel}
-            >
-               <StyledTitleContainer>
-                  <StyledTitle>Change Password</StyledTitle>
-               </StyledTitleContainer>
-               <Form.Row>
-                  <Form.Group as={Col} md="4" controlId="validationCustom01">
-                     <StyledSubtitle>Old Password</StyledSubtitle>
-                     <StyledInput
-                        required
-                        autoFocus
-                        type={oldPasswordShown ? 'text' : 'password'}
-                        defaultValue={oldPassword}
-                        onChange={(e) => setOldPassword(e.target.value)}
-                     />
-                     <StyledFeedback>Looks good!</StyledFeedback>
-                     <StyledFeedback type="invalid">
-                        {' '}
-                        Please fill in your password.{' '}
-                     </StyledFeedback>
-                  </Form.Group>
-               </Form.Row>
-               <Form.Row>
-                  <Form.Group as={Col} md="4" controlId="validationCustom02">
-                     <StyledSubtitle>New Password</StyledSubtitle>
-                     <StyledInput
-                        required
-                        autoFocus
-                        type={newPasswordShown ? 'text' : 'password'}
-                        defaultValue={newPassword}
-                        onChange={(e) => setNewPassword(e.target.value)}
-                     />
-                     <StyledFeedback>Looks good!</StyledFeedback>
-                     <StyledFeedback type="invalid">
-                        {' '}
-                        Please fill in your password.{' '}
-                     </StyledFeedback>
-                     <StyledComment>
-                        * Password must be 6 characters or longer
-                     </StyledComment>
-                  </Form.Group>
-               </Form.Row>
-               <StyledButtonAndEye>
-                  <StyledHideButton onClick={toggleShowOldPassword}>
-                     {oldPasswordShown ? 'Hide ' : 'Show '}
-                     {oldPasswordShown ? (
-                        <FontAwesomeIcon icon={faEye} />
-                     ) : (
-                        <FontAwesomeIcon icon={faEyeSlash} />
-                     )}
-                  </StyledHideButton>
-               </StyledButtonAndEye>
-               <StyledButtonAndEye>
-                  <StyledHideButton onClick={toggleShowNewPassword}>
-                     {newPasswordShown ? 'Hide ' : 'Show '}
-                     {newPasswordShown ? (
-                        <FontAwesomeIcon icon={faEye} />
-                     ) : (
-                        <FontAwesomeIcon icon={faEyeSlash} />
-                     )}
-                  </StyledHideButton>
-               </StyledButtonAndEye>
-               <Form.Row>
-                  <a href="/editprofile">
-                     <CancelButton type="reset">Cancel</CancelButton>
-                  </a>
-                  <SubmitButton type="submit">Save</SubmitButton>
-               </Form.Row>
-            </Form>
-         </StyledFormContainer>
-      );
-   }
-
-   function renderSuccessMessage() {
-      return (
-         <div className="success">
-            <p>Password Saved!</p>
-            <a href="/">
+   return (
+      <StyledFormContainer>
+         <Form
+            noValidate
+            validated={validated}
+            onSubmit={handleSubmit}
+            onCancel={handleCancel}
+         >
+            <StyledTitleContainer>
+               <StyledTitle>Change Password</StyledTitle>
+            </StyledTitleContainer>
+            <Form.Row>
+               <Form.Group as={Col} md="4" controlId="validationCustom01">
+                  <StyledSubtitle>Old Password</StyledSubtitle>
+                  <StyledInput
+                     required
+                     autoFocus
+                     type={oldPasswordShown ? 'text' : 'password'}
+                     defaultValue={oldPassword}
+                     onChange={(e) => setOldPassword(e.target.value)}
+                  />
+                  <StyledFeedback>Looks good!</StyledFeedback>
+                  <StyledFeedback type="invalid">
+                     {' '}
+                     Please fill in your password.{' '}
+                  </StyledFeedback>
+               </Form.Group>
+            </Form.Row>
+            <Form.Row>
+               <Form.Group as={Col} md="4" controlId="validationCustom02">
+                  <StyledSubtitle>New Password</StyledSubtitle>
+                  <StyledInput
+                     required
+                     autoFocus
+                     type={newPasswordShown ? 'text' : 'password'}
+                     defaultValue={newPassword}
+                     onChange={(e) => setNewPassword(e.target.value)}
+                  />
+                  <StyledFeedback>Looks good!</StyledFeedback>
+                  <StyledFeedback type="invalid">
+                     {' '}
+                     Please fill in your password.{' '}
+                  </StyledFeedback>
+                  <StyledComment>
+                     * Password must be 6 characters or longer
+                  </StyledComment>
+               </Form.Group>
+            </Form.Row>
+            <StyledButtonAndEye>
+               <StyledHideButton onClick={toggleShowOldPassword}>
+                  {oldPasswordShown ? 'Hide ' : 'Show '}
+                  {oldPasswordShown ? (
+                     <FontAwesomeIcon icon={faEye} />
+                  ) : (
+                     <FontAwesomeIcon icon={faEyeSlash} />
+                  )}
+               </StyledHideButton>
+            </StyledButtonAndEye>
+            <StyledButtonAndEye>
+               <StyledHideButton onClick={toggleShowNewPassword}>
+                  {newPasswordShown ? 'Hide ' : 'Show '}
+                  {newPasswordShown ? (
+                     <FontAwesomeIcon icon={faEye} />
+                  ) : (
+                     <FontAwesomeIcon icon={faEyeSlash} />
+                  )}
+               </StyledHideButton>
+            </StyledButtonAndEye>
+            <Form.Row>
+               <a href="/editprofile">
+                  <CancelButton type="reset">Cancel</CancelButton>
+               </a>
                <SubmitButtonContainer>
-                  <SubmitButtonFullWidth type="submit">
-                     Back to Profile
-                  </SubmitButtonFullWidth>
+                  <a href="/successfulchange">
+                     <SubmitButton type="submit" disabled={!validatePassword()}>
+                        Save
+                     </SubmitButton>
+                  </a>
                </SubmitButtonContainer>
-            </a>
-         </div>
-      );
-   }
-
-   const then = renderSuccessMessage();
-   const iff = !validated ? renderChangePasswordForm() : then;
-
-   return <div>{iff}</div>;
-}
+            </Form.Row>
+         </Form>
+      </StyledFormContainer>
+   );
+};
