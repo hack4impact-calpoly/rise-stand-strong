@@ -120,6 +120,8 @@ const StyledHideButton = styled(Button)`
    font-size: 16px;
    font-family: 'Nunito Sans', sans-serif;
    font-weight: 600;
+   @media only screen and (min-width: 769px) {
+   }
 `;
 const StyledButtonAndEye = styled.div`
    z-index: 1;
@@ -128,10 +130,19 @@ const StyledButtonAndEye = styled.div`
    margin-top: -75px;
    margin-right: 10px;
    @media only screen and (min-width: 769px) {
-      margin-left: calc(33vw - 65px);
-      margin-top: -85px;
+      display: absolute;
+      margin-left: auto;
+      margin-right: -85px;
+      margin-left: calc(29vw - 65px);
+      margin-top: -80px;
+      border-radius: 5px;
    }
 `;
+
+// const StyledHolder = styled.div`
+//    display: flex;
+//    justify-content: right;
+// `;
 
 export default () => {
    const [validated, setValidated] = useState(false);
