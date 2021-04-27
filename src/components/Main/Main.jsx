@@ -10,6 +10,7 @@ import Dashboard from '../Dashboard/Dashboard';
 import Calendar from '../Calendar/Calendar';
 import ShiftDetails from '../Shifts/ShiftDetails';
 import RequireAuth from './RequireAuth';
+import Directory from '../Directory/Directory';
 
 export default () => (
    <div className="App">
@@ -26,6 +27,7 @@ export default () => (
          <Route path="/dashboard" component={RequireAuth(Dashboard)} />
          <Route path="/profilepage" component={RequireAuth(ProfilePage)} />
          <Route path="/calendar" component={RequireAuth(Calendar)} />
+         <Route path="/directory" render={() => <Directory />} />
       </Switch>
    </div>
 );

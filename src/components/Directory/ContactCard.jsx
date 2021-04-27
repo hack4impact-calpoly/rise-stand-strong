@@ -16,22 +16,31 @@ const Header3 = styled.h3`
    line-height: 22px;
 `;
 
-const HeaderContainer = styled.div`
+const IconContainer = styled.div`
    display: flex;
-   flex-wrap: wrap;
+   flex-direction: column;
+   color: rgba(81, 40, 84, 1);
+   justify-content: center;
+`;
+
+const HeaderContainer = styled.div`
+   display: grid;
+   grid-template-columns: 250px auto;
 `;
 const CardTitle = styled(Card.Title)`
-   flex-basis: 75%;
+   align-self: start;
 `;
-const CardSubtitle = styled(Card.Subtitle)`
-   flex-basis: 25%;
-   text-align: right;
+
+const ButtonContainer = styled(Card.Subtitle)`
+   display: flex;
+   margin-top: 5px;
+   align-self: end;
 `;
 
 export default (ContactInfo) => {
-   const PhoneNumber = ContactInfo.cardData.phone;
-   const Name = ContactInfo.cardData.name;
-   const Email = ContactInfo.cardData.email;
+   const PhoneNumber = ContactInfo.ContactInfo.phone;
+   const Name = ContactInfo.ContactInfo.name;
+   const Email = ContactInfo.ContactInfo.email;
 
    const numberFormatter = (pn) => {
       const nn = '('.concat(
@@ -52,17 +61,25 @@ export default (ContactInfo) => {
                   <div>
                      <CardTitle>
                         <Header1>{Name}</Header1>
-                        <CardSubtitle>
+                        <Card.Subtitle>
                            <Header3>{numberFormatter(PhoneNumber)}</Header3>
-                        </CardSubtitle>
+                        </Card.Subtitle>
                      </CardTitle>
                   </div>
-                  <Card.Link href={'mailto:'.concat(Email)}>
-                     <FaPhoneAlt />
-                  </Card.Link>
-                  <Card.Link href={'tel:'.concat(PhoneNumber)}>
-                     <FaEnvelope />
-                  </Card.Link>
+                  <ButtonContainer>
+                     <Card.Link href={'tel:'.concat(PhoneNumber)}>
+                        <IconContainer>
+                           <FaPhoneAlt size={25} />
+                           <h6>Call</h6>
+                        </IconContainer>
+                     </Card.Link>
+                     <Card.Link href={'mailto:'.concat(Email)}>
+                        <IconContainer>
+                           <FaEnvelope size={25} />
+                           <h6>Email</h6>
+                        </IconContainer>
+                     </Card.Link>
+                  </ButtonContainer>
                </HeaderContainer>
             </div>
          </Card.Body>
