@@ -111,6 +111,11 @@ const StyledHeader = styled(Form.Label)`
       margin-left: auto;
       margin-right: auto;
    }
+   &:hover,
+   &:focus {
+      background-color: transparent;
+      color: #024e6b;
+   }
 `;
 
 const StyledHideButton = styled(Button)`
@@ -124,17 +129,12 @@ const StyledHideButton = styled(Button)`
 `;
 
 const StyledButtonAndEye = styled.div`
-   padding: 20px;
-   display: flex;
-   justify-content: flex-end;
-   margin-left: auto;
-   margin-top: -60px;
-   margin-right: 20px;
-   @media only screen and (min-width: 768px) {
-      margin-top: -6px;
+   position: absolute;
+   top: 30px;
+   @media only screen and (max-width: 768px) {
       position: absolute;
-      margin-left: auto;
-      margin-right: auto;
+      top: 30px;
+      right: 40px;
    }
 `;
 
