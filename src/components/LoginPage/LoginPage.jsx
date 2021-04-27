@@ -120,22 +120,20 @@ const StyledHideButton = styled(Button)`
    font-size: 16px;
    font-family: 'Nunito Sans', sans-serif;
    font-weight: 600;
-   @media only screen and (min-width: 769px) {
+   z-index: 1;
+   &:hover,
+   &:focus {
+      background-color: transparent;
+      color: #024e6b;
    }
 `;
 const StyledButtonAndEye = styled.div`
-   z-index: 1;
-   padding: 20px;
-   margin-left: auto;
-   margin-top: -75px;
-   margin-right: 10px;
-   @media only screen and (min-width: 769px) {
-      display: absolute;
-      margin-left: auto;
-      margin-right: -85px;
-      margin-left: calc(29vw - 65px);
-      margin-top: -80px;
-      border-radius: 5px;
+   position: absolute;
+   top: 30px;
+   @media only screen and (max-width: 768px) {
+      position: absolute;
+      top: 30px;
+      right: 40px;
    }
 `;
 
@@ -217,6 +215,11 @@ export default () => {
                         defaultValue={password}
                         onChange={handlePassword}
                      />
+                     <StyledButtonAndEye>
+                        <StyledHideButton>
+                           <b>Show</b> <FontAwesomeIcon icon={faEyeSlash} />
+                        </StyledHideButton>
+                     </StyledButtonAndEye>
                      <StyledFeedback>looks good!</StyledFeedback>
                      <StyledFeedback type="invalid">
                         {' '}
@@ -224,11 +227,6 @@ export default () => {
                      </StyledFeedback>
                   </Form.Group>
                </Form.Row>
-               <StyledButtonAndEye>
-                  <StyledHideButton>
-                     <b>Show</b> <FontAwesomeIcon icon={faEyeSlash} />
-                  </StyledHideButton>
-               </StyledButtonAndEye>
                <StyledLinkButton href="/forgotPassword" variant="link">
                   Forgot your password?
                </StyledLinkButton>
