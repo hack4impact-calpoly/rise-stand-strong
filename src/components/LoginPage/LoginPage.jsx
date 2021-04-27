@@ -6,7 +6,7 @@ import { Form, Col, Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
 
 import Logo from './Logo.svg';
 
@@ -19,7 +19,6 @@ const StyledContainer = styled.div`
       align-items: center;
    }
 `;
-
 const StyledTitle = styled.h2`
    display: block;
    margin-left: auto;
@@ -53,20 +52,19 @@ const StyledText = styled.div`
       margin-left: 0px;
    }
 `;
-const StyledInput = styled(Form.Control)`
+const StyledField = styled(Form.Control)`
    margin-left: 33px;
    margin-top: -7px;
    margin-bottom: 3px;
+   font-size: 18px;
    padding: 2px 5px;
    width: calc(100vw - 65px);
-   color: #024e6b;
-   border-radius: 5px;
-   @media only screen and (min-width: 769px) {
-      width: calc(40vw - 65px);
-      height: 53px;
-      border-radius: 5px;
+   @media only screen and (min-width: 768px) {
       margin-left: auto;
       margin-right: auto;
+      width: calc(40vw - 65px);
+      min-width: 400px;
+      max-width: 500px;
    }
 `;
 const StyledFeedback = styled(Form.Control.Feedback)`
@@ -137,16 +135,25 @@ const StyledButtonAndEye = styled.div`
    }
 `;
 
-// const StyledHolder = styled.div`
-//    display: flex;
-//    justify-content: right;
-// `;
+const StyledSmallContainer = styled.div`
+   @media only screen and (min-width: 768px) {
+      width: calc(40vw - 65px);
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      width: calc(40vw - 65px);
+      min-width: 400px;
+      max-width: 500px;
+   }
+`;
 
 export default () => {
    const [validated, setValidated] = useState(false);
    const [username, setUsername] = useState('');
    const [password, setPassword] = useState('');
    const [validLogin, setValidLogin] = useState(true);
+   const [passwordShown, setPasswordShown] = useState(false);
+
    const history = useHistory();
 
    async function signIn() {
@@ -170,11 +177,12 @@ export default () => {
       }
       setValidated(true);
    };
-   const handleUsername = (event) => {
-      setUsername(event.target.value);
-   };
-   const handlePassword = (event) => {
-      setPassword(event.target.value);
+   const toggleShowPassword = () => {
+      if (passwordShown) {
+         setPasswordShown(false);
+      } else {
+         setPasswordShown(true);
+      }
    };
 
    return (
@@ -191,12 +199,12 @@ export default () => {
                <Form.Row>
                   <Form.Group as={Col} md="4" controlId="validationCustom01">
                      <StyledText>Email</StyledText>
-                     <StyledInput
+                     <StyledField
                         required
                         type="username"
                         placeholder=""
                         defaultValue={username}
-                        onChange={handleUsername}
+                        onChange={(e) => setUsername(e.target.value)}
                      />
                      <StyledFeedback>looks good!</StyledFeedback>
                      <StyledFeedback type="invalid">
@@ -208,18 +216,24 @@ export default () => {
                <Form.Row>
                   <Form.Group as={Col} md="4" controlId="validationCustom02">
                      <StyledText>Password</StyledText>
-                     <StyledInput
-                        type="password"
-                        required
-                        placeholder=""
-                        defaultValue={password}
-                        onChange={handlePassword}
-                     />
-                     <StyledButtonAndEye>
-                        <StyledHideButton>
-                           <b>Show</b> <FontAwesomeIcon icon={faEyeSlash} />
-                        </StyledHideButton>
-                     </StyledButtonAndEye>
+                     <StyledSmallContainer>
+                        <StyledField
+                           required
+                           type={passwordShown ? 'text' : 'password'}
+                           defaultValue={password}
+                           onChange={(e) => setPassword(e.target.value)}
+                        />
+                        <StyledButtonAndEye>
+                           <StyledHideButton onClick={toggleShowPassword}>
+                              {passwordShown ? 'Hide ' : 'Show '}
+                              {passwordShown ? (
+                                 <FontAwesomeIcon icon={faEye} />
+                              ) : (
+                                 <FontAwesomeIcon icon={faEyeSlash} />
+                              )}
+                           </StyledHideButton>
+                        </StyledButtonAndEye>
+                     </StyledSmallContainer>
                      <StyledFeedback>looks good!</StyledFeedback>
                      <StyledFeedback type="invalid">
                         {' '}
