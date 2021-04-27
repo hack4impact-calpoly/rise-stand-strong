@@ -6,7 +6,7 @@ import { Form, Col, Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
 
 import Logo from './Logo.svg';
 
@@ -14,35 +14,58 @@ const StyledContainer = styled.div`
    display: flex;
    flex-direction: column;
    justify-content: space-between;
+   @media only screen and (min-width: 768px) {
+      justify-content: center;
+      align-items: center;
+   }
 `;
-
 const StyledTitle = styled.h2`
-   display: flex;
-   justify-content: center;
+   display: block;
+   margin-left: auto;
+   margin-right: auto;
    color: #024e6b;
    font-size: 48px;
    font-weight: 700;
+   text-align: center;
+   @media only screen and (min-width: 767px) {
+      margin-left: auto;
+      margin-right: auto;
+      padding: 40px;
+   }
 `;
 const StyledImage = styled.img`
-   display: flex;
-   justify-content: center;
+   display: block;
+   margin-left: auto;
+   margin-right: auto;
+   @media only screen and (min-width: 768px) {
+      max-width: 200px;
+      height: auto;
+   }
 `;
 const StyledText = styled.div`
    margin-left: 33px;
-   margin-bottom: 3px;
    font-size: 18px;
    font-weight: 700;
    font-family: 'Nunito Sans', sans-serif;
    margin-bottom: 5px;
+   @media only screen and (min-width: 769px) {
+      margin-left: 0px;
+   }
 `;
-const StyledInput = styled(Form.Control)`
+const StyledField = styled(Form.Control)`
    margin-left: 33px;
    margin-top: -7px;
    margin-bottom: 3px;
+   font-size: 18px;
    padding: 2px 5px;
    width: calc(100vw - 65px);
-   color: #024e6b;
-   border-radius: 5px;
+   @media only screen and (min-width: 768px) {
+      margin-left: auto;
+      margin-right: auto;
+      width: calc(40vw - 65px);
+      min-width: 400px;
+      max-width: 500px;
+   }
 `;
 const StyledFeedback = styled(Form.Control.Feedback)`
    margin-left: 20px;
@@ -50,7 +73,6 @@ const StyledFeedback = styled(Form.Control.Feedback)`
    color: #024e6b;
 `;
 const StyledButton = styled(Button)`
-   margin-left: 33px;
    margin-top: 50px;
    margin-bottom: 3px;
    padding: 2px 5px;
@@ -59,6 +81,13 @@ const StyledButton = styled(Button)`
    font-size: 18px;
    font-weight: 700;
    border-radius: 5px;
+   margin-left: auto;
+   margin-right: auto;
+   @media only screen and (min-width: 769px) {
+      width: calc(40vw - 65px);
+      height: 53px;
+      border-radius: 5px;
+   }
 `;
 const StyledLinkButton = styled(Button)`
    padding: 10px;
@@ -70,6 +99,12 @@ const StyledLinkButton = styled(Button)`
    font-family: 'Nunito Sans', sans-serif;
    margin-top: -30px;
    margin-right: 20px;
+   @media only screen and (min-width: 769px) {
+      margin-left: calc(29vw - 65px);
+      margin-top: -20px;
+      height: 53px;
+      border-radius: 5px;
+   }
 `;
 const StyledLinkButtonAcc = styled(Button)`
    display: flex;
@@ -83,14 +118,33 @@ const StyledHideButton = styled(Button)`
    font-size: 16px;
    font-family: 'Nunito Sans', sans-serif;
    font-weight: 600;
+   z-index: 1;
+   &:hover,
+   &:focus {
+      background-color: transparent;
+      color: #024e6b;
+   }
 `;
 const StyledButtonAndEye = styled.div`
-   z-index: 1;
-   padding: 20px;
-   display: flex;
-   margin-left: auto;
-   margin-top: -75px;
-   margin-right: 10px;
+   position: absolute;
+   top: 30px;
+   @media only screen and (max-width: 768px) {
+      position: absolute;
+      top: 30px;
+      right: 40px;
+   }
+`;
+
+const StyledSmallContainer = styled.div`
+   @media only screen and (min-width: 768px) {
+      width: calc(40vw - 65px);
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      width: calc(40vw - 65px);
+      min-width: 400px;
+      max-width: 500px;
+   }
 `;
 
 export default () => {
@@ -98,6 +152,8 @@ export default () => {
    const [username, setUsername] = useState('');
    const [password, setPassword] = useState('');
    const [validLogin, setValidLogin] = useState(true);
+   const [passwordShown, setPasswordShown] = useState(false);
+
    const history = useHistory();
 
    async function signIn() {
@@ -121,11 +177,12 @@ export default () => {
       }
       setValidated(true);
    };
-   const handleUsername = (event) => {
-      setUsername(event.target.value);
-   };
-   const handlePassword = (event) => {
-      setPassword(event.target.value);
+   const toggleShowPassword = () => {
+      if (passwordShown) {
+         setPasswordShown(false);
+      } else {
+         setPasswordShown(true);
+      }
    };
 
    return (
@@ -137,20 +194,17 @@ export default () => {
          )}
          <Form noValidate validated={validated} onSubmit={handleSubmit}>
             <StyledContainer>
-               <StyledTitle>
-                  <StyledImage src={Logo} alt="Logo" />
-               </StyledTitle>
-               <StyledTitle>Volunteer</StyledTitle>
-               <StyledTitle>System</StyledTitle>
+               <StyledImage src={Logo} alt="Logo" />
+               <StyledTitle>Volunteer &nbsp;System</StyledTitle>
                <Form.Row>
                   <Form.Group as={Col} md="4" controlId="validationCustom01">
                      <StyledText>Email</StyledText>
-                     <StyledInput
+                     <StyledField
                         required
                         type="username"
                         placeholder=""
                         defaultValue={username}
-                        onChange={handleUsername}
+                        onChange={(e) => setUsername(e.target.value)}
                      />
                      <StyledFeedback>looks good!</StyledFeedback>
                      <StyledFeedback type="invalid">
@@ -162,13 +216,24 @@ export default () => {
                <Form.Row>
                   <Form.Group as={Col} md="4" controlId="validationCustom02">
                      <StyledText>Password</StyledText>
-                     <StyledInput
-                        type="password"
-                        required
-                        placeholder=""
-                        defaultValue={password}
-                        onChange={handlePassword}
-                     />
+                     <StyledSmallContainer>
+                        <StyledField
+                           required
+                           type={passwordShown ? 'text' : 'password'}
+                           defaultValue={password}
+                           onChange={(e) => setPassword(e.target.value)}
+                        />
+                        <StyledButtonAndEye>
+                           <StyledHideButton onClick={toggleShowPassword}>
+                              {passwordShown ? 'Hide ' : 'Show '}
+                              {passwordShown ? (
+                                 <FontAwesomeIcon icon={faEye} />
+                              ) : (
+                                 <FontAwesomeIcon icon={faEyeSlash} />
+                              )}
+                           </StyledHideButton>
+                        </StyledButtonAndEye>
+                     </StyledSmallContainer>
                      <StyledFeedback>looks good!</StyledFeedback>
                      <StyledFeedback type="invalid">
                         {' '}
@@ -176,11 +241,6 @@ export default () => {
                      </StyledFeedback>
                   </Form.Group>
                </Form.Row>
-               <StyledButtonAndEye>
-                  <StyledHideButton>
-                     <b>Show</b> <FontAwesomeIcon icon={faEyeSlash} />
-                  </StyledHideButton>
-               </StyledButtonAndEye>
                <StyledLinkButton href="/forgotPassword" variant="link">
                   Forgot your password?
                </StyledLinkButton>
