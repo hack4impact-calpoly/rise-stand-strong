@@ -111,11 +111,6 @@ const StyledHeader = styled(Form.Label)`
       margin-left: auto;
       margin-right: auto;
    }
-   &:hover,
-   &:focus {
-      background-color: transparent;
-      color: #024e6b;
-   }
 `;
 
 const StyledHideButton = styled(Button)`
@@ -126,6 +121,11 @@ const StyledHideButton = styled(Button)`
    font-size: 16px;
    font-family: 'Nunito Sans', sans-serif;
    font-weight: 600;
+   &:hover,
+   &:focus {
+      background-color: transparent;
+      color: #024e6b;
+   }
 `;
 
 const StyledButtonAndEye = styled.div`
@@ -295,16 +295,6 @@ export default () => {
                   </StyledComment>
                </Form.Group>
             </Form.Row>
-            {/* <StyledButtonAndEye>
-               <StyledHideButton onClick={toggleShowPassword}>
-                  {passwordShown ? 'Hide ' : 'Show '}
-                  {passwordShown ? (
-                     <FontAwesomeIcon icon={faEye} />
-                  ) : (
-                     <FontAwesomeIcon icon={faEyeSlash} />
-                  )}
-               </StyledHideButton>
-            </StyledButtonAndEye> */}
             <SubmitButton type="submit">Register</SubmitButton>
          </StyledContainer>
       </Form>
