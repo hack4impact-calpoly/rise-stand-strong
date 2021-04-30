@@ -24,14 +24,23 @@ const announcementReducer = (state = initialState, action) => {
       }
       case SELECT_ANNOUNCEMENTS: {
          const { targetAnnouncementId } = action; // argv[] coming in
-
-         const updatedAnnouncement = state.announcements.filter(
-            (announcement) =>
-               announcement.announcementId === targetAnnouncementId
-         );
+         let retAnnouncement = false;
+         state.announcements.forEach((announcement) => {
+            if (announcement.announcementId === targetAnnouncementId) {
+               retAnnouncement = announcement;
+            }
+         });
+         if (!retAnnouncement) {
+            // if announcement not found
+            return {
+               ...state,
+               retAnnouncement,
+            };
+         }
          return {
+            // if announcement found
             ...state,
-            announcements: updatedAnnouncement,
+            announcements: [retAnnouncement],
          };
       }
       case DELETE_ANNOUNCEMENTS: {

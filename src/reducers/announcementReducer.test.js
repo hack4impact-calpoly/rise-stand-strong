@@ -124,15 +124,15 @@ describe('announcementReducer tests', () => {
             ],
          };
 
-         const targetAnnouncementId = 1;
+         const targetAnnouncementId = 5;
 
          const expectedAnnouncements = [
             {
-               announcementId: 1,
-               title: 'Hello',
-               author: 'Sam S',
-               test: 'This is my great announcment',
-               createdAt: '2021-5-28T13:40:20',
+               announcementId: 5,
+               title: 'QWERTYUIO',
+               author: 'Not Sam S',
+               test: 'This is a horrible announcment',
+               createdAt: '2021-5-28T13:40:25',
                link: 'https://rise/updates/new',
             },
          ];
@@ -147,44 +147,40 @@ describe('announcementReducer tests', () => {
          expect(computedState.announcements).toEqual(expectedAnnouncements);
       });
 
-      // it('Should do nothing if targetAnnouncementId does not exist', () => {
-      //    // Arrange
-      //    const prevState = {
-      //       announcements: [
-      //         {
-      //             announcementId: 1,
-      //             title: 'Hello',
-      //             author: 'Sam S',
-      //             test: 'This is my great announcment',
-      //             createdAt: '2021-5-28T13:40:20',
-      //             link: 'https://rise/updates/new',
+      it('Should do nothing if targetAnnouncementId does not exist', () => {
+         // Arrange
+         const prevState = {
+            announcements: [
+               {
+                  announcementId: 1,
+                  title: 'Hello',
+                  author: 'Sam S',
+                  test: 'This is my great announcment',
+                  createdAt: '2021-5-28T13:40:20',
+                  link: 'https://rise/updates/new',
+               },
+               {
+                  announcementId: 5,
+                  title: 'QWERTYUIO',
+                  author: 'Not Sam S',
+                  test: 'This is a horrible announcment',
+                  createdAt: '2021-5-28T13:40:25',
+                  link: 'https://rise/updates/new',
+               },
+            ],
+         };
 
-      //          },
-      //          {
-      //            announcementId: 5,
-      //            title: 'QWERTYUIO',
-      //            author: 'Not Sam S',
-      //            test: 'This is a horrible announcment',
-      //            createdAt: '2021-5-28T13:40:25',
-      //            link: 'https://rise/updates/new',
-      //          },
-      //       ],
-      //    };
+         const targetAnnouncementId = 139;
 
-      //    const targetAnnouncementId = 139;
+         // Act
+         const computedState = announcementReducer(prevState, {
+            type: SELECT_ANNOUNCEMENTS,
+            targetAnnouncementId,
+         });
 
-      //    // Act
-      //    const computedState = announcementReducer(prevState, {
-      //       type: UPDATE_ANNOUNCEMENTS,
-      //       targetAnnouncementId,
-      //       newAnnouncement: {
-      //          announcementId: 1294580,
-      //       },
-      //    });
-
-      //    // Assert
-      //    expect(computedState.announcements).toEqual(prevState.announcements);
-      // });
+         // Assert
+         expect(computedState.announcements).toEqual(prevState.announcements);
+      });
    });
 
    describe('DELETE_ANNOUNCEMENT tests', () => {
