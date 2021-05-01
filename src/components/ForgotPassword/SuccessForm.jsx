@@ -9,8 +9,11 @@ const StyledFormContainer = styled.div`
    flex-direction: column;
    justify-content: space-between;
    @media only screen and (min-width: 768px) {
-      justify-content: center;
-      align-items: center;
+      margin-right: auto;
+      margin-left: auto;
+      width: calc(40vw - 65px)
+      min-width: 400px;
+      max-width: 500px;
    }
 `;
 const StyledTitle = styled(Form.Label)`
@@ -33,11 +36,14 @@ const StyledCaption = styled(Form.Label)`
    font-family: nunito, sans-serif;
    margin-bottom: 35px;
    font-size: 16px;
+   font-weight: 400;
+   display: block;
+   text-align: center;
    margin-left: 32px;
    margin-right: 32px;
-   font-weight: 400;
-   @media only screen and (min-width: 767px) {
-      margin-left: 0;
+   @media only screen and (min-width: 769px) {
+      margin-left: 32px;
+      margin-right: 32px;
    }
 `;
 const SubmitButtonContainer = styled.div`
@@ -66,6 +72,7 @@ const SubmitButtonFullWidth = styled(Button)`
       width: 457px;
    }
 `;
+
 const StyledIconContainer = styled.div`
    text-align: center;
    padding-top: 75px;
