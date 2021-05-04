@@ -65,7 +65,13 @@ const ContactInfo = [
 
 export default () => {
    const [keyword, setKeyword] = useState('');
-   const myData = ContactInfo.sort((a, b) => a.name.localeCompare(b.name));
+   const myData = ContactInfo.sort((a, b) =>
+      a.name.localeCompare(b.name)
+   ).filter(
+      (contact) =>
+         !keyword || contact.name.toLowerCase().includes(keyword.toLowerCase())
+   );
+
    const onChangeKeyword = (e) => {
       setKeyword(e.target.value);
    };
