@@ -25,18 +25,9 @@ const ButtonContainer = styled.div`
 `;
 
 export default () => {
-   const [title, setTitle] = useState('Announcement Title');
-   const [hyperlink, setHyperlink] = useState('Hyperlink (optional)');
-   const [content, setContent] = useState('Write the announcement here...');
-   const onChangeTitle = (e) => {
-      setTitle(e.target.value);
-   };
-   const onChangeHyperlink = (e) => {
-      setHyperlink(e.target.value);
-   };
-   const onChangeContent = (e) => {
-      setContent(e.target.value);
-   };
+   const [title, setTitle] = useState('');
+   const [hyperlink, setHyperlink] = useState('');
+   const [content, setContent] = useState('');
 
    return (
       <div>
@@ -51,8 +42,11 @@ export default () => {
                      required
                      type="text"
                      defaultValue={title}
-                     onChange={onChangeTitle}
+                     onChange={(e) => {
+                        setTitle(e.target.value);
+                     }}
                      size="lg"
+                     placeholder="Announcement Title"
                   />
                </InputContainer>
                <InputContainer>
@@ -62,8 +56,11 @@ export default () => {
                      required
                      type="text"
                      defaultValue={hyperlink}
-                     onChange={onChangeHyperlink}
+                     onChange={(e) => {
+                        setHyperlink(e.target.value);
+                     }}
                      size="lg"
+                     placeholder="Hyperlink (optional)"
                   />
                   <Header2>Body</Header2>
                   <StyledField
@@ -71,9 +68,12 @@ export default () => {
                      required
                      type="text-area"
                      defaultValue={content}
-                     onChange={onChangeContent}
+                     onChange={(e) => {
+                        setContent(e.target.value);
+                     }}
                      as="textarea"
                      rows={7}
+                     placeholder="Write the announcement here..."
                   />
                </InputContainer>
             </Form.Row>
