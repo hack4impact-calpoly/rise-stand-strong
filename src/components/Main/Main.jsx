@@ -11,6 +11,7 @@ import Calendar from '../Calendar/Calendar';
 import ShiftDetails from '../Shifts/ShiftDetails';
 import RequireAuth from './RequireAuth';
 import Directory from '../Directory/Directory';
+import NewAnnouncement from '../AnnouncementCard/NewAnnouncement';
 
 export default () => (
    <div className="App">
@@ -24,10 +25,12 @@ export default () => (
          <Route path="/forgotpassword" render={() => <ForgotPassword />} />
          <Route path="/newaccount" render={() => <NewAccountPage />} />
          <Route path="/editprofile" component={RequireAuth(EditProfilePage)} />
-         <Route path="/dashboard" component={RequireAuth(Dashboard)} />
+         {/* <Route path="/dashboard" component={RequireAuth(Dashboard)} /> */}
+         <Route path="/dashboard" render={() => <Dashboard />} />
          <Route path="/profilepage" component={RequireAuth(ProfilePage)} />
          <Route path="/calendar" component={RequireAuth(Calendar)} />
          <Route path="/directory" render={() => <Directory />} />
+         <Route path="/newannouncement" render={() => <NewAnnouncement />} />
       </Switch>
    </div>
 );
