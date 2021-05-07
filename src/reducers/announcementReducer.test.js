@@ -3,7 +3,7 @@ import announcementReducer from './announcementReducer';
 import {
    INITIALIZE_ANNOUNCEMENTS,
    ADD_ANNOUNCEMENTS,
-   SELECT_ANNOUNCEMENTS,
+   UPDATE_ANNOUNCEMENTS,
    DELETE_ANNOUNCEMENTS,
 } from '../constants';
 
@@ -100,8 +100,8 @@ describe('announcementReducer tests', () => {
       });
    });
 
-   describe('SELECT_ANNOUNCEMENT tests', () => {
-      it('Should select the announcement specified by announcementId', () => {
+   describe('UPDATE_ANNOUNCEMENT tests', () => {
+      it('Should update the announcement specified by announcementId', () => {
          // Arrange
          const prevState = {
             announcements: [
@@ -125,13 +125,28 @@ describe('announcementReducer tests', () => {
          };
 
          const targetAnnouncementId = 5;
+         const newAnnouncementBody = {
+            title: 'WOAH THERE',
+            author: 'Bobby Nobody',
+            test: 'This is an updated announcment',
+            createdAt: '2021-5-28T13:40:25',
+            link: 'https://rise/updates/new',
+         };
 
          const expectedAnnouncements = [
             {
+               announcementId: 1,
+               title: 'Hello',
+               author: 'Sam S',
+               test: 'This is my great announcment',
+               createdAt: '2021-5-28T13:40:20',
+               link: 'https://rise/updates/new',
+            },
+            {
                announcementId: 5,
-               title: 'QWERTYUIO',
-               author: 'Not Sam S',
-               test: 'This is a horrible announcment',
+               title: 'WOAH THERE',
+               author: 'Bobby Nobody',
+               test: 'This is an updated announcment',
                createdAt: '2021-5-28T13:40:25',
                link: 'https://rise/updates/new',
             },
@@ -139,8 +154,9 @@ describe('announcementReducer tests', () => {
 
          // Act
          const computedState = announcementReducer(prevState, {
-            type: SELECT_ANNOUNCEMENTS,
+            type: UPDATE_ANNOUNCEMENTS,
             targetAnnouncementId,
+            newAnnouncementBody,
          });
 
          // Assert
@@ -171,11 +187,19 @@ describe('announcementReducer tests', () => {
          };
 
          const targetAnnouncementId = 139;
+         const newAnnouncementBody = {
+            title: 'WOAH THERE',
+            author: 'Bobby Nobody',
+            test: 'This is an updated announcment',
+            createdAt: '2021-5-28T13:40:25',
+            link: 'https://rise/updates/new',
+         };
 
          // Act
          const computedState = announcementReducer(prevState, {
-            type: SELECT_ANNOUNCEMENTS,
+            type: UPDATE_ANNOUNCEMENTS,
             targetAnnouncementId,
+            newAnnouncementBody,
          });
 
          // Assert

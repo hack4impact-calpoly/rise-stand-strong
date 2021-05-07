@@ -1,7 +1,7 @@
 import {
    INITIALIZE_ANNOUNCEMENTS,
    ADD_ANNOUNCEMENTS,
-   SELECT_ANNOUNCEMENTS,
+   UPDATE_ANNOUNCEMENTS,
    DELETE_ANNOUNCEMENTS,
 } from '../constants';
 
@@ -22,25 +22,17 @@ const announcementReducer = (state = initialState, action) => {
             announcements: [...state.announcements, action.newAnnouncement],
          };
       }
-      case SELECT_ANNOUNCEMENTS: {
-         const { targetAnnouncementId } = action; // argv[] coming in
-         let retAnnouncement = false;
-         state.announcements.forEach((announcement) => {
-            if (announcement.announcementId === targetAnnouncementId) {
-               retAnnouncement = announcement;
-            }
-         });
-         if (!retAnnouncement) {
-            // if announcement not found
-            return {
-               ...state,
-               retAnnouncement,
-            };
-         }
+      case UPDATE_ANNOUNCEMENTS: {
+         const { targetAnnouncementId, newAnnouncementBody } = action;
+
+         const updatedAnnouncement = state.announcements.map((announcement) =>
+            announcement.announcementId === targetAnnouncementId
+               ? { ...announcement, ...newAnnouncementBody }
+               : announcement
+         );
          return {
-            // if announcement found
             ...state,
-            announcements: [retAnnouncement],
+            announcements: updatedAnnouncement,
          };
       }
       case DELETE_ANNOUNCEMENTS: {
