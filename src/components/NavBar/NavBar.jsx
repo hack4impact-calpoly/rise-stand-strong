@@ -3,7 +3,7 @@ import './NavBar.css';
 import styled from 'styled-components';
 import { Auth } from 'aws-amplify';
 import { useHistory } from 'react-router-dom';
-import { ReactComponent as RiseLogo } from './RISE_Logo.svg';
+import { ReactComponent as RiseLogo } from '../../RISE_Logo.svg';
 
 const PositionedLogo = styled(RiseLogo)`
    width: 60px;
