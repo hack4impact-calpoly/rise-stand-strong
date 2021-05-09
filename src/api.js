@@ -32,6 +32,10 @@ export async function getShift(startTimestamp) {
    return await axios.get(`${BASE_URL}/${SHIFTS}/${startTimestamp}`);
 }
 
+export async function putShift(startTimestamp, shiftBody) {
+   return await axios.put(`${BASE_URL}/${SHIFTS}/${startTimestamp}`, { ...shiftBody });
+}
+
 export async function getShiftsRange(startTimestamp, endTimestamp) {
    return await axios.get(
       `${BASE_URL}/${SHIFTS}?startTimestamp=${startTimestamp}&endTimestamp=${endTimestamp}`
