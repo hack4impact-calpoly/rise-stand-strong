@@ -66,7 +66,7 @@
             "Timeout": "25",
             "Code": {
                "S3Bucket": "amplify-rise-stand-strong-prod-55902-deployment",
-               "S3Key": "amplify-builds/risestandstrongcb34053a-56784e55475135343752-build.zip"
+               "S3Key": "amplify-builds/risestandstrongcb34053a-74642f45515531656e48-build.zip"
             }
          }
       },
