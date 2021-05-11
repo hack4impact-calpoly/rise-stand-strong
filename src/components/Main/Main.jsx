@@ -11,6 +11,8 @@ import Calendar from '../Calendar/Calendar';
 import ShiftDetails from '../Shifts/ShiftDetails';
 import RequireAuth from './RequireAuth';
 import Directory from '../Directory/Directory';
+import ChangePassword from '../ChangePassword/ChangePassword';
+import SuccessfulChangePassword from '../ChangePassword/SuccessfulChangePassword';
 
 export default () => (
    <div className="App">
@@ -28,6 +30,14 @@ export default () => (
          <Route path="/profilepage" component={RequireAuth(ProfilePage)} />
          <Route path="/calendar" component={RequireAuth(Calendar)} />
          <Route path="/directory" render={() => <Directory />} />
+         <Route
+            path="/changepassword"
+            component={RequireAuth(ChangePassword)}
+         />
+         <Route
+            path="/successfulchangepassword"
+            component={RequireAuth(SuccessfulChangePassword)}
+         />
       </Switch>
    </div>
 );
