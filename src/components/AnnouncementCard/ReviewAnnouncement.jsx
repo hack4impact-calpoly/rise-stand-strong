@@ -1,99 +1,82 @@
-import { useState, React } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { React } from 'react';
+import { Button } from 'react-bootstrap';
 import styled from 'styled-components';
-import { postAnnouncement } from '../../api';
+import { FaExternalLinkAlt } from 'react-icons/fa';
+// import { postAnnouncement } from '../../api';
 
-const Header2 = styled.h2`
+const Header = styled.h2`
    font-family: Arial;
    font-weight: bold;
-   font-size: 18px;
-   line-height: 25px;
-   margin-top: 10px;
+   font-size: 30px;
+   line-height: 41px;
+   margin: 30px 32px 0px 32px;
 `;
-const InputContainer = styled.div`
-   display: flex;
-   flex-direction: column;
-   margin: 10px 0px 0px 32px;
+const Header2 = styled.h2`
+   font-family: Arial;
+   font-size: 14px;
+   line-height: 19px;
+   margin: 5px 32px 0px 32px;
+`;
+const Header3 = styled.h3`
+   font-family: Arial;
+   font-size: 14px;
+   line-height: 19px;
+   margin: 5px 32px 0px 32px;
+`;
+
+const EditButtonContainer = styled.div`
+   width: 100%;
+   margin-left: 32px;
+`;
+const LinkButtonContainer = styled.div`
    width: 75%;
-`;
-const StyledField = styled(Form.Control)`
-   width: 100%;
-   margin-top: 10px;
-`;
-const ButtonContainer = styled.div`
-   text-align: right;
-   margin-right: 32px;
-   width: 100%;
+   border-bottom: 2px solid #c0c0c0;
+   margin: 5px 32px 10px 32px;
 `;
 
-const AnnouncementData = {
-   title: 'Valentines Day Work Schedule',
-   author: 'John Doe',
-   text:
-      'With the upcoming Valentines day comes an altered work schedule! Click the link to see any changes.',
-   createdAt: '2021-01-30T10:30:00',
-   link: 'https://rise/updates/vday',
-};
+// const AnnouncementData = {
+//    title: 'Valentines Day Work Schedule',
+//    author: 'John Doe',
+//    text:
+//       'With the upcoming Valentines day comes an altered work schedule! Click the link to see any changes.',
+//    createdAt: '2021-01-30T10:30:00',
+//    link: 'https://rise/updates/vday',
+// };
 
-export default () => {
-   const [title, setTitle] = useState('');
-   const [hyperlink, setHyperlink] = useState('');
-   const [content, setContent] = useState('');
-
+export default (AnnouncementData) => {
+   const date = new Date(AnnouncementData.createdAt);
+   const months = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
+   ];
    return (
       <div>
-         <Form>
-            <Form.Row>
-               <InputContainer>
-                  <StyledField
-                     class="text-center"
-                     required
-                     type="text"
-                     defaultValue={title}
-                     onChange={(e) => {
-                        setTitle(e.target.value);
-                     }}
-                     size="lg"
-                     placeholder="Announcement Title"
-                  />
-               </InputContainer>
-               <InputContainer>
-                  <Header2>Link</Header2>
-                  <StyledField
-                     class="text-center"
-                     required
-                     type="text"
-                     defaultValue={hyperlink}
-                     onChange={(e) => {
-                        setHyperlink(e.target.value);
-                     }}
-                     size="lg"
-                     placeholder="Hyperlink (optional)"
-                  />
-                  <Header2>Body</Header2>
-                  <StyledField
-                     class="text-center"
-                     required
-                     type="text-area"
-                     defaultValue={content}
-                     onChange={(e) => {
-                        setContent(e.target.value);
-                     }}
-                     as="textarea"
-                     rows={7}
-                     placeholder="Write the announcement here..."
-                  />
-               </InputContainer>
-            </Form.Row>
-         </Form>
-         <ButtonContainer>
-            <Button
-               variant="danger"
-               onClick={() => postAnnouncement(AnnouncementData)}
-            >
-               Publish
+         <EditButtonContainer>
+            <Button variant="light">Edit</Button>
+         </EditButtonContainer>
+         <Header>{AnnouncementData.title}</Header>
+         {console.log(date)}
+         <Header2>
+            Posted by {AnnouncementData.author} on {months[date.getMonth()]}{' '}
+            {date.getDate()}, {date.getFullYear()}
+         </Header2>
+         <LinkButtonContainer>
+            <Button variant="link" href={AnnouncementData.link}>
+               <FaExternalLinkAlt />
+               {AnnouncementData.link}
             </Button>
-         </ButtonContainer>
+         </LinkButtonContainer>
+         <Header3>{AnnouncementData.text}</Header3>
       </div>
    );
 };
