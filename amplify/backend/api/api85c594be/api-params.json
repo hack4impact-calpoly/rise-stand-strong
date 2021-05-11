@@ -1,14 +1,14 @@
 {
    "paths": [
       {
-         "name": "/shifts",
+         "name": "/shifts/{startTimestamp}",
          "lambdaFunction": "risestandstrongcb34053a",
          "privacy": {
             "open": true
          }
       },
       {
-         "name": "/announcements",
+         "name": "/announcements/{announcementId}",
          "lambdaFunction": "risestandstrongcb34053a",
          "privacy": {
             "open": true
@@ -35,5 +35,5 @@
          "attributes": ["Name", "Arn"]
       }
    ],
-   "uuid": "50d12c86"
+   "uuid": "b343681f"
 }
