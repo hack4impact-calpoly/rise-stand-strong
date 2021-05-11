@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
 
 const SubmitButtonContainer = styled.div`
    text-align: center;
@@ -36,13 +37,11 @@ export default () => {
          <p>Password Saved!</p>
          <a href="/">
             <SubmitButtonContainer>
-               <SubmitButtonFullWidth 
-                  type="submit"
-                  onClick={history.push('/')}>
+               <SubmitButtonFullWidth type="submit" onClick={history.push('/')}>
                   Back to Profile
                </SubmitButtonFullWidth>
             </SubmitButtonContainer>
          </a>
       </div>
    );
-}
+};
