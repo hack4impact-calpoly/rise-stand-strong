@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import UpcomingShiftCard from '../Shifts/UpcomingShiftCard/UpcomingShiftCard';
+import LinkBar from '../LinkBar/LinkBar';
 
 const StyledTitle = styled.h1`
    font-size: 48px;
@@ -103,5 +104,6 @@ export default (UserData) => (
             </StyledButton2>
          </UserInfoContainer>
       </RecentShiftsContainer>
+      <LinkBar />
    </div>
 );

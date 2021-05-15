@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { FaChevronRight } from 'react-icons/fa';
 import AnnouncementCard from '../AnnouncementCard/AnnouncementCard';
 import UpcomingShiftCard from '../Shifts/UpcomingShiftCard/UpcomingShiftCard';
+import LinkBar from '../LinkBar/LinkBar';
 
 const Header1 = styled.h1`
    font-family: Arial;
@@ -122,5 +123,6 @@ export default (UserData) => (
             </Header5>
          </Button>
       </ButtonContainer>
+      <LinkBar />
    </div>
 );

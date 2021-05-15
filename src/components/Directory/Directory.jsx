@@ -3,6 +3,7 @@ import { CardColumns, Form } from 'react-bootstrap';
 import styled from 'styled-components';
 import { FaSearch } from 'react-icons/fa';
 import ContactCard from './ContactCard';
+import LinkBar from '../LinkBar/LinkBar';
 
 const Header1 = styled.h1`
    font-family: Arial;
@@ -101,6 +102,7 @@ export default () => {
                   myData.map((item) => <ContactCard ContactInfo={item} />)}
             </StyledCardGroup>
          </CardContainer>
+         <LinkBar />
       </div>
    );
 };
