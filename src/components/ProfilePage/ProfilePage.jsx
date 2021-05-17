@@ -11,18 +11,23 @@ const StyledTitle = styled.h1`
    font-family: nunito, sans-serif;
    font-weight: 700px;
    line-height: 65px;
+   margin-top: 60px;
 `;
 
 const UserInfoContainer = styled.section`
-   display: flex;
    flex-direction: column;
    justify-content: center;
-   align-item: center;
+   display: flex;
+   align-items: center;
 `;
 
 const RecentShiftsContainer = styled.section`
    margin: 50px 0px 15px 30px;
    margin-right: 30px;
+   width: 349px;
+   @media screen and (min-width: 800px) {
+      margin: 0;
+   }
 `;
 
 const StyledSubtitle2 = styled.h6`
@@ -80,30 +85,40 @@ const CardData = {
    to: '2021-03-9 8:00:00',
    link: '#',
 };
-
+const PageDiv = styled.div`
+   @media only {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+   }
+`;
 export default (UserData) => (
    <div>
-      <UserInfoContainer>
-         <StyledTitle>
-            {UserData.Name}
-            {UserInfo.Name}
-         </StyledTitle>
-         <StyledSubtitle2>{UserInfo.Email}</StyledSubtitle2>
-         <StyledSubtitle2>{UserInfo.CellPhoneNumber}</StyledSubtitle2>
-         <StyledLink to="/editprofile">
-            Edit contact information &gt;
-         </StyledLink>
-         <StyledButton variant="link">Change your password &gt; </StyledButton>
-      </UserInfoContainer>
-      <RecentShiftsContainer>
-         <StyledSubtitle>Recent Shifts</StyledSubtitle>
-         <UpcomingShiftCard cardData={CardData} />
+      <PageDiv>
          <UserInfoContainer>
-            <StyledButton2 variant="link">
-               See all your past shifts &gt;{' '}
-            </StyledButton2>
+            <StyledTitle>
+               {UserData.Name}
+               {UserInfo.Name}
+            </StyledTitle>
+            <StyledSubtitle2>{UserInfo.Email}</StyledSubtitle2>
+            <StyledSubtitle2>{UserInfo.CellPhoneNumber}</StyledSubtitle2>
+            <StyledLink to="/editprofile">
+               Edit contact information &gt;
+            </StyledLink>
+            <StyledButton variant="link">
+               Change your password &gt;
+            </StyledButton>
          </UserInfoContainer>
-      </RecentShiftsContainer>
+         <RecentShiftsContainer>
+            <StyledSubtitle>Recent Shifts</StyledSubtitle>
+            <UpcomingShiftCard cardData={CardData} />
+            <UserInfoContainer>
+               <StyledButton2 variant="link">
+                  See all your past shifts &gt;{' '}
+               </StyledButton2>
+            </UserInfoContainer>
+         </RecentShiftsContainer>
+      </PageDiv>
       <LinkBar />
    </div>
 );

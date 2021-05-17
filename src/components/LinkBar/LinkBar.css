@@ -8,7 +8,7 @@
    align-items: center;
    height: 88px;
    bottom: 0;
-   position: absolute;
+   position: fixed;
    overflow: hidden;
    background-color: white;
 }

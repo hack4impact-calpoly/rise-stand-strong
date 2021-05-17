@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import LinkBar from '../LinkBar/LinkBar';
 import './fonts.css';
 
 const StyledContainer = styled.div`
@@ -298,7 +297,6 @@ export default () => {
             </Form.Row>
             <SubmitButton type="submit">Register</SubmitButton>
          </StyledContainer>
-         <LinkBar />
       </Form>
    );
 };

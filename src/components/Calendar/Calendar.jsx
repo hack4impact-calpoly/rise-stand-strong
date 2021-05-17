@@ -8,6 +8,9 @@ import LinkBar from '../LinkBar/LinkBar';
 
 const CalendarContainer = styled.section`
    margin: 40px;
+   @media screen and (min-width: 800px) {
+      margin-left: 318px;
+   }
 `;
 
 const renderEvents = ExampleShifts.map((item) => {
