@@ -2,7 +2,7 @@ import React from 'react';
 import './LinkBar.css';
 import { NavLink } from 'react-router-dom';
 import HomeIcon from './Home_Icon.png';
-import CalenderIcon from './Calender_Icon.png';
+import CalendarIcon from './Calendar_Icon.png';
 import DirectoryIcon from './Directory_Icon.png';
 import ProfileIcon from './Profile_Icon.png';
 
@@ -17,9 +17,9 @@ export default () => (
          </NavLink>
          <NavLink to="/calendar" activeClassName="active" className="item">
             <div className="img-container">
-               <img src={CalenderIcon} alt="calender-icon" />
+               <img src={CalendarIcon} alt="calendar-icon" />
             </div>
-            <div className="link">Calender</div>
+            <div className="link">Calendar</div>
          </NavLink>
          <NavLink to="/directory" activeClassName="active" className="item">
             <div id="directory" className="img-container">
