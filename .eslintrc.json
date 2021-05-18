@@ -17,6 +17,7 @@
    "rules": {
       "prettier/prettier": "error",
       "no-console": "off",
+      "no-nested-ternary": "off",
       "node/no-missing-import": [
          "error",
          {

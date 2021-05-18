@@ -76,7 +76,7 @@
                },
                "schemes": ["https"],
                "paths": {
-                  "/shifts": {
+                  "/shifts/{startTimestamp}": {
                      "options": {
                         "consumes": ["application/json"],
                         "produces": ["application/json"],
@@ -166,7 +166,7 @@
                         }
                      }
                   },
-                  "/shifts/{proxy+}": {
+                  "/shifts/{startTimestamp}/{proxy+}": {
                      "options": {
                         "consumes": ["application/json"],
                         "produces": ["application/json"],
@@ -257,7 +257,7 @@
                      }
                   },
 
-                  "/announcements": {
+                  "/announcements/{announcementId}": {
                      "options": {
                         "consumes": ["application/json"],
                         "produces": ["application/json"],
@@ -347,7 +347,7 @@
                         }
                      }
                   },
-                  "/announcements/{proxy+}": {
+                  "/announcements/{announcementId}/{proxy+}": {
                      "options": {
                         "consumes": ["application/json"],
                         "produces": ["application/json"],
@@ -505,7 +505,7 @@
          }
       },
 
-      "DeploymentAPIGWapi85c594be50d12c86": {
+      "DeploymentAPIGWapi85c594beb343681f": {
          "Type": "AWS::ApiGateway::Deployment",
          "Properties": {
             "Description": "The Development stage deployment of your API.",
