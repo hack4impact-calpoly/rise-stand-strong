@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import './fonts.css';
 import PhoneInput from 'react-phone-number-input/input';
 
 const StyledContainer = styled.div`
