@@ -17,6 +17,7 @@
    "rules": {
       "prettier/prettier": "error",
       "no-console": "off",
+      "no-nested-ternary": "off",
       "node/no-missing-import": [
          "error",
          {
@@ -29,7 +30,8 @@
          {
             "devDependencies": true
          }
-      ]
+      ],
+      "import/no-unresolved": [2, { "caseSensitive": false }]
    },
    "settings": {
       "import/resolver": {

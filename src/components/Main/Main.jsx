@@ -8,18 +8,33 @@ import ProfilePage from '../ProfilePage/ProfilePage';
 import NavBar from '../NavBar/NavBar';
 import Dashboard from '../Dashboard/Dashboard';
 import Calendar from '../Calendar/Calendar';
+import ShiftDetails from '../Shifts/ShiftDetails';
+import RequireAuth from './RequireAuth';
+import Directory from '../Directory/Directory';
+import NewAnnouncement from '../AnnouncementCard/NewAnnouncement';
+import ReviewAnnouncement from '../AnnouncementCard/ReviewAnnouncement';
 
 export default () => (
    <div className="App">
       <NavBar />
       <Switch>
          <Route exact path="/" render={() => <LoginPage />} />
+         <Route
+            path="/shift/:startTimestamp"
+            component={RequireAuth(ShiftDetails)}
+         />
          <Route path="/forgotpassword" render={() => <ForgotPassword />} />
          <Route path="/newaccount" render={() => <NewAccountPage />} />
-         <Route path="/editprofile" render={() => <EditProfilePage />} />
-         <Route path="/dashboard" render={() => <Dashboard />} />
-         <Route path="/profilepage" render={() => <ProfilePage />} />
-         <Route path="/calendar" render={() => <Calendar />} />
+         <Route path="/editprofile" component={RequireAuth(EditProfilePage)} />
+         <Route path="/dashboard" component={RequireAuth(Dashboard)} />
+         <Route path="/profilepage" component={RequireAuth(ProfilePage)} />
+         <Route path="/calendar" component={RequireAuth(Calendar)} />
+         <Route path="/directory" render={() => <Directory />} />
+         <Route path="/newannouncement" render={() => <NewAnnouncement />} />
+         <Route
+            path="/reviewannouncement"
+            render={() => <ReviewAnnouncement />}
+         />
       </Switch>
    </div>
 );
