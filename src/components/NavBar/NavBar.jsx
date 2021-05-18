@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react';
 import './NavBar.css';
 import styled from 'styled-components';
@@ -19,20 +18,20 @@ const StyledButton = styled.button`
    background: #00000000;
    border: none;
    padding: 14px 16px;
-`;
-
-const StyledAquaLabel = styled.label`
-   font-size: 18px;
-   font-family: 'Nunito Sans', sans-serif;
-   font-weight: 700;
-   color: #024e6b;
-`;
-
-const StyledBlackLabel = styled.label`
    font-size: 18px;
    font-family: 'Nunito Sans', sans-serif;
    font-weight: 700;
    color: #000000;
+`;
+
+const StyledBackButton = styled.button`
+   background: #00000000;
+   border: none;
+   padding: 14px 16px;
+   font-size: 18px;
+   font-family: 'Nunito Sans', sans-serif;
+   font-weight: 700;
+   color: #024e6b;
 `;
 
 const signOut = async () => {
@@ -47,29 +46,25 @@ const signOut = async () => {
 export default () => {
    const history = useHistory();
    const location = useLocation();
-   const backList = ['/REGISTER', '/FORGOTPASSWORD', '/NEWACCOUNT']; // add /shiftdetails?
+   const backList = ['/REGISTER', '/FORGOTPASSWORD', '/NEWACCOUNT'];
    return (
       <div className="navbar">
-         {console.log('backarrow')}
          {location.pathname === '/' ? null : backList.includes(
               location.pathname.toUpperCase()
            ) ? (
-            <StyledAquaLabel>
-               <a>
-                  <FontAwesomeIcon icon={faArrowLeft} /> Back
-               </a>
-            </StyledAquaLabel>
+            <StyledBackButton onClick={() => history.goBack()}>
+               <FontAwesomeIcon icon={faArrowLeft} /> Back
+            </StyledBackButton>
          ) : (
-            <StyledBlackLabel>
-               <a href="/">Sign out</a>
-            </StyledBlackLabel>
+            <StyledButton
+               onClick={async () => {
+                  await signOut();
+                  history.push('/');
+               }}
+            >
+               Sign out
+            </StyledButton>
          )}
-         <StyledButton
-            onClick={async () => {
-               await signOut();
-               history.push('/');
-            }}
-         />
          <PositionedLogo />
       </div>
    );
