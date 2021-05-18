@@ -6,7 +6,6 @@ const {
    deleteAnnouncement,
 } = require('../utils/aws-utils');
 const router = express.Router();
-const AWS = require('aws-amplify');
 
 /**
  * @swagger
