@@ -42,8 +42,14 @@ const Header5 = styled.h4`
    text-align: center;
    color: rgba(81, 40, 84, 1);
 `;
+const Header6 = styled.h4`
+   font-family: Arial;
+   font-size: 18px;
+   color: black;
+`;
 const ButtonContainer = styled.div`
    text-align: center;
+   margin-bottom: 10px;
 `;
 const ShiftDiv = styled.div`
    margin-bottom: 15px;
@@ -109,6 +115,11 @@ export default (UserData) => (
       <Header2> Announcements </Header2>
 
       <StyledCardGroup>
+         <ButtonContainer>
+            <Button variant="link" href="/newannouncement">
+               <Header6>+New</Header6>
+            </Button>
+         </ButtonContainer>
          {Announcements &&
             Announcements.length > 0 &&
             Announcements.map((announcement) => (
