@@ -46,7 +46,6 @@ const StyledText = styled.div`
    margin-left: 33px;
    font-size: 18px;
    font-weight: 700;
-   font-family: 'Nunito Sans', sans-serif;
    margin-bottom: 5px;
    @media only screen and (min-width: 769px) {
       margin-left: 0px;
@@ -96,7 +95,6 @@ const StyledLinkButton = styled(Button)`
    color: #024e6b;
    font-size: 16px;
    font-weight: 700;
-   font-family: 'Nunito Sans', sans-serif;
    margin-top: -30px;
    margin-right: 20px;
    @media only screen and (min-width: 769px) {
@@ -116,7 +114,6 @@ const StyledHideButton = styled(Button)`
    color: #024e6b;
    border: none;
    font-size: 16px;
-   font-family: 'Nunito Sans', sans-serif;
    font-weight: 600;
    z-index: 1;
    &:hover,
@@ -247,7 +244,7 @@ export default () => {
                <StyledButton type="submit" block>
                   Log In
                </StyledButton>
-               <StyledLinkButtonAcc href="/newaccount" variant="link">
+               <StyledLinkButtonAcc href="/register" variant="link">
                   First Time? &nbsp;
                   <b>Create new account</b>
                </StyledLinkButtonAcc>

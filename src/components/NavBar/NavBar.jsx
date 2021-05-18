@@ -5,7 +5,7 @@ import { Auth } from 'aws-amplify';
 import { useHistory, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import { ReactComponent as RiseLogo } from './RISE_Logo.svg';
+import { ReactComponent as RiseLogo } from '../../RISE_Logo.svg';
 
 const PositionedLogo = styled(RiseLogo)`
    width: 60px;

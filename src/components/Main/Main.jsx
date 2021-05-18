@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import { Route, Switch } from 'react-router-dom';
 import LoginPage from '../LoginPage/LoginPage';
 import ForgotPassword from '../ForgotPassword/ForgotPassword';
@@ -14,8 +15,12 @@ import Directory from '../Directory/Directory';
 import NewAnnouncement from '../AnnouncementCard/NewAnnouncement';
 import ReviewAnnouncement from '../AnnouncementCard/ReviewAnnouncement';
 
+const StyledApp = styled.div`
+   font-family: 'Nunito Sans', sans-serif;
+`;
+
 export default () => (
-   <div className="App">
+   <StyledApp>
       <NavBar />
       <Switch>
          <Route exact path="/" render={() => <LoginPage />} />
@@ -24,7 +29,7 @@ export default () => (
             component={RequireAuth(ShiftDetails)}
          />
          <Route path="/forgotpassword" render={() => <ForgotPassword />} />
-         <Route path="/newaccount" render={() => <NewAccountPage />} />
+         <Route path="/register" render={() => <NewAccountPage />} />
          <Route path="/editprofile" component={RequireAuth(EditProfilePage)} />
          <Route path="/dashboard" component={RequireAuth(Dashboard)} />
          <Route path="/profilepage" component={RequireAuth(ProfilePage)} />
@@ -36,5 +41,5 @@ export default () => (
             render={() => <ReviewAnnouncement />}
          />
       </Switch>
-   </div>
+   </StyledApp>
 );

@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import './fonts.css';
+import PhoneInput from 'react-phone-number-input/input';
 
 const StyledContainer = styled.div`
    display: flex
@@ -65,7 +65,6 @@ const StyledFeedback = styled(Form.Control.Feedback)`
 const StyledLabel = styled(Form.Label)`
    margin-left: 33px;
    font-size: 18px;
-   font-family: 'Nunito Sans', sans-serif;
    font-weight: 700;
    @media only screen and (min-width: 768px) {
       width: calc(40vw - 65px);
@@ -79,7 +78,6 @@ const StyledSubheader = styled(Form.Label)`
    margin-bottom: 35px;
    font-size: 14px;
    color: #525252;
-   font-family: 'Nunito Sans', sans-serif;
    font-weight: 400;
    @media only screen and (min-width: 768px) {
       margin-left: 8px;
@@ -92,7 +90,6 @@ const StyledComment = styled(Form.Label)`
    margin-bottom: 25px;
    font-size: 13px;
    color: #525252;
-   font-family: 'Nunito Sans', sans-serif;
    font-weight: 400;
    @media only screen and (min-width: 768px) {
       width: calc(40vw - 65px);
@@ -105,7 +102,6 @@ const StyledHeader = styled(Form.Label)`
    margin-left: 33px;
    margin-bottom: -5px;
    font-size: 36px;
-   font-family: 'Nunito Sans', sans-serif;
    font-weight: 600;
    @media only screen and (min-width: 768px) {
       margin-left: auto;
@@ -119,7 +115,6 @@ const StyledHideButton = styled(Button)`
    border: none;
    z-index: 1;
    font-size: 16px;
-   font-family: 'Nunito Sans', sans-serif;
    font-weight: 600;
    &:hover,
    &:focus {
@@ -147,6 +142,33 @@ const StyledSmallContainer = styled.div`
       width: calc(40vw - 65px);
       min-width: 400px;
       max-width: 500px;
+   }
+`;
+
+const StyledPhoneInput = styled(PhoneInput)`
+   margin-left: 33px;
+   margin-top: -7px;
+   margin-bottom: 3px;
+   font-size: 18px;
+   padding: 2px 5px;
+   width: calc(100vw - 65px);
+   border: 1px solid #ced4da;
+   border-radius: 0.25rem;
+   height: calc(1.5em + 0.75rem + 2px);
+   font-weight: 400;
+   line-height: 1.5;
+   @media only screen and (min-width: 768px) {
+      margin-left: auto;
+      margin-right: auto;
+      width: calc(40vw - 65px);
+      min-width: 400px;
+      max-width: 500px;
+   }
+   :focus {
+      transition: border-color 0.15s ease-in-out, , outline: 0.15s ease-in -out, box-shadow 0.15s ease-in-out;
+      border: 1px solid #84bcfc;
+      outline: 1px solid #bcdcfc;
+      box-shadow: 0 0 0 3px #bcdcfc;
    }
 `;
 
@@ -251,11 +273,13 @@ export default () => {
             <Form.Row>
                <Form.Group as={Col} md="4" controlId="validationCustom04">
                   <StyledLabel>Phone number</StyledLabel>
-                  <StyledField
+                  <StyledPhoneInput
+                     country="US"
+                     mask="_"
                      required
                      type="text"
                      defaultValue={phoneNumber}
-                     onChange={(e) => setPhoneNumber(e.target.value)}
+                     onChange={setPhoneNumber}
                   />
                   <StyledFeedback>Looks good!</StyledFeedback>
                   <StyledFeedback type="invalid">

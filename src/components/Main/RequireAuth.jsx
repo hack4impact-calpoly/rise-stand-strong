@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import { Auth } from 'aws-amplify';
 import styled from 'styled-components';
-import { ReactComponent as RSSLogo } from '../NavBar/RISE_Logo.svg';
+import { ReactComponent as RSSLogo } from '../../RISE_Logo.svg';
 
 const StyledLogo = styled(RSSLogo)`
    width: 194;
