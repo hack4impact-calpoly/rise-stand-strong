@@ -1,0 +1,108 @@
+.linkbar {
+   width: 100%;
+   float: left;
+   padding: 0;
+   box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.15);
+   display: flex;
+   justify-content: space-evenly;
+   align-items: center;
+   height: 88px;
+   bottom: 0;
+   position: fixed;
+   overflow: hidden;
+   background-color: white;
+}
+ul {
+   display: flex;
+   list-style-type: none;
+   margin: 0 auto;
+   padding: 0;
+   overflow: hidden;
+   justify-content: center;
+}
+
+.item {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   flex-direction: column;
+}
+.img-container {
+   display: flex;
+   margin-top: auto;
+}
+.link {
+   display: flex;
+   padding: 14px 16px;
+   padding-top: 5px;
+   margin-bottom: 0;
+   margin-top: auto;
+   padding-bottom: 0;
+   height: 20px;
+   text-decoration: none;
+   color: black;
+   font-size: 11px;
+   line-height: 15px;
+   text-align: center;
+   font-weight: 700px;
+}
+
+.item:hover {
+   color: #ae4c33;
+   text-decoration: none;
+}
+.item:hover .link {
+   color: #ae4c33;
+}
+.item:hover img {
+   filter: invert(30%) sepia(90%) saturate(590%) hue-rotate(328deg)
+      brightness(98%) contrast(88%);
+}
+.link:hover {
+   text-decoration: none;
+}
+
+.active {
+   text-decoration: none;
+}
+.active img {
+   filter: invert(30%) sepia(90%) saturate(590%) hue-rotate(328deg)
+      brightness(98%) contrast(88%);
+}
+.active .link {
+   color: #ae4c33;
+}
+
+@media screen and (min-width: 800px) {
+   .linkbar {
+      width: 260px;
+      height: 100%;
+      position: fixed;
+      top: 0%;
+      align-items: normal;
+   }
+   .container {
+      flex-direction: column;
+      margin-top: 70px;
+      margin-left: 30px;
+      height: 200px;
+   }
+   .item {
+      flex-direction: row;
+      top: calc(50% - 24px / 2);
+      height: 24px;
+      margin-top: 15px;
+      margin-bottom: 15px;
+      justify-content: left;
+   }
+   .link {
+      left: calc(50% - 147px / 2 + 27px);
+      font-size: 18px;
+   }
+   .img-container {
+      height: 24px;
+   }
+   #directory {
+      height: 14.4px;
+   }
+}
