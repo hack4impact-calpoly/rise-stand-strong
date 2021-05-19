@@ -4,13 +4,18 @@ import styled from 'styled-components';
 import { FaChevronRight } from 'react-icons/fa';
 import AnnouncementCard from '../AnnouncementCard/AnnouncementCard';
 import UpcomingShiftCard from '../Shifts/UpcomingShiftCard/UpcomingShiftCard';
+import LinkBar from '../LinkBar/LinkBar';
 
 const Header1 = styled.h1`
    font-family: Arial;
    font-style: Bold;
    font-size: 3em;
-   line-height: 1em;
    margin: 0em 0em 0.75em 32px;
+   line-height: 1em;
+   margin-top: 60px;
+   @media screen and (min-width: 800px) {
+      margin-left: 318px;
+   }
 `;
 
 const Header2 = styled.h2`
@@ -19,6 +24,9 @@ const Header2 = styled.h2`
    font-size: 36px;
    line-height: 25px;
    margin: 0em 0em 0.75em 32px;
+   @media screen and (min-width: 800px) {
+      margin-left: 318px;
+   }
 `;
 
 const Header3 = styled.h3`
@@ -27,6 +35,9 @@ const Header3 = styled.h3`
    font-size: 18px;
    margin: 0px 0px 10px 32px;
    color: rgba(82, 82, 82, 1);
+   @media screen and (min-width: 800px) {
+      margin-left: 318px;
+   }
 `;
 const Header4 = styled.h4`
    font-family: Arial;
@@ -58,6 +69,9 @@ const ShiftDiv = styled.div`
 const StyledCardGroup = styled(CardColumns)`
    margin: 0px 32px 0px 32px;
    font-size: 12px;
+   @media screen and (min-width: 800px) {
+      margin-left: 318px;
+   }
 `;
 
 const Announcements = [
@@ -90,48 +104,55 @@ const CardData = [
    },
 ];
 
+const PageDiv = styled.div`
+   padding-bottom: 100px;
+`;
+
 export default (UserData) => (
    <div>
-      <Header1>
-         Hi
-         {UserData.name}.
-      </Header1>
-      <ShiftDiv>
-         <Header2> Your next shifts </Header2>
-         <Header3> This week</Header3>
+      <PageDiv>
+         <Header1>
+            Hi
+            {UserData.name}.
+         </Header1>
+         <ShiftDiv>
+            <Header2> Your next shifts </Header2>
+            <Header3> This week</Header3>
+            <StyledCardGroup>
+               {CardData &&
+                  CardData.length > 0 &&
+                  CardData.map((item) => <UpcomingShiftCard cardData={item} />)}
+            </StyledCardGroup>
+            <ButtonContainer>
+               <Button variant="link">
+                  <Header4>
+                     See all your upcoming shifts <FaChevronRight />
+                  </Header4>
+               </Button>
+            </ButtonContainer>
+         </ShiftDiv>
+
+         <Header2> Announcements </Header2>
          <StyledCardGroup>
-            {CardData &&
-               CardData.length > 0 &&
-               CardData.map((item) => <UpcomingShiftCard cardData={item} />)}
+            <ButtonContainer>
+               <Button variant="link" href="/newannouncement">
+                  <Header6>+New</Header6>
+               </Button>
+            </ButtonContainer>
+            {Announcements &&
+               Announcements.length > 0 &&
+               Announcements.map((announcement) => (
+                  <AnnouncementCard Announcement={announcement} />
+               ))}
          </StyledCardGroup>
          <ButtonContainer>
             <Button variant="link">
-               <Header4>
-                  See all your upcoming shifts <FaChevronRight />
-               </Header4>
+               <Header5>
+                  See all announcements <FaChevronRight />
+               </Header5>
             </Button>
          </ButtonContainer>
-      </ShiftDiv>
-      <Header2> Announcements </Header2>
-
-      <StyledCardGroup>
-         <ButtonContainer>
-            <Button variant="link" href="/newannouncement">
-               <Header6>+New</Header6>
-            </Button>
-         </ButtonContainer>
-         {Announcements &&
-            Announcements.length > 0 &&
-            Announcements.map((announcement) => (
-               <AnnouncementCard Announcement={announcement} />
-            ))}
-      </StyledCardGroup>
-      <ButtonContainer>
-         <Button variant="link">
-            <Header5>
-               See all announcements <FaChevronRight />
-            </Header5>
-         </Button>
-      </ButtonContainer>
+      </PageDiv>
+      <LinkBar />
    </div>
 );
