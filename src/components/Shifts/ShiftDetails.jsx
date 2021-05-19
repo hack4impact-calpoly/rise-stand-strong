@@ -8,7 +8,7 @@ import { useHistory } from 'react-router-dom';
 import { DAY_OF_WEEK } from '../../constants';
 import SelectableShiftCard from './SelectableShiftCard';
 import AssignedShiftCard from './AssignedShiftCard';
-import { ReactComponent as RiseLogo } from './RISE_Logo.svg';
+import { ReactComponent as RiseLogo } from '../../RISE_Logo.svg';
 
 const StyledSelectableShiftCard = styled(SelectableShiftCard)`
    width: calc(100vw - 60px);

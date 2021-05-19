@@ -8,7 +8,6 @@ import LinkBar from '../LinkBar/LinkBar';
 const StyledTitle = styled.h1`
    font-size: 48px;
    text-align: center;
-   font-family: nunito, sans-serif;
    font-weight: 700px;
    line-height: 65px;
    margin-top: 60px;
@@ -34,14 +33,12 @@ const StyledSubtitle2 = styled.h6`
    margin-top: 10px;
    font-size: 16px;
    text-align: center;
-   font-family: nunito, sans-serif;
    line-height: 22px;
 `;
 
 const StyledSubtitle = styled.h3`
    font-size: 36px;
    margin: 20px 0px 20px 0px;
-   font-family: nunito, sans-serif;
    font-weight: 600px;
    line-height: 49px;
 `;
@@ -49,7 +46,6 @@ const StyledSubtitle = styled.h3`
 const StyledButton = styled(Button)`
    color: #ae4c33;
    margin-top: 15px;
-   font-family: nunito, sans-serif;
    font-size: 18px;
    line-height: 25px;
    font-weight: bold;
@@ -58,7 +54,6 @@ const StyledButton = styled(Button)`
 const StyledButton2 = styled(Button)`
    color: #024e6b;
    margin-top: 15px;
-   font-family: nunito, sans-serif;
    font-size: 18px;
    line-height: 25px;
    font-weight: bold;
@@ -68,7 +63,6 @@ const StyledLink = styled(Link)`
    color: #ae4c33;
    margin-top: 15px;
    text-align: center;
-   font-family: nunito, sans-serif;
    font-size: 18px;
    line-height: 25px;
    font-weight: bold;
