@@ -130,29 +130,29 @@ export default (UserData) => (
                   </Header4>
                </Button>
             </ButtonContainer>
-      </ShiftDiv>
+         </ShiftDiv>
 
-      <Header2> Announcements </Header2>
-      <StyledCardGroup>
+         <Header2> Announcements </Header2>
+         <StyledCardGroup>
+            <ButtonContainer>
+               <Button variant="link" href="/newannouncement">
+                  <Header6>+New</Header6>
+               </Button>
+            </ButtonContainer>
+            {Announcements &&
+               Announcements.length > 0 &&
+               Announcements.map((announcement) => (
+                  <AnnouncementCard Announcement={announcement} />
+               ))}
+         </StyledCardGroup>
          <ButtonContainer>
-            <Button variant="link" href="/newannouncement">
-               <Header6>+New</Header6>
+            <Button variant="link">
+               <Header5>
+                  See all announcements <FaChevronRight />
+               </Header5>
             </Button>
          </ButtonContainer>
-         {Announcements &&
-            Announcements.length > 0 &&
-            Announcements.map((announcement) => (
-               <AnnouncementCard Announcement={announcement} />
-            ))}
-      </StyledCardGroup>
-      <ButtonContainer>
-         <Button variant="link">
-            <Header5>
-               See all announcements <FaChevronRight />
-            </Header5>
-         </Button>
-      </ButtonContainer>
-     </PageDiv>
-     <LinkBar />
+      </PageDiv>
+      <LinkBar />
    </div>
 );
