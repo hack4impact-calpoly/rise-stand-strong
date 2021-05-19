@@ -5,6 +5,7 @@ const BASE_URL = 'https://1nazz9rwh9.execute-api.us-west-2.amazonaws.com/prod';
 
 const ANNOUNCEMENTS = 'announcements';
 const SHIFTS = 'shifts';
+const USERS = 'users';
 
 export async function postAnnouncement(announcementBody) {
    await axios.post(`${BASE_URL}/${ANNOUNCEMENTS}`, { ...announcementBody });
@@ -40,4 +41,16 @@ export async function getShiftsRange(startTimestamp, endTimestamp) {
 
 export async function deleteShift(startTimestamp) {
    await axios.delete(`${BASE_URL}/${SHIFTS}/${startTimestamp}`);
+}
+
+export async function listUsers(accessToken) {
+   const config = {
+      headers: {
+         Authorization: accessToken,
+      },
+   };
+
+   const response = await axios.get(`${BASE_URL}/${SHIFTS}`, config);
+
+   return response.data; 
 }

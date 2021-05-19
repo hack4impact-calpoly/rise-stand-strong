@@ -21,5 +21,9 @@
          }
       ]
    },
-   "apis": ["./routes/announcements.js", "./routes/shifts.js"]
+   "apis": [
+      "./routes/announcements.js",
+      "./routes/shifts.js",
+      "./routes/users.js"
+   ]
 }

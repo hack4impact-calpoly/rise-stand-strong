@@ -19,6 +19,7 @@ const specs = swaggerJsdoc(swaggerSettings);
 // Routers
 const announcementsRouter = require('./routes/announcements');
 const shiftsRouter = require('./routes/shifts');
+const usersRouter = require('./routes/users');
 
 // declare a new express app
 var app = express();
@@ -35,6 +36,7 @@ app.use(function (req, res, next) {
 // Use Routers
 app.use('/announcements', announcementsRouter);
 app.use('/shifts', shiftsRouter);
+app.use('/users', usersRouter);
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 app.get('/docs');

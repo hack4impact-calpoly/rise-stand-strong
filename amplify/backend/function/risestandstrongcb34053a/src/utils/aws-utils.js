@@ -251,6 +251,33 @@ async function deleteShift(startTimestamp) {
    }
 }
 
+
+async function listUsers(userPoolIds) {
+   const cognitoProvider = new AWS.CognitoIdentityServiceProvider({apiVersion: '2016-04-18'});
+
+   const users = [];
+   for(const userPoolId of userPoolIds) {
+      try {
+         const retrievedUsers = await cognitoProvider.listUsers({
+            UserPoolId: userPoolId
+         }).promise();
+         users.push(...retrievedUsers.Users.map((user) => {
+            const parsedUser = {};
+
+            user.Attributes.forEach((attr) => {
+               parsedUser[attr.Name] = attr.Value;
+            });
+
+            return parsedUser;
+         }));
+      } catch (err) {
+         console.log(err + ` ${userPoolId}`);
+      }
+   }
+
+   return users;
+}
+
 module.exports = {
    getAnnouncements,
    deleteAnnouncement,
@@ -261,4 +288,5 @@ module.exports = {
    putShift,
    queryShiftsRange,
    deleteShift,
+   listUsers,
 };

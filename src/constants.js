@@ -6,6 +6,9 @@ export const ADD_SHIFT = 'ADD_SHIFT';
 export const UPDATE_SHIFT = 'UPDATE_SHIFT';
 export const DELETE_SHIFT = 'DELETE_SHIFT';
 
+// User Actions
+export const INITIALIZE_USERS = 'INITIALIZE_USERS';
+
 // Date Parsing
 export const DAY_OF_WEEK = [
    'Sunday',
