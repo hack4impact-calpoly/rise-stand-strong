@@ -88,6 +88,7 @@ const Announcements = [
          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna et dolor scelerisque tincidunt cras etiam...',
       date: '2021-02-014',
       link: '#',
+      postedby: 'Admin',
    },
 ];
 

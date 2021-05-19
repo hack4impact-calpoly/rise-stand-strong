@@ -1,7 +1,8 @@
-import React from 'react';
+import { React, useState } from 'react';
 import { Card } from 'react-bootstrap';
-import styled from 'styled-components';
 import { FaChevronRight } from 'react-icons/fa';
+import styled from 'styled-components';
+import AnnouncementModal from '../AnnouncementModal/AnnouncementModal';
 
 const Header1 = styled.h1`
    font-family: Arial;
@@ -50,6 +51,7 @@ const CardSubtitle = styled(Card.Subtitle)`
 
 export default (Announcement) => {
    const d = new Date(Announcement.Announcement.date);
+   const [showModal, setShowModal] = useState(false);
    const months = [
       'January',
       'February',
@@ -64,32 +66,44 @@ export default (Announcement) => {
       'November',
       'December',
    ];
+   const toggleModal = () => {
+      setShowModal(!showModal);
+   };
+
    return (
-      <Card>
-         <Card.Body>
-            <div>
-               <HeaderContainer>
-                  <CardTitle>
-                     <Header1>{Announcement.Announcement.title}</Header1>
-                  </CardTitle>
-                  <CardSubtitle className="mb-2 text-muted">
-                     <Header2>
-                        {months[d.getMonth()]} {d.getDate()}, {d.getFullYear()}
-                     </Header2>
-                  </CardSubtitle>
-               </HeaderContainer>
-               <Card.Text>
-                  <Header3>{Announcement.Announcement.text}</Header3>
-               </Card.Text>
-               <AAContainer>
-                  <Card.Link href={Announcement.Announcement.link}>
-                     <Header4>
-                        Read More <FaChevronRight />
-                     </Header4>
-                  </Card.Link>
-               </AAContainer>
-            </div>
-         </Card.Body>
-      </Card>
+      <>
+         <Card>
+            <Card.Body>
+               <div>
+                  <HeaderContainer>
+                     <CardTitle>
+                        <Header1>{Announcement.Announcement.title}</Header1>
+                     </CardTitle>
+                     <CardSubtitle className="mb-2 text-muted">
+                        <Header2>
+                           {months[d.getMonth()]} {d.getDate()},{' '}
+                           {d.getFullYear()}
+                        </Header2>
+                     </CardSubtitle>
+                  </HeaderContainer>
+                  <Card.Text>
+                     <Header3>{Announcement.Announcement.text}</Header3>
+                  </Card.Text>
+                  <AAContainer>
+                     <Card.Link onClick={toggleModal}>
+                        <Header4>
+                           Read More <FaChevronRight />
+                        </Header4>
+                     </Card.Link>
+                  </AAContainer>
+               </div>
+            </Card.Body>
+         </Card>
+         <AnnouncementModal
+            show={showModal}
+            onHide={toggleModal}
+            AnnouncementInfo={Announcement}
+         />
+      </>
    );
 };
