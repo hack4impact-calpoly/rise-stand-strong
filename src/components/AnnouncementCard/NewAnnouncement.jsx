@@ -2,9 +2,14 @@ import { useState, React } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import { FaExternalLinkAlt, FaAlignLeft } from 'react-icons/fa';
-import ReviewAnnouncement from './ReviewAnnouncement';
-// import ReviewAnnouncement from './ReviewAnnouncement';
 
+const Header = styled.h2`
+   font-family: Arial;
+   font-weight: bold;
+   font-size: 30px;
+   line-height: 41px;
+   margin: 30px 32px 0px 32px;
+`;
 const Header2 = styled.h2`
    font-family: Arial;
    font-weight: bold;
@@ -14,6 +19,19 @@ const Header2 = styled.h2`
    display: flex;
    flex-direction: column;
 `;
+const Header3 = styled.h3`
+   font-family: Arial;
+   font-size: 14px;
+   line-height: 19px;
+   margin: 5px 32px 0px 32px;
+`;
+const Header4 = styled.h2`
+   font-family: Arial;
+   font-size: 14px;
+   line-height: 19px;
+   margin: 5px 32px 0px 32px;
+`;
+
 const InputContainer = styled.div`
    display: flex;
    width: 100%;
@@ -45,6 +63,22 @@ const ButtonContainer = styled.div`
 const StyledButton = styled(Button)`
    background-color: rgba(174, 76, 51, 1);
 `;
+const EditButtonContainer = styled.div`
+   width: 100%;
+   margin-left: 32px;
+`;
+const LinkButtonContainer = styled.div`
+   width: 95%;
+   border-bottom: 2px solid #c0c0c0;
+   margin: 5px 32px 10px 32px;
+`;
+const PublishButtonContainer = styled.div`
+   text-align: center;
+   width: 50%;
+   margin: 5px 32px 12px 32px;
+   position: absolute;
+   bottom: 10px;
+`;
 
 export default () => {
    const [title, setTitle] = useState('');
@@ -52,17 +86,30 @@ export default () => {
    const [content, setContent] = useState('');
    const [editing, setEditing] = useState(true);
    const date = new Date();
-
-   const setAnnouncementData = () => {
-      const data = {
-         title: `${title}`,
-         author: 'John Doe',
-         text: `${content}`,
-         createdAt: `${date}`,
-         link: `${hyperlink}`,
-      };
-      return data;
-   };
+   const months = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
+   ];
+   // const setAnnouncementData = () => {
+   //    const data = {
+   //       title: `${title}`,
+   //       author: 'John Doe',
+   //       text: `${content}`,
+   //       createdAt: `${date}`,
+   //       link: `${hyperlink}`,
+   //    };
+   //    return data;
+   // };
 
    return (
       <div>
@@ -125,7 +172,29 @@ export default () => {
                </Form>
             </div>
          ) : (
-            <ReviewAnnouncement AnnouncementData={setAnnouncementData()} />
+            <div>
+               <EditButtonContainer>
+                  <Button variant="light" onClick={() => setEditing(true)}>
+                     Edit
+                  </Button>
+               </EditButtonContainer>
+               <Header>{title}</Header>
+               {console.log(date)}
+               <Header4>
+                  Posted by author on {months[date.getMonth()]}
+                  {date.getDate()}, {date.getFullYear()}
+               </Header4>
+               <LinkButtonContainer>
+                  <Button variant="link" href={hyperlink}>
+                     <FaExternalLinkAlt />
+                     {hyperlink}
+                  </Button>
+               </LinkButtonContainer>
+               <Header3>{content}</Header3>
+               <PublishButtonContainer>
+                  <StyledButton block>Publish</StyledButton>
+               </PublishButtonContainer>
+            </div>
          )}
       </div>
    );
