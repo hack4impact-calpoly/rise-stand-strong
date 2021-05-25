@@ -68,9 +68,16 @@ const EditButtonContainer = styled.div`
    margin-left: 32px;
 `;
 const LinkButtonContainer = styled.div`
-   width: 75%;
+   width: 95%;
    border-bottom: 2px solid #c0c0c0;
    margin: 5px 32px 10px 32px;
+`;
+const PublishButtonContainer = styled.div`
+   text-align: center;
+   width: 50%;
+   margin: 5px 32px 12px 32px;
+   position: absolute;
+   bottom: 10px;
 `;
 
 export default () => {
@@ -184,6 +191,9 @@ export default () => {
                   </Button>
                </LinkButtonContainer>
                <Header3>{content}</Header3>
+               <PublishButtonContainer>
+                  <StyledButton block>Publish</StyledButton>
+               </PublishButtonContainer>
             </div>
          )}
       </div>
