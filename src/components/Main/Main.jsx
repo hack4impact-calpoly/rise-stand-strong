@@ -12,7 +12,6 @@ import ShiftDetails from '../Shifts/ShiftDetails';
 import RequireAuth from './RequireAuth';
 import Directory from '../Directory/Directory';
 import NewAnnouncement from '../AnnouncementCard/NewAnnouncement';
-import ReviewAnnouncement from '../AnnouncementCard/ReviewAnnouncement';
 
 export default () => (
    <div className="App">
@@ -31,10 +30,6 @@ export default () => (
          <Route path="/calendar" component={RequireAuth(Calendar)} />
          <Route path="/directory" render={() => <Directory />} />
          <Route path="/newannouncement" render={() => <NewAnnouncement />} />
-         <Route
-            path="/reviewannouncement"
-            render={() => <ReviewAnnouncement />}
-         />
       </Switch>
    </div>
 );
