@@ -16,3 +16,10 @@ export const DAY_OF_WEEK = [
    'Friday',
    'Saturday',
 ];
+
+// Require Auth Access Levels
+export const ACCESS_LEVEL_MAP = {
+   volunteer: 1,
+   'staff-member': 2,
+   admin: 3,
+};
