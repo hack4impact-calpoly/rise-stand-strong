@@ -1,6 +1,49 @@
-# Getting Started with Create React App
+# RISE & Stand Strong
+### A streamlined calendar system where volunteers can sign up for shifts in a simple yet effective manner. Created for <a href="https://www.riseslo.org/" target="_blank">RISE</a> and <a href="https://standstrongnow.org/" target="_blank">Stand Strong</a> nonprofit organizations.
+#### Volunteers can use this system to:
+- **View Announcements**
+- **View Events**
+- **View Shifts**
+- **Access a Volunteer Directory**
+- **Get Notified of Schedule Changes**
 
+<br />
+
+## Tools and Technologies
+- Figma
+- ReactJS
+- Redux
+- Express
+- AWS Cognito
+- DynamoDB
+
+<br />
+
+## Our Team
+| <a href=""><img src="https://user-images.githubusercontent.com/42549561/120409764-809e2500-c306-11eb-9dec-5ad74781b29a.jpg" width="125px"/></a> | <a href="https://github.com/jackfales" target="_blank"><img src="https://user-images.githubusercontent.com/42549561/120407708-8bef5180-c302-11eb-86eb-5186a2e4b17e.jpg" width="125px"/></a> | <a href="https://thebarrettlo.com/" target="_blank"><img src="https://user-images.githubusercontent.com/42549561/120409928-d83c9080-c306-11eb-8d61-60374bdf2067.jpg" width="125px"/></a> | <a href="https://github.com/jpoist97" target="_blank"><img src="https://user-images.githubusercontent.com/42549561/120408307-9d852900-c303-11eb-9c7d-f84269b8cd66.jpg" width="125px"/></a> | <a href="https://github.com/comalvirdi"><img src="https://user-images.githubusercontent.com/42549561/120408542-171d1700-c304-11eb-85ad-a22302bb71b9.jpg" width="125px"/></a> |
+|     :---:      |       :---:      |      :---:      |     :---:     |    :----:    |
+| **Riddhi Somani** <br /> *Product Manager* | **Jack Fales** <br /> *Tech Lead* |  **Barrett Lo** <br /> *Designer* | **Justin Poist** <br /> *Software Developer* | **Comal Virdi** <br /> *Software Developer* |
+| <a href="https://github.com/ObjectJosh" target="_blank"><img src="https://user-images.githubusercontent.com/42549561/120408315-a1b14680-c303-11eb-8472-8b29c9958362.jpg" width="125px"/></a> |  <a href="https://github.com/ellabuysse" target="_blank"><img src="https://user-images.githubusercontent.com/42549561/120408807-9dd1f400-c304-11eb-8f64-a6545e987f44.jpg" width="125px"/></a> | <a href="https://github.com/SamuelSehnert" target="_blank"><img src="https://user-images.githubusercontent.com/42549561/120408811-a0cce480-c304-11eb-8316-8aeeed49e3fd.jpg" width="125px"/></a> | <a href="https://github.com/esauerbo" target="_blank"><img src="https://user-images.githubusercontent.com/42549561/120408816-a3c7d500-c304-11eb-9c94-01cf4e9dd5b6.jpg" width="125px"/></a> | <a href="https://github.com/pgonza25" target="_blank"><img src="https://avatars.githubusercontent.com/u/49253760?v=4" width="125px"/></a> |
+| **Josh Wong** <br /> *Software Developer* | **Ella Buysse** <br /> *Software Developer* | **Samuel Sehnert** <br /> *Software Developer* | **Emma Sauerborn** <br /> *Software Developer* | **Pablo Gonzalez** <br /> *Software Developer* |
+
+<br />
+<br />
+
+# Getting Started
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Requirements
+- pip
+
+### Run the App
+```
+git clone https://github.com/hack4impact-calpoly/rise-stand-strong.git
+cd rise-stand-strong
+cd src
+npm i
+npm start
+```
+
+<br />
 
 ## Available Scripts
 
